@@ -52,8 +52,36 @@ def no_link_domains() -> list[str]:
     return _config().get("no_link_domains", [])
 
 
+def fetch_telegram(channel: str) -> tuple[list[dict], str]:
+    """Публичный Telegram-канал через его веб-страницу t.me/s/<канал> (без ключей и входа)."""
+    try:
+        r = requests.get(f"https://t.me/s/{channel}", headers={"User-Agent": UA}, timeout=25)
+    except requests.RequestException as e:
+        return [], f"ошибка сети: {type(e).__name__}"
+    if r.status_code != 200:
+        return [], f"ответ {r.status_code}"
+    entries = []
+    for block in r.text.split('class="tgme_widget_message_wrap')[1:]:
+        post = re.search(r'data-post="([^"]+)"', block)
+        when = re.search(r'<time[^>]+datetime="([^"]+)"', block)
+        body = re.search(r'class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>', block, re.S)
+        if not (post and when and body):
+            continue
+        text = clean(body.group(1).replace("<br/>", " ").replace("<br>", " "))
+        t = time.strptime(when.group(1)[:19], "%Y-%m-%dT%H:%M:%S")
+        entries.append({
+            "title": text[:140], "summary": text, "link": f"https://t.me/{post.group(1)}",
+            "published_parsed": t, "content": [{"value": text}],
+        })
+    if not entries:
+        return [], "200, но сообщений нет (канал закрыт или без веб-версии)"
+    return entries, f"ok, {len(entries)} сообщений"
+
+
 def fetch_feed(feed: dict) -> tuple[list[dict], str]:
     """Возвращает (записи, статус). Статус — для отчёта о лентах."""
+    if feed.get("telegram"):
+        return fetch_telegram(feed["telegram"])
     try:
         r = requests.get(feed["url"], headers={"User-Agent": UA}, timeout=25)
     except requests.RequestException as e:

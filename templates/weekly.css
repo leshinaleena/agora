@@ -55,3 +55,6 @@ th.l { text-align: left; }
 td { padding: 4pt 2pt; border-bottom: .5pt solid var(--rule); vertical-align: top; }
 td small { color: #666; font-size: 6.8pt; }
 td.n { text-align: right; font-weight: 600; font-size: 9pt; }
+.analysis { column-count: 2; column-gap: 16pt; font-size: 9.8pt; }
+.analysis h3 { column-span: all; font-size: 16pt; margin-bottom: 8pt; }
+.analysis .src { column-span: all; }

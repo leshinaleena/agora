@@ -62,3 +62,6 @@ feeds:
 # Издания, на которые не ставим ссылки: в России они признаны «нежелательными»,
 # переход по ссылке может быть риском для читателей в России. Факты из них можно упоминать без ссылки.
 no_link_domains: [meduza.io, novayagazeta.eu, themoscowtimes.com, theins.ru, istories.media, tvrain.tv, rferl.org, svoboda.org]
+
+# Telegram-каналы (публичные, читаются через t.me/s/<канал>). Пример строки:
+#  - {name: "Название канала", telegram: "username_kanala", lang: ru}

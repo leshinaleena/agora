@@ -72,8 +72,15 @@ class Statement(BaseModel):
     source_ids: list[str]
 
 
+class Analysis(BaseModel):
+    headline: str
+    paragraphs: list[str]  # 4–6 абзацев
+    source_ids: list[str]
+
+
 class Issue(BaseModel):
     main: Article
+    analysis: Analysis  # «Анализ недели»: что стоит за событиями, расклад сил, что дальше
     number_value: str  # «11»
     number_text: str
     open_question: str
@@ -93,6 +100,10 @@ class Issue(BaseModel):
 WEEKLY_TASK = """
 Собери выпуск по материалам недели. Правила:
 • main — главная тема недели: 3–4 абзаца, суть, цифры, расхождения, что дальше.
+• analysis — «Анализ недели»: 4–6 абзацев о том, что стоит за главными событиями, как меняется расклад \
+сил (правительство, оппозиция, улица, соседи), чего ждать. Опирайся на материалы и на раздел «Взгляд извне» \
+(что пишут мировые СМИ и аналитики); мнения обязательно приписывай их авторам. Источники из «Взгляда извне» \
+указывай номерами w1, w2…
 • number_value/number_text — «Цифра недели»: одно число из материалов и что оно значит (2–3 предложения).
 • open_question — главный открытый вопрос недели и 1–2 предложения, кто что ожидает.
 • quote — «Цитата недели»: дословная цитата (в переводе) и кто, когда, где сказал.
@@ -106,7 +117,20 @@ WEEKLY_TASK = """
 • statements — 4–6 «Заявлений недели», одно предложение каждое.
 • watch — 4–6 пунктов «Следим дальше» на следующую неделю.
 • source_ids — номера из списка источников (вида n12), только реально использованные.
-Не повторяй одну тему в двух местах. Все факты только из материалов. Объём выпуска — около 4 страниц A4.
+Приоритет — острая политика, улица, конфликты, трагедии и внешняя политика; бытовое (ярмарки, скидки, \
+праздники, выплаты) не берём. Не повторяй одну тему в двух местах. Все факты только из материалов. \
+Объём выпуска — 5 страниц A4, это максимум недели.
+"""
+
+RESEARCH_TASK = """
+Ты — исследователь редакции. Найди в интернете, что за указанную неделю писали о Греции мировые СМИ \
+и аналитики (Reuters, AP, AFP, Politico Europe, Financial Times, Bloomberg, Euractiv, Balkan Insight, \
+турецкие и кипрские СМИ, ELIAMEP, ECFR и т. п.), и что Россия официально говорила о Греции. \
+Сделай не больше 8 поисков. Ищи по главным сюжетам недели (список ниже) и шире: внешняя политика, \
+Турция, ЕС, оборона, миграция, кризисы.
+Верни по-русски список пунктов «Взгляд извне»: каждый пункт — кто (издание, автор), когда, что \
+утверждает или как оценивает, и полный URL страницы. Только то, что реально нашёл; никаких догадок. \
+Не повторяй факты из сюжетов ниже, если издание не добавляет оценки или нового факта.
 """
 
 
@@ -223,9 +247,13 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
       <p>{e(tv.intro)}</p>{views}</div>
   </div>
 </section>
+<section class="page"><h2 class="sec">Анализ недели</h2>
+  <article class="analysis"><h3>{e(issue.analysis.headline)}</h3>
+  {"".join(f"<p>{e(p)}</p>" for p in issue.analysis.paragraphs)}{_src(links, issue.analysis.source_ids, bl)}</article>
+  <div class="brief"><h4>Коротко</h4>{"".join(brief(b) for b in issue.inside_brief)}</div>
+</section>
 <section class="page"><h2 class="sec">Внутри страны</h2>
   <div class="cols3">{"".join(art(a) for a in issue.inside)}</div>
-  <div class="brief"><h4>Коротко</h4>{"".join(brief(b) for b in issue.inside_brief)}</div>
 </section>
 <section class="page"><h2 class="sec">Настроение: улица и опросы</h2>
   <div class="cols2"><div>{"".join(art(a) for a in issue.mood)}</div><div>{polls}</div></div>
@@ -244,9 +272,20 @@ def main() -> None:
     material, links = collect_week(start, end)
     if not material:
         raise SystemExit(f"Нет ежедневных сводок за {start}–{end}: выпуск не из чего собирать.")
+    titles = "\n".join(line for line in material.splitlines() if line.startswith("Сюжет: "))[:6000]
+    outside = ""
+    try:
+        outside = llm.research(prompts.EDITORIAL + RESEARCH_TASK, f"Неделя {start} — {end}.\n\n{titles}")
+    except Exception as e:  # поиск не должен ломать выпуск
+        print(f"[weekly] поиск не удался: {e}")
+    import re as _re
+    for k, url in enumerate(dict.fromkeys(_re.findall(r"https?://[^\s)\]>»\"]+", outside)), 1):
+        host = _re.sub(r"^www\.", "", url.split("/")[2])
+        links[f"w{k}"] = {"name": host, "url": url}
+        outside = outside.replace(url, f"[w{k} = {host}]")
     issue = llm.ask(
         llm.SONNET, prompts.WEEKLY_SYSTEM + WEEKLY_TASK,
-        f"Неделя {start} — {end}.\n\n{material}",
+        f"Неделя {start} — {end}.\n\n{material}\n\n===== Взгляд извне (поиск в интернете) =====\n{outside or '(нет)'}",
         Issue, effort="medium", max_tokens=48000,
     )
     if not issue:

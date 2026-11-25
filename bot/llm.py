@@ -135,6 +135,32 @@ def ask_batch(
     return None
 
 
+def research(system: str, user: str, max_searches: int = 8) -> str:
+    """Sonnet ищет в интернете (веб-поиск Claude) и возвращает заметки текстом.
+    Поиск стоит $10 за 1000 запросов, то есть 1 цент за поиск, плюс токены найденных страниц."""
+    messages = [{"role": "user", "content": user}]
+    text = ""
+    for _ in range(4):  # pause_turn: сервер просит продолжить длинный поиск
+        with client().messages.stream(
+            model=SONNET,
+            max_tokens=16000,
+            system=system,
+            messages=messages,
+            output_config={"effort": "medium"},
+            tools=[{"type": "web_search_20260209", "name": "web_search", "max_uses": max_searches}],
+        ) as stream:
+            resp = stream.get_final_message()
+        _account(SONNET, resp.usage)
+        n = getattr(getattr(resp.usage, "server_tool_use", None), "web_search_requests", 0) or 0
+        spent["usd"] += n * 0.01
+        print(f"[llm] поиск: {n} запросов, итого ${spent['usd']:.4f}", flush=True)
+        text += "".join(b.text for b in resp.content if b.type == "text")
+        if resp.stop_reason != "pause_turn":
+            break
+        messages = messages + [{"role": "assistant", "content": resp.content}]
+    return text
+
+
 # ---------- Схемы ответов ----------
 
 Rubric = Literal[
