@@ -295,9 +295,14 @@ def main() -> None:
           f"расход: ${data['cost_usd']}")
     if os.environ.get("PUBLISH") == "yes":
         wait_until(os.environ.get("POST_AT", "08:30"))
+        if os.environ.get("REPLACE") == "yes" and data.get("sent_ids"):
+            telegram.delete(data["sent_ids"])  # заменить уже опубликованную версию
+        sent = []
         for m in messages:
-            telegram.send_html(m)
+            sent += telegram.send_html(m)
             time.sleep(1)
+        data["sent_ids"] = sent  # номера постов: чтобы потом можно было заменить
+        (ARCHIVE / f"{today}.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), "utf-8")
         print(f"[daily] опубликовано в {telegram.chat_id()}")
     else:
         print("[daily] PUBLISH не включён — в канал ничего не отправлено")

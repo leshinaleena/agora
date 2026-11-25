@@ -43,9 +43,19 @@ def split(text: str) -> list[str]:
     return parts
 
 
-def send_html(text: str) -> None:
+def delete(message_ids: list[int]) -> None:
+    """Удалить свои прошлые сообщения в канале (Telegram разрешает в течение 48 часов)."""
+    for mid in message_ids:
+        try:
+            _call("deleteMessage", json={"chat_id": chat_id(), "message_id": mid})
+        except RuntimeError as e:
+            print(f"[telegram] не удалось удалить {mid}: {e}")
+
+
+def send_html(text: str) -> list[int]:
+    ids = []
     for part in split(text):
-        _call(
+        res = _call(
             "sendMessage",
             json={
                 "chat_id": chat_id(),
@@ -54,6 +64,8 @@ def send_html(text: str) -> None:
                 "link_preview_options": {"is_disabled": True},
             },
         )
+        ids.append(res["message_id"])
+    return ids
 
 
 def send_pdf(path: Path, caption_html: str) -> None:

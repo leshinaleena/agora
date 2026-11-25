@@ -9,6 +9,10 @@ on:
         description: "Опубликовать в канал? (yes — да, no — только черновик)"
         default: "no"
         required: true
+      replace:
+        description: "Удалить прежние посты этой сводки перед отправкой? (yes / no)"
+        default: "no"
+        required: false
       from_archive:
         description: "Взять готовую сводку из архива за дату (например 2026-11-25), без запросов к Claude"
         default: ""
@@ -36,6 +40,7 @@ jobs:
           PUBLISH: ${{ github.event_name == 'schedule' && vars.PUBLISH_DAILY || inputs.publish }}
           POST_AT: ${{ github.event_name == 'schedule' && '08:30' || '00:00' }}
           FROM_ARCHIVE: ${{ inputs.from_archive }}
+          REPLACE: ${{ inputs.replace }}
         run: python -m bot.daily
       - name: Черновик на страницу запуска
         if: always()
