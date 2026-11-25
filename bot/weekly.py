@@ -1,0 +1,272 @@
+"""Понедельничный PDF-выпуск «Агоры» за прошедшую неделю (пн–вс).
+
+Запуск: python -m bot.weekly
+  PUBLISH=yes — отправить PDF в канал; иначе только файл в out/.
+"""
+from __future__ import annotations
+
+import datetime as dt
+import html
+import json
+import os
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+from pydantic import BaseModel
+
+from . import feeds, llm, prompts, telegram
+
+ROOT = Path(__file__).resolve().parent.parent
+ARCHIVE = ROOT / "archive"
+OUT = ROOT / "out"
+ATHENS = ZoneInfo("Europe/Athens")
+MONTHS = "января февраля марта апреля мая июня июля августа сентября октября ноября декабря".split()
+
+
+# ---------- Схема выпуска ----------
+
+class Article(BaseModel):
+    kicker: str  # надзаголовок: «ВЫБОРЫ», «ТУРЦИЯ», «ДЕНЬГИ», «ОСТРЫЙ МОМЕНТ»
+    headline: str
+    paragraphs: list[str]
+    source_ids: list[str]
+
+
+class View(BaseModel):
+    label: str  # «АФИНЫ», «БРЮССЕЛЬ», «КРИТИКИ»
+    headline: str
+    text: str
+    source_ids: list[str]
+
+
+class ThreeViews(BaseModel):
+    headline: str
+    intro: str
+    views: list[View]  # ровно 3
+
+
+class Brief(BaseModel):
+    label: str
+    text: str
+    source_ids: list[str]
+
+
+class PollRow(BaseModel):
+    pollster: str
+    note: str  # канал и дата: «Action 24, 16 ноября»
+    values: list[str]  # по столбцам parties слева направо
+
+
+class Polls(BaseModel):
+    headline: str
+    intro: str
+    parties: list[str]  # заголовки столбцов: «ND», «ЭЛАС», «ПАСОК»
+    rows: list[PollRow]
+    after: list[str]  # абзацы после таблицы
+    source_ids: list[str]
+
+
+class Statement(BaseModel):
+    who_when: str  # «Яннис Лавердос, 21 ноября»
+    text: str
+    source_ids: list[str]
+
+
+class Issue(BaseModel):
+    main: Article
+    number_value: str  # «11»
+    number_text: str
+    open_question: str
+    open_question_text: str
+    quote: str
+    quote_attribution: str
+    three_views: ThreeViews
+    inside: list[Article]  # 2–3 статьи «Внутри страны»
+    inside_brief: list[Brief]
+    mood: list[Article]  # 1–2: митинги, забастовки
+    polls: Polls | None
+    world: list[Article]  # 2–3 «Греция и мир», включая Грецию и Россию, если есть
+    statements: list[Statement]
+    watch: list[Brief]
+
+
+WEEKLY_TASK = """
+Собери выпуск по материалам недели. Правила:
+• main — главная тема недели: 3–4 абзаца, суть, цифры, расхождения, что дальше.
+• number_value/number_text — «Цифра недели»: одно число из материалов и что оно значит (2–3 предложения).
+• open_question — главный открытый вопрос недели и 1–2 предложения, кто что ожидает.
+• quote — «Цитата недели»: дословная цитата (в переводе) и кто, когда, где сказал.
+• three_views — «Одна новость, три взгляда»: событие с тремя сторонами (страны, лагеря, институты), \
+у каждой — label, заголовок, 2–4 предложения и источники.
+• inside — 2–3 статьи «Внутри страны» по 2 абзаца; inside_brief — 2–4 коротких пункта.
+• mood — 1–2 статьи «Настроение»: митинги, забастовки, протесты.
+• polls — таблица опросов недели, если опросы были (иначе null): только цифры из материалов, \
+пустые ячейки — «—», рядом поясни, что это за цифры (оценка голоса или намерения).
+• world — 2–3 статьи «Греция и мир»; если неделя дала сюжет «Греция и Россия», одна из статей о нём.
+• statements — 4–6 «Заявлений недели», одно предложение каждое.
+• watch — 4–6 пунктов «Следим дальше» на следующую неделю.
+• source_ids — номера из списка источников (вида n12), только реально использованные.
+Не повторяй одну тему в двух местах. Все факты только из материалов. Объём выпуска — около 4 страниц A4.
+"""
+
+
+def week_range(today: dt.date) -> tuple[dt.date, dt.date]:
+    end = today - dt.timedelta(days=today.weekday() + 1)  # прошедшее воскресенье
+    return end - dt.timedelta(days=6), end
+
+
+def issue_number(start: dt.date) -> int:
+    # № 2 — неделя 16–22 ноября 2026; дальше по одному в неделю
+    return 2 + (start - dt.date(2026, 11, 16)).days // 7
+
+
+def collect_week(start: dt.date, end: dt.date) -> tuple[str, dict]:
+    parts, links, k = [], {}, 0
+    d = start
+    while d <= end:
+        f = ARCHIVE / f"{d}.json"
+        if f.exists():
+            data = json.loads(f.read_text("utf-8"))
+            parts.append(f"===== {d.day} {MONTHS[d.month - 1]} =====")
+            for b in data.get("stories", []):
+                ids = []
+                for s in b["sources"]:
+                    k += 1
+                    nid = f"n{k}"
+                    links[nid] = s
+                    ids.append(f"{nid} = {s['name']}")
+                parts.append(
+                    f"Сюжет: {b['title']} [{b['rubric']}, важность {b['importance']}]\n"
+                    + "\n".join(f"- {x}" for x in b["facts"])
+                    + (f"\nРасхождения: {b['disagreement']}" if b.get("disagreement") else "")
+                    + (f"\nДаты впереди: {'; '.join(b.get('dates_ahead', []))}" if b.get("dates_ahead") else "")
+                    + f"\nИсточники: {', '.join(ids)}"
+                )
+        d += dt.timedelta(days=1)
+    return "\n\n".join(parts), links
+
+
+# ---------- Вёрстка ----------
+
+def _src(links: dict, ids: list[str], blocked: list[str]) -> str:
+    e, seen, out = html.escape, set(), []
+    for i in ids:
+        s = links.get(i)
+        if not s or s["name"] in seen:
+            continue
+        seen.add(s["name"])
+        if any(dom in s["url"] or dom in s.get("home", "") for dom in blocked):
+            out.append(e(s["name"]))
+        else:
+            out.append(f'<a href="{e(s["url"], quote=True)}">{e(s["name"])}</a>')
+    return f'<p class="src">{" · ".join(out)}</p>' if out else ""
+
+
+def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.date) -> str:
+    e = html.escape
+    bl = feeds.no_link_domains()
+    num = issue_number(start)
+    if start.month == end.month:
+        dates = f"{start.day}–{end.day} {MONTHS[end.month - 1]} {end.year}"
+    else:
+        dates = f"{start.day} {MONTHS[start.month - 1]} – {end.day} {MONTHS[end.month - 1]} {end.year}"
+
+    def art(a: Article, cls: str = "") -> str:
+        body = "".join(f"<p>{e(p)}</p>" for p in a.paragraphs)
+        return (f'<article class="{cls}"><div class="kicker">{e(a.kicker)}</div>'
+                f"<h3>{e(a.headline)}</h3>{body}{_src(links, a.source_ids, bl)}</article>")
+
+    def brief(b: Brief) -> str:
+        return f"<p><b>{e(b.label)}.</b> {e(b.text)} {_src(links, b.source_ids, bl)}</p>"
+
+    tv = issue.three_views
+    views = "".join(
+        f'<div class="view"><div class="kicker">{e(v.label)}</div><h4>{e(v.headline)}</h4>'
+        f"<p>{e(v.text)}</p>{_src(links, v.source_ids, bl)}</div>" for v in tv.views
+    )
+    polls = ""
+    if issue.polls and issue.polls.rows:
+        p = issue.polls
+        head = "".join(f"<th>{e(x)}</th>" for x in p.parties)
+        rows = "".join(
+            f"<tr><td><b>{e(r.pollster)}</b><br><small>{e(r.note)}</small></td>"
+            + "".join(f'<td class="n">{e(v)}</td>' for v in r.values) + "</tr>"
+            for r in p.rows
+        )
+        polls = (f'<article><div class="kicker">ОПРОСЫ</div><h3>{e(p.headline)}</h3><p>{e(p.intro)}</p>'
+                 f'<table><tr><th class="l">ОПРОС</th>{head}</tr>{rows}</table>'
+                 + "".join(f"<p>{e(x)}</p>" for x in p.after) + _src(links, p.source_ids, bl) + "</article>")
+    statements = "".join(
+        f"<p><b>{e(s.who_when)}.</b> {e(s.text)} {_src(links, s.source_ids, bl)}</p>" for s in issue.statements
+    )
+    watch = "".join(f"<p><b>{e(w.label)}.</b> {e(w.text)}</p>" for w in issue.watch)
+    css = (ROOT / "templates" / "weekly.css").read_text("utf-8").replace("FONTS", (ROOT / "fonts").as_uri())
+
+    return f"""<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<title>Агора № {num} — {dates}</title><style>{css}</style></head><body>
+<section class="page first">
+  <div class="top"><span>№ {num}</span><span>Неделя {dates}</span><span>Афины, {today.day} {MONTHS[today.month - 1]}</span></div>
+  <header><h1>АГОРА</h1><div class="motto"><i>Мир за неделю.<br>Без информационного шума</i>
+  <small>Греция внутри и снаружи</small></div></header>
+  <div class="cols2">
+    <div class="left">
+      <article class="lead"><div class="kicker">ГЛАВНАЯ ТЕМА</div><h2>{e(issue.main.headline)}</h2>
+      {"".join(f"<p>{e(p)}</p>" for p in issue.main.paragraphs)}{_src(links, issue.main.source_ids, bl)}</article>
+      <div class="box number"><div class="big">{e(issue.number_value)}</div>
+        <div><div class="kicker">ЦИФРА НЕДЕЛИ</div><p>{e(issue.number_text)}</p></div></div>
+      <div class="box"><div class="kicker">ОТКРЫТЫЙ ВОПРОС</div><p class="q">{e(issue.open_question)}</p>
+        <p>{e(issue.open_question_text)}</p></div>
+      <div class="box"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
+        <p>{e(issue.quote_attribution)}</p></div>
+    </div>
+    <div class="right"><div class="kicker">ОДНА НОВОСТЬ, ТРИ ВЗГЛЯДА</div><h3>{e(tv.headline)}</h3>
+      <p>{e(tv.intro)}</p>{views}</div>
+  </div>
+</section>
+<section class="page"><h2 class="sec">Внутри страны</h2>
+  <div class="cols3">{"".join(art(a) for a in issue.inside)}</div>
+  <div class="brief"><h4>Коротко</h4>{"".join(brief(b) for b in issue.inside_brief)}</div>
+</section>
+<section class="page"><h2 class="sec">Настроение: улица и опросы</h2>
+  <div class="cols2"><div>{"".join(art(a) for a in issue.mood)}</div><div>{polls}</div></div>
+</section>
+<section class="page"><h2 class="sec">Греция и мир</h2>
+  <div class="cols3">{"".join(art(a) for a in issue.world)}</div>
+  <div class="cols2 bottom"><div class="brief"><h4>Заявления недели</h4>{statements}</div>
+  <div class="brief"><h4>Следим дальше</h4>{watch}</div></div>
+</section>
+</body></html>"""
+
+
+def main() -> None:
+    today = dt.datetime.now(ATHENS).date()
+    start, end = week_range(today)
+    material, links = collect_week(start, end)
+    if not material:
+        raise SystemExit(f"Нет ежедневных сводок за {start}–{end}: выпуск не из чего собирать.")
+    issue = llm.ask(
+        llm.SONNET, prompts.WEEKLY_SYSTEM + WEEKLY_TASK,
+        f"Неделя {start} — {end}.\n\n{material}",
+        Issue, effort="medium", max_tokens=48000,
+    )
+    if not issue:
+        raise SystemExit("Выпуск не написан.")
+    from weasyprint import HTML  # импорт здесь: ежедневной сводке WeasyPrint не нужен
+
+    OUT.mkdir(exist_ok=True)
+    num = issue_number(start)
+    page = render_html(issue, links, start, end, today)
+    (OUT / "weekly.html").write_text(page, "utf-8")
+    pdf = OUT / f"Agora_{num}_{start:%Y-%m-%d}.pdf"
+    HTML(string=page, base_url=str(ROOT)).write_pdf(pdf)
+    (ARCHIVE / f"weekly-{start}.json").write_text(
+        json.dumps({"issue": issue.model_dump(), "links": links}, ensure_ascii=False, indent=1), "utf-8")
+    print(f"[weekly] № {num}: {pdf.name}, расход ${llm.spent['usd']:.3f}")
+    if os.environ.get("PUBLISH") == "yes":
+        telegram.send_pdf(pdf, f"<b>Агора № {num}</b> · неделя {start.day}–{end.day} {MONTHS[end.month - 1]}\n"
+                               f"<i>{html.escape(issue.main.headline)}</i>")
+        print(f"[weekly] опубликовано в {telegram.chat_id()}")
+
+
+if __name__ == "__main__":
+    main()

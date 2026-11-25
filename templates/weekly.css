@@ -1,0 +1,57 @@
+@font-face { font-family: "Cormorant"; src: url("FONTS/CormorantGaramond.ttf"); font-weight: 300 700; }
+@font-face { font-family: "Playfair"; src: url("FONTS/PlayfairDisplay.ttf"); font-weight: 400 900; }
+@font-face { font-family: "Playfair"; src: url("FONTS/PlayfairDisplay-Italic.ttf"); font-style: italic; font-weight: 400 900; }
+@font-face { font-family: "Source Serif"; src: url("FONTS/SourceSerif4.ttf"); font-weight: 200 900; }
+@font-face { font-family: "Source Serif"; src: url("FONTS/SourceSerif4-Italic.ttf"); font-style: italic; font-weight: 200 900; }
+@font-face { font-family: "Inter"; src: url("FONTS/Inter.ttf"); font-weight: 100 900; }
+
+@page { size: A4; margin: 14mm 13mm 14mm 13mm;
+  @bottom-center { content: "АГОРА · " counter(page); font: 500 7pt "Inter"; color: #888; letter-spacing: .12em; } }
+
+:root { --red: #8e2f24; --ink: #1b1b1b; --rule: #d8d2c8; }
+body { font: 9.2pt/1.42 "Source Serif"; color: var(--ink); margin: 0; }
+a { color: var(--red); text-decoration: underline; text-decoration-thickness: .4pt; }
+p { margin: 0 0 5pt; }
+.page { page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+
+.top { display: flex; justify-content: space-between; font: 500 7.5pt "Inter"; color: #555;
+  border-bottom: .6pt solid var(--ink); padding-bottom: 3pt; }
+header { display: flex; justify-content: space-between; align-items: flex-end;
+  border-bottom: 1.6pt solid var(--ink); padding: 4pt 0 6pt; margin-bottom: 10pt; }
+h1 { font: 600 58pt/0.9 "Cormorant"; letter-spacing: .04em; margin: 0; }
+.motto { text-align: right; font: italic 500 12pt/1.25 "Playfair"; }
+.motto small { display: block; font: 600 7.5pt "Inter"; font-style: normal; margin-top: 3pt; }
+
+.kicker { font: 600 7pt "Inter"; color: var(--red); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 3pt; }
+h2 { font: 700 21pt/1.08 "Playfair"; margin: 0 0 7pt; }
+h2.sec { font: 700 18pt/1.1 "Playfair"; border-bottom: 1.2pt solid var(--ink); padding-bottom: 4pt; margin-bottom: 9pt; }
+h3 { font: 700 12.5pt/1.18 "Playfair"; margin: 0 0 5pt; }
+h4 { font: 700 10.5pt/1.2 "Playfair"; margin: 0 0 4pt; }
+.src { font: 500 7pt/1.35 "Inter"; color: #555; margin-top: 3pt; }
+
+.cols2 { display: flex; gap: 14pt; }
+.cols2 > div { flex: 1; }
+.first .cols2 .left { flex: 1.45; }
+.first .cols2 .right { flex: 1; border-left: .6pt solid var(--rule); padding-left: 12pt; }
+.cols3 { display: flex; gap: 12pt; }
+.cols3 > article { flex: 1; }
+.cols3 > article + article { border-left: .6pt solid var(--rule); padding-left: 11pt; }
+article { margin-bottom: 9pt; }
+.box { border-top: .8pt solid var(--ink); padding-top: 5pt; margin-top: 8pt; }
+.number { display: flex; gap: 10pt; align-items: flex-start; }
+.number .big { font: 700 34pt/1 "Playfair"; color: var(--red); min-width: 34pt; }
+.q { font: italic 600 11.5pt/1.3 "Playfair"; }
+.view { border-top: .6pt solid var(--rule); padding-top: 5pt; margin-top: 7pt; }
+.brief { border-top: 1pt solid var(--ink); padding-top: 5pt; margin-top: 6pt; }
+.brief h4 { font: 700 12pt "Playfair"; }
+.brief .src { display: inline; }
+.bottom { margin-top: 8pt; }
+
+table { width: 100%; border-collapse: collapse; font: 8pt/1.3 "Inter"; margin: 6pt 0 8pt; }
+th { font: 600 6.5pt "Inter"; color: var(--red); letter-spacing: .1em; text-align: right; padding: 3pt 2pt;
+  border-bottom: .8pt solid var(--ink); }
+th.l { text-align: left; }
+td { padding: 4pt 2pt; border-bottom: .5pt solid var(--rule); vertical-align: top; }
+td small { color: #666; font-size: 6.8pt; }
+td.n { text-align: right; font-weight: 600; font-size: 9pt; }
