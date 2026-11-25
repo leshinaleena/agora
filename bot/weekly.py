@@ -110,7 +110,7 @@ WEEKLY_TASK = """
 • three_views — «Одна новость, три взгляда»: событие с тремя сторонами (страны, лагеря, институты), \
 у каждой — label, заголовок, 2–4 предложения и источники.
 • inside — 2–3 статьи «Внутри страны» по 2 абзаца; inside_brief — 2–4 коротких пункта.
-• mood — 1–2 статьи «Настроение»: митинги, забастовки, протесты.
+• mood — 1–2 статьи «Улица»: митинги, забастовки, протесты.
 • polls — таблица опросов недели, если опросы были (иначе null): только цифры из материалов, \
 пустые ячейки — «—», рядом поясни, что это за цифры (оценка голоса или намерения).
 • world — 2–3 статьи «Греция и мир»; если неделя дала сюжет «Греция и Россия», одна из статей о нём.
@@ -301,7 +301,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 <section class="page"><h2 class="sec">Внутри страны</h2>
   <div class="cols3">{"".join(art(a) for a in issue.inside)}</div>
 </section>
-<section class="page"><h2 class="sec">Настроение: улица и опросы</h2>
+<section class="page"><h2 class="sec">Что думают греки</h2>
   <div class="cols2"><div>{"".join(art(a) for a in issue.mood)}</div><div>{polls}</div></div>
 </section>
 <section class="page"><h2 class="sec">Греция и мир</h2>

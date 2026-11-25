@@ -212,7 +212,7 @@ def render(data: dict) -> list[str]:
     if data.get("weather"):
         head.append(data["weather"])
 
-    parts = ["\n".join(head), "🔥 <b>ГЛАВНОЕ</b>"]
+    parts = ["\n".join(head), "<b>ГЛАВНОЕ</b>"]
     for i, m in enumerate(d["main"], 1):
         refs = _refs(data, m["source_ids"], blocked)
         src = f"\n<i>Источники: {', '.join(refs)}</i>" if refs else ""
@@ -224,18 +224,18 @@ def render(data: dict) -> list[str]:
 
     parts = []
     if d["mood"]:
-        parts.append("🌡 <b>НАСТРОЕНИЕ</b>\n\n" + "\n".join(_bullet(data, b, blocked) for b in d["mood"]))
+        parts.append("<b>ЧТО ДУМАЮТ ГРЕКИ</b>\n\n" + "\n".join(_bullet(data, b, blocked) for b in d["mood"]))
     if d["agenda"]:
-        parts.append("📌 <b>СЕГОДНЯ В ПОВЕСТКЕ</b>\n\n" + "\n".join(_bullet(data, b, blocked) for b in d["agenda"]))
+        parts.append("<b>СЕГОДНЯ В ПОВЕСТКЕ</b>\n\n" + "\n".join(_bullet(data, b, blocked) for b in d["agenda"]))
     secs = sorted(d["brief"], key=lambda s: BRIEF_ORDER.index(s["title"]))
     if secs:
-        parts.append("⚡ <b>КОРОТКО</b>\n\n" + "\n\n".join(
+        parts.append("<b>КОРОТКО</b>\n\n" + "\n\n".join(
             f"<b>{e(s['title'])}</b>\n" + "\n".join(_bullet(data, b, blocked) for b in s["bullets"]) for s in secs
         ))
     if d["athens"]:
-        parts.append("🏛 <b>АФИНЫ СЕГОДНЯ</b>\n\n" + "\n".join(_bullet(data, b, blocked) for b in d["athens"]))
+        parts.append("<b>АФИНЫ СЕГОДНЯ</b>\n\n" + "\n".join(_bullet(data, b, blocked) for b in d["athens"]))
     if d["watch"]:
-        parts.append("👀 <b>СЛЕДИМ</b>\n\n" + "\n".join(f"• {e(w)}" for w in d["watch"]))
+        parts.append("<b>СЛЕДИМ</b>\n\n" + "\n".join(f"• {e(w)}" for w in d["watch"]))
 
     messages: list[str] = []
     for block in [msg1] + parts:  # складываем разделы в сообщения по видимой длине
