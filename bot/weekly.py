@@ -301,7 +301,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 <title>Агора № {num} — {dates}</title><style>{css}</style></head><body>
 <section class="page first">
   <div class="top"><span>№ {num}</span><span>Неделя {dates}</span><span>Афины, {today.day} {MONTHS[today.month - 1]}</span></div>
-  <header><div class="masthead"><img class="logo" src="{(ROOT / 'templates' / 'agora-mark-circle.svg').as_uri()}" alt="Агора">
+  <header><div class="masthead"><img class="logo" src="{(ROOT / 'templates' / 'agora-mark.png').as_uri()}" alt="Агора">
   <h1>АГОРА</h1></div><div class="motto"><i>Мир за неделю.<br>Без информационного шума</i>
   <small>Греция внутри и снаружи</small></div></header>
   <div class="cols2">
@@ -383,7 +383,7 @@ def main() -> None:
     num = issue_number(start)
     page = render_html(issue, links, start, end, today)
     (OUT / "weekly.html").write_text(page, "utf-8")
-    pdf = OUT / f"Agora_{num}_{start:%Y-%m-%d}.pdf"
+    pdf = OUT / f"agora_news_{today:%Y-%m-%d}.pdf"  # дата выхода (понедельник)
     HTML(string=page, base_url=str(ROOT)).write_pdf(pdf)
     (ARCHIVE / f"weekly-{start}.json").write_text(
         json.dumps({"issue": issue.model_dump(), "links": links}, ensure_ascii=False, indent=1), "utf-8")

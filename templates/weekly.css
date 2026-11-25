@@ -21,7 +21,7 @@ p { margin: 0 0 5pt; }
 header { display: flex; justify-content: space-between; align-items: flex-end;
   border-bottom: 1.6pt solid var(--ink); padding: 4pt 0 6pt; margin-bottom: 10pt; }
 header .masthead { display: flex; align-items: center; gap: 10pt; }
-header .logo { width: 22mm; height: 22mm; } /* круг целиком, без растяжения */
+header .logo { height: 18mm; width: auto; margin: 3pt 0 1pt; } /* знак на прозрачном фоне, пропорции не меняем */
 h1 { font: 600 58pt/0.9 "Cormorant"; letter-spacing: .04em; margin: 0; }
 .motto { text-align: right; font: italic 500 12pt/1.25 "Playfair"; }
 .motto small { display: block; font: 600 7.5pt "Inter"; font-style: normal; margin-top: 3pt; }
