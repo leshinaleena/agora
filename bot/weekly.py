@@ -99,16 +99,18 @@ class Issue(BaseModel):
 
 WEEKLY_TASK = """
 Собери выпуск по материалам недели. Правила:
-• main — главная тема недели: 3–4 абзаца, суть, цифры, расхождения, что дальше.
+• main — главная ПОЛИТИЧЕСКАЯ тема недели (власть, партии, выборы, скандалы, внешняя политика), не митинг: \
+3 абзаца, всего не больше 1100 знаков (иначе не поместится на первую страницу); суть, цифры, расхождения, что дальше.
 • analysis — «Анализ недели»: 4–6 абзацев о том, что стоит за главными событиями, как меняется расклад \
 сил (правительство, оппозиция, улица, соседи), чего ждать. Опирайся на материалы и на раздел «Взгляд извне» \
 (что пишут мировые СМИ и аналитики); мнения обязательно приписывай их авторам. Источники из «Взгляда извне» \
 указывай номерами w1, w2…
-• number_value/number_text — «Цифра недели»: одно число из материалов и что оно значит (2–3 предложения).
+• number_value/number_text — «Цифра недели»: политическое число недели (депутаты, проценты опроса, суммы скандала, \
+голоса), коротко — число или число со словом («11», «30,3%»), и 1–2 предложения, что оно значит. Только событие этой недели.
 • open_question — главный открытый вопрос недели и 1–2 предложения, кто что ожидает.
 • quote — «Цитата недели»: дословная цитата (в переводе) и кто, когда, где сказал.
 • three_views — «Одна новость, три взгляда»: событие с тремя сторонами (страны, лагеря, институты), \
-у каждой — label, заголовок, 2–4 предложения и источники.
+у каждой — label, заголовок, 2–3 предложения и источники.
 • Каждая тема — в одном месте: «Коротко», mood и statements не повторяют главную тему, анализ и опросы.
 • mood не повторяет главную тему: если главная тема — митинг, в mood другие акции, забастовки и опросы.
 • inside — 2–3 статьи «Внутри страны» по 2 абзаца; inside_brief — 2–4 коротких пункта.
@@ -287,27 +289,25 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 <title>Агора № {num} — {dates}</title><style>{css}</style></head><body>
 <section class="page first">
   <div class="top"><span>№ {num}</span><span>Неделя {dates}</span><span>Афины, {today.day} {MONTHS[today.month - 1]}</span></div>
-  <header><div class="masthead"><img class="logo" src="{(ROOT / 'templates' / 'agora-logo-circle.svg').as_uri()}" alt="Агора">
-  <div class="issue">Еженедельный выпуск<b>№ {num}</b>{dates}</div></div><div class="motto"><i>Мир за неделю.<br>Без информационного шума</i>
+  <header><div class="masthead"><img class="logo" src="{(ROOT / 'templates' / 'agora-mark-circle.svg').as_uri()}" alt="Агора">
+  <h1>АГОРА</h1></div><div class="motto"><i>Мир за неделю.<br>Без информационного шума</i>
   <small>Греция внутри и снаружи</small></div></header>
   <div class="cols2">
     <div class="left">
       <article class="lead"><div class="kicker">ГЛАВНАЯ ТЕМА</div><h2>{e(issue.main.headline)}</h2>
       {"".join(f"<p>{e(p)}</p>" for p in issue.main.paragraphs)}{_src(links, issue.main.source_ids, bl)}</article>
+      <div class="box number"><div class="big">{e(issue.number_value)}</div>
+        <div><div class="kicker">ЦИФРА НЕДЕЛИ</div><p>{e(issue.number_text)}</p></div></div>
+      <div class="box"><div class="kicker">ОТКРЫТЫЙ ВОПРОС</div><p class="q">{e(issue.open_question)}</p>
+        <p>{e(issue.open_question_text)}</p></div>
+      <div class="box sand"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
+        <p>{e(issue.quote_attribution)}</p></div>
     </div>
     <div class="right"><div class="kicker">ОДНА НОВОСТЬ, ТРИ ВЗГЛЯДА</div><h3>{e(tv.headline)}</h3>
       <p>{e(tv.intro)}</p>{views}</div>
   </div>
 </section>
 <section class="page">
-  <div class="boxes">
-      <div class="box number"><div class="kicker">ЦИФРА НЕДЕЛИ</div><div class="big">{e(issue.number_value)}</div>
-        <p>{e(issue.number_text)}</p></div>
-      <div class="box"><div class="kicker">ОТКРЫТЫЙ ВОПРОС</div><p class="q">{e(issue.open_question)}</p>
-        <p>{e(issue.open_question_text)}</p></div>
-      <div class="box sand"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
-        <p>{e(issue.quote_attribution)}</p></div>
-  </div>
   <h2 class="sec">Анализ недели</h2>
   <article class="analysis"><h3>{e(issue.analysis.headline)}</h3>
   {"".join(f"<p>{e(p)}</p>" for p in issue.analysis.paragraphs)}{_src(links, issue.analysis.source_ids, bl)}</article>
