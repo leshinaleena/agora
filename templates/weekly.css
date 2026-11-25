@@ -38,14 +38,16 @@ h4 { font: 700 10.5pt/1.2 "Playfair"; margin: 0 0 4pt; }
 .cols2 > div { flex: 1; }
 .first .cols2 .left { flex: 1.45; }
 .first .cols2 .right { flex: 1; border-left: .6pt solid var(--rule); padding-left: 12pt; }
+.boxes { display: flex; gap: 12pt; margin-bottom: 12pt; }
+.boxes > .box { flex: 1; margin-top: 0; }
 .cols3 { display: flex; gap: 12pt; }
 .cols3 > article { flex: 1; }
 .cols3 > article + article { border-left: .6pt solid var(--rule); padding-left: 11pt; }
 article { margin-bottom: 9pt; }
 .box { border-top: .8pt solid var(--ink); padding-top: 5pt; margin-top: 8pt; }
+.box, .view { break-inside: avoid; }
 .box.sand { background: var(--sand); border-top: 1.4pt solid var(--red); padding: 6pt 8pt; }
-.number { display: flex; gap: 10pt; align-items: flex-start; }
-.number .big { font: 700 34pt/1 "Playfair"; color: var(--red); min-width: 34pt; }
+.number .big { font: 700 26pt/1.05 "Playfair"; color: var(--red); margin: 2pt 0 4pt; }
 .q { font: italic 600 11.5pt/1.3 "Playfair"; }
 .view { border-top: .6pt solid var(--red); padding-top: 5pt; margin-top: 7pt; }
 .brief { border-top: 1pt solid var(--ink); padding-top: 5pt; margin-top: 6pt; }
@@ -60,6 +62,7 @@ th.l { text-align: left; }
 td { padding: 4pt 2pt; border-bottom: .5pt solid var(--rule); vertical-align: top; }
 td small { color: #666; font-size: 6.8pt; }
 td.n { text-align: right; font-weight: 600; font-size: 9pt; }
-.analysis { column-count: 2; column-gap: 16pt; font-size: 9.8pt; }
+.analysis { column-count: 2; column-gap: 16pt; font-size: 9.4pt; }
+.brief .src { margin-left: 3pt; }
 .analysis h3 { column-span: all; font-size: 16pt; margin-bottom: 8pt; }
 .analysis .src { column-span: all; }

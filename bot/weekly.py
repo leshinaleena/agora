@@ -109,6 +109,8 @@ WEEKLY_TASK = """
 • quote — «Цитата недели»: дословная цитата (в переводе) и кто, когда, где сказал.
 • three_views — «Одна новость, три взгляда»: событие с тремя сторонами (страны, лагеря, институты), \
 у каждой — label, заголовок, 2–4 предложения и источники.
+• Каждая тема — в одном месте: «Коротко», mood и statements не повторяют главную тему, анализ и опросы.
+• mood не повторяет главную тему: если главная тема — митинг, в mood другие акции, забастовки и опросы.
 • inside — 2–3 статьи «Внутри страны» по 2 абзаца; inside_brief — 2–4 коротких пункта.
 • mood — 1–2 статьи «Улица»: митинги, забастовки, протесты.
 • polls — таблица опросов недели, если опросы были (иначе null): только цифры из материалов, \
@@ -162,7 +164,11 @@ HOSTS = {
     "hurriyetdailynews.com": "Hürriyet Daily News", "greekreporter.com": "Greek Reporter", "tass.ru": "ТАСС",
     "ria.ru": "РИА Новости", "mid.ru": "МИД России", "euronews.com": "Euronews", "dw.com": "DW",
     "greekcitytimes.com": "Greek City Times", "avgi.gr": "Avgi", "documentonews.gr": "Documento",
-    "in.gr": "in.gr", "news247.gr": "News247", "skai.gr": "Skai", "megatv.com": "Mega", "cnn.gr": "CNN Greece",
+    "in.gr": "in.gr", "en.parapolitika.gr": "Parapolitika", "parapolitika.gr": "Parapolitika",
+    "newsminimalist.com": "Newsit", "yusufkanli.substack.com": "Юсуф Канлы", "cyprusnews.substack.com": "RIK",
+    "hellasjournal.com": "Hellas Journal", "en.rua.gr": "Athens News", "greekherald.com.au": "Greek Herald",
+    "thenationalherald.com": "National Herald", "politis.com.cy": "Politis", "en.politis.com.cy": "Politis",
+    "iefimerida.gr": "iefimerida", "neoskosmos.com": "Neos Kosmos", "kiprinform.com": "Kiprinform", "news247.gr": "News247", "skai.gr": "Skai", "megatv.com": "Mega", "cnn.gr": "CNN Greece",
 }
 
 
@@ -217,7 +223,7 @@ def collect_week(start: dt.date, end: dt.date) -> tuple[str, dict]:
 
 # ---------- Вёрстка ----------
 
-def _src(links: dict, ids: list[str], blocked: list[str]) -> str:
+def _src(links: dict, ids: list[str], blocked: list[str], inline: bool = False) -> str:
     e, seen, out = html.escape, set(), []
     for i in ids:
         s = links.get(i)
@@ -228,7 +234,10 @@ def _src(links: dict, ids: list[str], blocked: list[str]) -> str:
             out.append(e(s["name"]))
         else:
             out.append(f'<a href="{e(s["url"], quote=True)}">{e(s["name"])}</a>')
-    return f'<p class="src">{" · ".join(out)}</p>' if out else ""
+    if not out:
+        return ""
+    tag = "span" if inline else "p"
+    return f'<{tag} class="src">{" · ".join(out)}</{tag}>'
 
 
 def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.date) -> str:
@@ -246,7 +255,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
                 f"<h3>{e(a.headline)}</h3>{body}{_src(links, a.source_ids, bl)}</article>")
 
     def brief(b: Brief) -> str:
-        return f"<p><b>{e(b.label)}.</b> {e(b.text)} {_src(links, b.source_ids, bl)}</p>"
+        return f"<p><b>{e(b.label)}.</b> {e(b.text)} {_src(links, b.source_ids, bl, True)}</p>"
 
     tv = issue.three_views
     views = "".join(
@@ -266,7 +275,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
                  f'<table><tr><th class="l">ОПРОС</th>{head}</tr>{rows}</table>'
                  + "".join(f"<p>{e(x)}</p>" for x in p.after) + _src(links, p.source_ids, bl) + "</article>")
     statements = "".join(
-        f"<p><b>{e(s.who_when)}.</b> {e(s.text)} {_src(links, s.source_ids, bl)}</p>" for s in issue.statements
+        f"<p><b>{e(s.who_when)}.</b> {e(s.text)} {_src(links, s.source_ids, bl, True)}</p>" for s in issue.statements
     )
     watch = "".join(f"<p><b>{e(w.label)}.</b> {e(w.text)}</p>" for w in issue.watch)
     css = (ROOT / "templates" / "weekly.css").read_text("utf-8").replace("FONTS", (ROOT / "fonts").as_uri())
@@ -282,18 +291,21 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
     <div class="left">
       <article class="lead"><div class="kicker">ГЛАВНАЯ ТЕМА</div><h2>{e(issue.main.headline)}</h2>
       {"".join(f"<p>{e(p)}</p>" for p in issue.main.paragraphs)}{_src(links, issue.main.source_ids, bl)}</article>
-      <div class="box number"><div class="big">{e(issue.number_value)}</div>
-        <div><div class="kicker">ЦИФРА НЕДЕЛИ</div><p>{e(issue.number_text)}</p></div></div>
-      <div class="box"><div class="kicker">ОТКРЫТЫЙ ВОПРОС</div><p class="q">{e(issue.open_question)}</p>
-        <p>{e(issue.open_question_text)}</p></div>
-      <div class="box sand"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
-        <p>{e(issue.quote_attribution)}</p></div>
     </div>
     <div class="right"><div class="kicker">ОДНА НОВОСТЬ, ТРИ ВЗГЛЯДА</div><h3>{e(tv.headline)}</h3>
       <p>{e(tv.intro)}</p>{views}</div>
   </div>
 </section>
-<section class="page"><h2 class="sec">Анализ недели</h2>
+<section class="page">
+  <div class="boxes">
+      <div class="box number"><div class="kicker">ЦИФРА НЕДЕЛИ</div><div class="big">{e(issue.number_value)}</div>
+        <p>{e(issue.number_text)}</p></div>
+      <div class="box"><div class="kicker">ОТКРЫТЫЙ ВОПРОС</div><p class="q">{e(issue.open_question)}</p>
+        <p>{e(issue.open_question_text)}</p></div>
+      <div class="box sand"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
+        <p>{e(issue.quote_attribution)}</p></div>
+  </div>
+  <h2 class="sec">Анализ недели</h2>
   <article class="analysis"><h3>{e(issue.analysis.headline)}</h3>
   {"".join(f"<p>{e(p)}</p>" for p in issue.analysis.paragraphs)}{_src(links, issue.analysis.source_ids, bl)}</article>
   <div class="brief"><h4>Коротко</h4>{"".join(brief(b) for b in issue.inside_brief)}</div>
