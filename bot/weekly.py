@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel
 
-from . import feeds, llm, prompts, telegram
+from . import costs, feeds, llm, prompts, telegram
 
 ROOT = Path(__file__).resolve().parent.parent
 ARCHIVE = ROOT / "archive"
@@ -340,6 +340,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 
 
 def main() -> None:
+    costs.track("газета")
     today = dt.datetime.now(ATHENS).date()
     start, end = week_range(today)
     if os.environ.get("WEEK_START"):  # выпуск за прошлую неделю по запросу: WEEK_START=2026-11-16
@@ -449,6 +450,8 @@ def publish(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.d
     text = post_text(issue, links, start, end)
     (OUT / "weekly_post.html").write_text(text, "utf-8")
     print(f"[weekly] № {num}: {pdf.name}, расход ${llm.spent['usd']:.3f}\n\n{text}")
+    (OUT / "costs.txt").write_text(costs.summary(today, llm.spent['usd']), "utf-8")
+    print(f"[weekly] {costs.summary(today, llm.spent['usd'])}")
     if os.environ.get("PUBLISH") == "yes":
         telegram.send_html(text)  # сначала текст с главным, затем файл
         telegram.send_pdf(pdf, f"<b>Агора № {num}</b> · неделя {start.day}–{end.day} {MONTHS[end.month - 1]}\n"

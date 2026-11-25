@@ -18,7 +18,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from . import feeds, llm, prompts, telegram
+from . import costs, feeds, llm, prompts, telegram
 
 ROOT = Path(__file__).resolve().parent.parent
 ARCHIVE = ROOT / "archive"
@@ -282,6 +282,7 @@ def preview_html(messages: list[str]) -> str:
 
 
 def main() -> None:
+    costs.track("сводка")
     today = dt.datetime.now(ATHENS).date()
     if os.environ.get("FROM_ARCHIVE"):  # переотправить уже собранную сводку без новых запросов к Claude
         today = dt.date.fromisoformat(os.environ["FROM_ARCHIVE"])
