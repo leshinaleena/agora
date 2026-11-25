@@ -84,7 +84,7 @@ def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
     for feed in load_feeds():
         entries, status = fetch_feed(feed)
         report[feed["name"]] = status
-        for e in entries:
+        for e in entries[:80]:
             pub = _published(e)
             if pub is None or pub < since:
                 continue
@@ -92,12 +92,14 @@ def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
             link_key = link.split("?")[0]
             title = clean(e.get("title", ""))
             source = feed["name"]
+            home = ""
             if feed.get("aggregator"):
                 # В Google News издание указано в <source>, а в конце заголовка « - Издание»
                 src = (e.get("source") or {}).get("title") or ""
                 if src and title.endswith(" - " + src):
                     title = title[: -len(src) - 3]
                 source = src or source
+                home = (e.get("source") or {}).get("href") or ""
             key = title.lower()[:80]
             if not link or not title or link_key in seen_links or key in seen_titles:
                 continue
@@ -120,6 +122,7 @@ def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
                     published=pub,
                     text=text,
                     via=feed["name"] if feed.get("aggregator") else "",
+                    extra={"home": home} if home else {},
                 )
             )
     return items, report

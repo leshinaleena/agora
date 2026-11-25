@@ -20,35 +20,44 @@ feeds:
   - {name: Greek Reporter,     url: "https://greekreporter.com/feed/", lang: en}
   - {name: Keep Talking Greece, url: "https://www.keeptalkinggreece.com/feed/", lang: en}
 
-  # --- Кандидаты из таблицы изданий (25.11). Адреса лент угаданы, проверит запуск «Проверка лент». ---
-  - {name: Parapolitika,       url: "https://www.parapolitika.gr/feed/", lang: el, trial: true}
-  - {name: Parapolitika English, url: "https://en.parapolitika.gr/feed/", lang: en, trial: true}
-  - {name: CNN Greece,         url: "https://www.cnn.gr/?format=feed&type=rss", lang: el, trial: true}
-  - {name: Real.gr,            url: "https://www.real.gr/feed/", lang: el, trial: true}
-  - {name: Liberal,            url: "https://www.liberal.gr/rss.xml", lang: el, trial: true}
-  - {name: Newsit,             url: "https://www.newsit.gr/feed/", lang: el, trial: true}
-  - {name: enikos,             url: "https://www.enikos.gr/feed/", lang: el, trial: true}
-  - {name: The Press Project,  url: "https://thepressproject.gr/feed/", lang: el, trial: true}
-  - {name: Reporters United,   url: "https://www.reportersunited.gr/feed/", lang: el, trial: true}
-  - {name: Solomon,            url: "https://wearesolomon.com/feed/", lang: en, trial: true}
-  - {name: Inside Story,       url: "https://insidestory.gr/rss.xml", lang: el, trial: true}
-  - {name: Dnews,              url: "https://www.dnews.gr/feed", lang: el, trial: true}
-  - {name: Energypress,        url: "https://energypress.gr/rss.xml", lang: el, trial: true}
-  - {name: Greek City Times,   url: "https://greekcitytimes.com/feed/", lang: en, trial: true}
-  - {name: Hellas Journal,     url: "https://hellasjournal.com/feed/", lang: el, trial: true}
-  - {name: Cyprus Mail,        url: "https://cyprus-mail.com/feed/", lang: en, trial: true}
-  - {name: Kiprinform,         url: "https://kiprinform.com/feed/", lang: ru, trial: true}
-  - {name: Balkan Insight,     url: "https://balkaninsight.com/feed/", lang: en, trial: true}
-  - {name: Euronews (греч.),   url: "https://gr.euronews.com/rss", lang: el, trial: true}
-  - {name: DW (греч.),         url: "https://rss.dw.com/rdf/rss-gre-all", lang: el, trial: true}
-  - {name: Hürriyet Daily News, url: "https://www.hurriyetdailynews.com/rss", lang: en, trial: true}
-  - {name: Anadolu,            url: "https://www.aa.com.tr/en/rss/default?cat=guncel", lang: en, trial: true}
-  - {name: Премьер-министр Греции, url: "https://www.primeminister.gr/feed", lang: el, trial: true}
+  # --- Добавлены из таблицы изданий 25.11, проверены с серверов GitHub ---
+  # не открылась с GitHub 25.11:
+  #  - {name: Parapolitika,       url: "https://www.parapolitika.gr/feed/", lang: el}
+  - {name: Parapolitika English, url: "https://en.parapolitika.gr/feed/", lang: en}
+  # не открылась с GitHub 25.11:
+  #  - {name: CNN Greece,         url: "https://www.cnn.gr/?format=feed&type=rss", lang: el}
+  - {name: Real.gr,            url: "https://www.real.gr/feed/", lang: el}
+  # не открылась с GitHub 25.11:
+  #  - {name: Liberal,            url: "https://www.liberal.gr/rss.xml", lang: el}
+  - {name: Newsit,             url: "https://www.newsit.gr/feed/", lang: el}
+  - {name: enikos,             url: "https://www.enikos.gr/feed/", lang: el}
+  - {name: The Press Project,  url: "https://thepressproject.gr/feed/", lang: el}
+  - {name: Reporters United,   url: "https://www.reportersunited.gr/feed/", lang: el}
+  - {name: Solomon,            url: "https://wearesolomon.com/feed/", lang: en}
+  # не открылась с GitHub 25.11:
+  #  - {name: Inside Story,       url: "https://insidestory.gr/rss.xml", lang: el}
+  # не открылась с GitHub 25.11:
+  #  - {name: Dnews,              url: "https://www.dnews.gr/feed", lang: el}
+  # не открылась с GitHub 25.11:
+  #  - {name: Energypress,        url: "https://energypress.gr/rss.xml", lang: el}
+  - {name: Greek City Times,   url: "https://greekcitytimes.com/feed/", lang: en}
+  - {name: Hellas Journal,     url: "https://hellasjournal.com/feed/", lang: el}
+  - {name: Cyprus Mail,        url: "https://cyprus-mail.com/feed/", lang: en}
+  - {name: Kiprinform,         url: "https://kiprinform.com/feed/", lang: ru}
+  - {name: Balkan Insight,     url: "https://balkaninsight.com/feed/", lang: en}
+  # не открылась с GitHub 25.11:
+  #  - {name: Euronews (греч.),   url: "https://gr.euronews.com/rss", lang: el}
+  - {name: DW (греч.),         url: "https://rss.dw.com/rdf/rss-gre-all", lang: el}
+  # не открылась с GitHub 25.11:
+  #  - {name: Hürriyet Daily News, url: "https://www.hurriyetdailynews.com/rss", lang: en}
+  - {name: Anadolu,            url: "https://www.aa.com.tr/en/rss/default?cat=guncel", lang: en}
+  # не открылась с GitHub 25.11:
+  #  - {name: Премьер-министр Греции, url: "https://www.primeminister.gr/feed", lang: el}
   # Мировая пресса о Греции через Google News: заголовки Reuters, FT, Politico, ТАСС, турецких СМИ и др.
-  - {name: Google News (англ.), url: "https://news.google.com/rss/search?q=Greece+OR+Greek+OR+Athens+when:1d&hl=en-US&gl=US&ceid=US:en", lang: en, aggregator: true, trial: true}
-  - {name: Google News (рус.),  url: "https://news.google.com/rss/search?q=%D0%93%D1%80%D0%B5%D1%86%D0%B8%D1%8F+when:1d&hl=ru&gl=RU&ceid=RU:ru", lang: ru, aggregator: true, trial: true}
-  - {name: Google News (тур.),  url: "https://news.google.com/rss/search?q=Yunanistan+when:1d&hl=tr&gl=TR&ceid=TR:tr", lang: tr, aggregator: true, trial: true}
-  - {name: Google News (Греция), url: "https://news.google.com/rss?hl=el&gl=GR&ceid=GR:el", lang: el, aggregator: true, trial: true}
+  - {name: Google News (англ.), url: "https://news.google.com/rss/search?q=Greece+OR+Greek+OR+Athens+when:1d&hl=en-US&gl=US&ceid=US:en", lang: en, aggregator: true}
+  - {name: Google News (рус.),  url: "https://news.google.com/rss/search?q=%D0%93%D1%80%D0%B5%D1%86%D0%B8%D1%8F+when:1d&hl=ru&gl=RU&ceid=RU:ru", lang: ru, aggregator: true}
+  - {name: Google News (тур.),  url: "https://news.google.com/rss/search?q=Yunanistan+when:1d&hl=tr&gl=TR&ceid=TR:tr", lang: tr, aggregator: true}
+  - {name: Google News (Греция), url: "https://news.google.com/rss?hl=el&gl=GR&ceid=GR:el", lang: el, aggregator: true}
 
 # Издания, на которые не ставим ссылки: в России они признаны «нежелательными»,
 # переход по ссылке может быть риском для читателей в России. Факты из них можно упоминать без ссылки.

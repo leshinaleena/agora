@@ -73,7 +73,9 @@ def ask(
 
 # ---------- Схемы ответов ----------
 
-Rubric = Literal["politics", "world", "economy", "mood", "russia", "society"]
+Rubric = Literal[
+    "politics", "neighbors", "eu_world", "migration", "security", "economy", "society", "mood", "russia", "athens"
+]
 
 
 class Story(BaseModel):
@@ -90,16 +92,35 @@ class Selection(BaseModel):
 class Notes(BaseModel):
     facts: list[str]  # факты, цифры, цитаты по-русски, каждый со ссылкой на издание в скобках
     disagreement: str  # чем расходятся издания, если расходятся; иначе пустая строка
+    dates_ahead: list[str]  # будущие даты и события из текстов: «25 ноября: забастовка ADEDY»
     is_new: bool  # есть ли в сюжете новое по сравнению со вчерашней сводкой
 
 
-class DigestItem(BaseModel):
-    rubric: Rubric
+class MainStory(BaseModel):
     headline: str
-    body: str
+    lead: str  # 1–2 предложения: суть
+    details: str  # подробности, 4–8 предложений, уходят под «ещё»
     source_ids: list[str]
 
 
+class Bullet(BaseModel):
+    label: str  # короткая жирная метка: «Опросы», «Кабель GSI»; может быть пустой
+    text: str
+    source_ids: list[str]
+
+
+class BriefSection(BaseModel):
+    title: Literal[
+        "Политика", "Турция, Кипр и соседи", "Европа и мир", "Миграция", "Безопасность и море",
+        "Экономика", "Общество", "Россия и Греция, русские в Греции",
+    ]
+    bullets: list[Bullet]
+
+
 class Digest(BaseModel):
-    lead: str  # одна фраза: главное за сутки
-    items: list[DigestItem]
+    main: list[MainStory]  # ровно 3 главные истории
+    mood: list[Bullet]  # улица, забастовки, цены, опросы
+    agenda: list[Bullet]  # что происходит сегодня
+    brief: list[BriefSection]
+    athens: list[Bullet]  # практическое для живущих в Афинах: транспорт, забастовки, город
+    watch: list[str]  # «19 ноября: …» — за чем следим в ближайшие дни

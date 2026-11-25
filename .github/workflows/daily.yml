@@ -1,8 +1,8 @@
 name: Ежедневная сводка
 on:
   schedule:
-    # 05:05 UTC = 8:05 по Москве. Программа соберёт сводку и дождётся 8:30.
-    - cron: "5 5 * * *"
+    # 04:50 UTC = 6:50 по Афинам зимой (7:50 летом). Программа соберёт сводку и дождётся 8:30 по Афинам.
+    - cron: "50 4 * * *"
   workflow_dispatch:
     inputs:
       publish:
@@ -16,7 +16,7 @@ concurrency:
 jobs:
   daily:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 200
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,7 +30,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           # По расписанию публикует, только если в Settings → Variables задано PUBLISH_DAILY = yes
           PUBLISH: ${{ github.event_name == 'schedule' && vars.PUBLISH_DAILY || inputs.publish }}
-          POST_AT: ${{ github.event_name == 'schedule' && '05:30' || '00:00' }}
+          POST_AT: ${{ github.event_name == 'schedule' && '08:30' || '00:00' }}
         run: python -m bot.daily
       - name: Черновик на страницу запуска
         if: always()
@@ -38,6 +38,12 @@ jobs:
           if [ -f out/digest.html ]; then
             { echo "## Сводка"; echo; sed 's/$/<br>/' out/digest.html; } >> "$GITHUB_STEP_SUMMARY"
           fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: preview
+          path: out/
+          if-no-files-found: ignore
       - name: Сохранить в архив
         run: |
           git config user.name "agora-bot"
