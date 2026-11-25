@@ -277,8 +277,12 @@ def preview_html(messages: list[str]) -> str:
 
 def main() -> None:
     today = dt.datetime.now(ATHENS).date()
-    data = build(today)
-    messages = render(data)
+    if os.environ.get("FROM_ARCHIVE"):  # переотправить уже собранную сводку без новых запросов к Claude
+        today = dt.date.fromisoformat(os.environ["FROM_ARCHIVE"])
+        data = json.loads((ARCHIVE / f"{today}.json").read_text("utf-8"))
+    else:
+        data = build(today)
+    messages = [m.replace("ЕЛАС", "ЭЛАС") for m in render(data)]
     ARCHIVE.mkdir(exist_ok=True)
     OUT.mkdir(exist_ok=True)
     (ARCHIVE / f"{today}.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), "utf-8")

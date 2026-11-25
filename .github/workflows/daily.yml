@@ -9,6 +9,10 @@ on:
         description: "Опубликовать в канал? (yes — да, no — только черновик)"
         default: "no"
         required: true
+      from_archive:
+        description: "Взять готовую сводку из архива за дату (например 2026-11-25), без запросов к Claude"
+        default: ""
+        required: false
 permissions:
   contents: write
 concurrency:
@@ -31,6 +35,7 @@ jobs:
           # По расписанию публикует, только если в Settings → Variables задано PUBLISH_DAILY = yes
           PUBLISH: ${{ github.event_name == 'schedule' && vars.PUBLISH_DAILY || inputs.publish }}
           POST_AT: ${{ github.event_name == 'schedule' && '08:30' || '00:00' }}
+          FROM_ARCHIVE: ${{ inputs.from_archive }}
         run: python -m bot.daily
       - name: Черновик на страницу запуска
         if: always()
