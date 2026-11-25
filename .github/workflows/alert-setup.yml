@@ -2,6 +2,11 @@ name: Узнать номер чата для уведомлений
 # Нажмите Start у бота в Telegram, затем запустите этот сценарий: бот пришлёт вам ваш номер чата.
 on:
   workflow_dispatch:
+    inputs:
+      test:
+        description: "Прислать пробное уведомление в чат ALERT_CHAT_ID? (yes / no)"
+        default: "no"
+        required: false
 jobs:
   whoami:
     runs-on: ubuntu-latest
@@ -14,4 +19,11 @@ jobs:
       - run: pip install -r requirements.txt
       - env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: python -m bot.alert whoami
+          ALERT_CHAT_ID: ${{ secrets.ALERT_CHAT_ID }}
+        run: |
+          if [ "${{ inputs.test }}" = "yes" ]; then
+            echo "Проверка уведомлений: всё работает, это пробное сообщение." > run.log
+            python -m bot.alert fail "пробная сводка" run.log
+          else
+            python -m bot.alert whoami
+          fi
