@@ -42,7 +42,7 @@ jobs:
           POST_AT: ${{ github.event_name == 'schedule' && '07:30' || '00:00' }}
           FROM_ARCHIVE: ${{ inputs.from_archive }}
           REPLACE: ${{ inputs.replace }}
-        run: python -m bot.daily
+        run: set -o pipefail; python -m bot.daily 2>&1 | tee run.log
       - name: Черновик на страницу запуска
         if: always()
         run: |
@@ -55,6 +55,12 @@ jobs:
           name: preview
           path: out/
           if-no-files-found: ignore
+      - name: Сообщить Лене о сбое
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ALERT_CHAT_ID: ${{ secrets.ALERT_CHAT_ID }}
+        run: python -m bot.alert fail "сводка" run.log || true
       - name: Сохранить в архив
         run: |
           git config user.name "agora-bot"

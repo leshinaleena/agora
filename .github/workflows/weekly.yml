@@ -39,13 +39,19 @@ jobs:
           PUBLISH: ${{ github.event_name == 'schedule' && vars.PUBLISH_WEEKLY || inputs.publish }}
           WEEK_START: ${{ inputs.week }}
           FROM_ARCHIVE: ${{ inputs.from_archive }}
-        run: python -m bot.weekly
+        run: set -o pipefail; python -m bot.weekly 2>&1 | tee run.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: weekly
           path: out/
           if-no-files-found: ignore
+      - name: Сообщить Лене о сбое
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ALERT_CHAT_ID: ${{ secrets.ALERT_CHAT_ID }}
+        run: python -m bot.alert fail "газета" run.log || true
       - name: Сохранить в архив
         if: always()
         run: |
