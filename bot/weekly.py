@@ -324,7 +324,15 @@ def main() -> None:
     if not material:
         # Сводок за неделю нет (например, бот тогда ещё не работал): собираем материал поиском.
         print(f"[weekly] сводок за {start}–{end} нет, собираю материал поиском в интернете")
-        found = llm.research(prompts.EDITORIAL + WEEK_SEARCH_TASK, f"Неделя {start} — {end}.", max_searches=15)
+        saved = ARCHIVE / f"weekly-research-{start}.md"
+        if saved.exists():  # поиск уже был — второй раз не платим
+            found = saved.read_text("utf-8")
+        else:
+            # Haiku читает найденные страницы в 20 раз дешевле Sonnet; пишет выпуск всё равно Sonnet.
+            found = llm.research(prompts.EDITORIAL + WEEK_SEARCH_TASK, f"Неделя {start} — {end}.",
+                                 max_searches=12, model=llm.HAIKU)
+            ARCHIVE.mkdir(exist_ok=True)
+            saved.write_text(found, "utf-8")
         material = links_from_urls(found, links)
         if not material.strip():
             raise SystemExit(f"Нет материала за {start}–{end}: выпуск не из чего собирать.")
@@ -338,7 +346,7 @@ def main() -> None:
     issue = llm.ask(
         llm.SONNET, prompts.WEEKLY_SYSTEM + WEEKLY_TASK,
         f"Неделя {start} — {end}.\n\n{material}\n\n===== Взгляд извне (поиск в интернете) =====\n{outside or '(нет)'}",
-        Issue, effort="medium", max_tokens=48000,
+        Issue, effort="medium", max_tokens=48000, strict=False,
     )
     if not issue:
         raise SystemExit("Выпуск не написан.")

@@ -49,17 +49,24 @@ def ask(
     schema: type[T],
     effort: Literal["low", "medium", "high"] = "medium",
     max_tokens: int = 16000,
+    strict: bool = True,
 ) -> T | None:
-    """Один запрос со структурированным ответом. None — если модель отказалась."""
+    """Один запрос со структурированным ответом. None — если модель отказалась.
+    strict=False — для больших схем (выпуск недели): схема идёт в задание, ответ проверяется после."""
+    import json
     models = [model] + ([SONNET_FALLBACK] if model == SONNET else [])
+    if not strict:
+        system = system + ("\n\nОтветь одним JSON-объектом строго по этой схеме, без пояснений и без ```:\n"
+                           + json.dumps(schema.model_json_schema(), ensure_ascii=False))
     for m in models:
+        kw = {"output_format": schema} if strict else {}
         with client().messages.stream(
             model=m,
             max_tokens=max_tokens,
             system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": user}],
             output_config={"effort": effort},
-            output_format=schema,
+            **kw,
         ) as stream:
             resp = stream.get_final_message()
         _account(m, resp.usage)
@@ -71,7 +78,11 @@ def ask(
         if resp.stop_reason == "max_tokens":
             print(f"[llm] {m}: ответ обрезан по max_tokens")
             return None
-        return resp.parsed_output
+        if strict:
+            return resp.parsed_output
+        text = "".join(b.text for b in resp.content if b.type == "text").strip()
+        text = text[text.find("{"): text.rfind("}") + 1]
+        return schema.model_validate_json(text)
     return None
 
 
@@ -135,14 +146,14 @@ def ask_batch(
     return None
 
 
-def research(system: str, user: str, max_searches: int = 8) -> str:
+def research(system: str, user: str, max_searches: int = 8, model: str = SONNET) -> str:
     """Sonnet ищет в интернете (веб-поиск Claude) и возвращает заметки текстом.
     Поиск стоит $10 за 1000 запросов, то есть 1 цент за поиск, плюс токены найденных страниц."""
     messages = [{"role": "user", "content": user}]
     text = ""
     for _ in range(4):  # pause_turn: сервер просит продолжить длинный поиск
         with client().messages.stream(
-            model=SONNET,
+            model=model,
             max_tokens=16000,
             system=system,
             messages=messages,
@@ -150,7 +161,7 @@ def research(system: str, user: str, max_searches: int = 8) -> str:
             tools=[{"type": "web_search_20260209", "name": "web_search", "max_uses": max_searches}],
         ) as stream:
             resp = stream.get_final_message()
-        _account(SONNET, resp.usage)
+        _account(model, resp.usage)
         n = getattr(getattr(resp.usage, "server_tool_use", None), "web_search_requests", 0) or 0
         spent["usd"] += n * 0.01
         print(f"[llm] поиск: {n} запросов, итого ${spent['usd']:.4f}", flush=True)

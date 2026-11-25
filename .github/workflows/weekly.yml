@@ -42,6 +42,7 @@ jobs:
           path: out/
           if-no-files-found: ignore
       - name: Сохранить в архив
+        if: always()
         run: |
           git config user.name "agora-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
