@@ -394,18 +394,47 @@ def _first_sentences(text: str, n: int) -> str:
     return " ".join(parts[:n])
 
 
-def post_text(issue: Issue, start: dt.date, end: dt.date) -> str:
-    """Текстовый пост к PDF: главное за неделю. Собирается из выпуска, без новых запросов к Claude."""
+def post_text(issue: Issue, links: dict, start: dt.date, end: dt.date) -> str:
+    """Развёрнутый текстовый пост к PDF: по абзацу на сюжет, ссылки вшиты в названия изданий.
+    Собирается из выпуска, без новых запросов к Claude."""
     e = html.escape
+    bl = feeds.no_link_domains()
     num = issue_number(start)
-    lines = [f"<b>АГОРА № {num} · неделя {start.day}–{end.day} {MONTHS[end.month - 1]}</b>", "",
-             f"<b>{e(issue.main.headline)}</b>", e(_first_sentences(issue.main.paragraphs[0], 2)) if issue.main.paragraphs else "", "",
-             f"<b>Цифра недели: {e(issue.number_value)}.</b> {e(issue.number_text)}", "",
-             "<b>Ещё за неделю</b>"]
-    for a in issue.inside + issue.mood + issue.world:
-        lines.append(f"• {e(a.headline)}")
-    lines += ["", f"<b>Открытый вопрос.</b> {e(issue.open_question)}", "", "Весь выпуск — в PDF ниже."]
-    return "\n".join(lines)
+
+    def refs(ids: list[str]) -> str:
+        seen, out = set(), []
+        for i in ids:
+            s_ = links.get(i)
+            if not s_ or s_["name"] in seen:
+                continue
+            seen.add(s_["name"])
+            if any(d in s_["url"] or d in s_.get("home", "") for d in bl):
+                out.append(e(s_["name"]))
+            else:
+                out.append(f'<a href="{e(s_["url"], quote=True)}">{e(s_["name"])}</a>')
+        return f" ({', '.join(out)})" if out else ""
+
+    def item(a: Article, n: int = 2) -> str:
+        return f"<b>{e(a.headline)}</b>\n{e(_first_sentences(' '.join(a.paragraphs), n))}{refs(a.source_ids)}"
+
+    parts = [f"<b>АГОРА № {num} · НЕДЕЛЯ {start.day}–{end.day} {MONTHS[end.month - 1].upper()}</b>\n"
+             "Главное за неделю. Полный выпуск — в PDF ниже.",
+             "<b>ГЛАВНАЯ ТЕМА</b>\n\n" + item(issue.main, 4),
+             f"<b>ЦИФРА НЕДЕЛИ: {e(issue.number_value)}</b>\n{e(issue.number_text)}"]
+    if issue.inside:
+        parts.append("<b>ВНУТРИ СТРАНЫ</b>\n\n" + "\n\n".join(item(a) for a in issue.inside))
+    mood = [item(a) for a in issue.mood]
+    if issue.polls and issue.polls.rows:
+        mood.append(f"<b>{e(issue.polls.headline)}</b>\n{e(_first_sentences(issue.polls.intro, 2))}"
+                    + refs(issue.polls.source_ids))
+    if mood:
+        parts.append("<b>ЧТО ДУМАЮТ ГРЕКИ</b>\n\n" + "\n\n".join(mood))
+    if issue.world:
+        parts.append("<b>ГРЕЦИЯ И МИР</b>\n\n" + "\n\n".join(item(a) for a in issue.world))
+    parts.append(f"<b>ОТКРЫТЫЙ ВОПРОС</b>\n{e(issue.open_question)} {e(issue.open_question_text)}")
+    if issue.watch:
+        parts.append("<b>СЛЕДИМ ДАЛЬШЕ</b>\n" + "\n".join(f"• {e(w.label)}. {e(w.text)}" for w in issue.watch))
+    return "\n\n".join(parts)
 
 
 def publish(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.date) -> None:
@@ -417,7 +446,7 @@ def publish(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.d
     (OUT / "weekly.html").write_text(page, "utf-8")
     pdf = OUT / f"agora_news_{today:%Y-%m-%d}.pdf"  # дата выхода (понедельник)
     HTML(string=page, base_url=str(ROOT)).write_pdf(pdf)
-    text = post_text(issue, start, end)
+    text = post_text(issue, links, start, end)
     (OUT / "weekly_post.html").write_text(text, "utf-8")
     print(f"[weekly] № {num}: {pdf.name}, расход ${llm.spent['usd']:.3f}\n\n{text}")
     if os.environ.get("PUBLISH") == "yes":
