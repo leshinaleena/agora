@@ -242,6 +242,18 @@ def _src(links: dict, ids: list[str], blocked: list[str], inline: bool = False) 
     return f'<{tag} class="src">{" · ".join(out)}</{tag}>'
 
 
+ACRONYMS = {"ЕС", "США", "ООН", "НАТО", "ПАСОК", "СИРИЗА", "ЭЛАС", "КПГ", "ККЕ", "ОПЕКЕПЕ", "ND", "GSI", "ADEDY", "ГСЭЭ"}
+
+
+def kicker(t: str) -> str:
+    """«ГРЕЦИЯ И КИПР» → «Греция и Кипр»: разреженный капс на кириллице читается хуже."""
+    if not t.isupper():
+        return t
+    words = [w if w.strip("«»,.") in ACRONYMS else w.lower() for w in t.split()]
+    out = " ".join(words)
+    return out[:1].upper() + out[1:]
+
+
 def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.date) -> str:
     import re
 
@@ -256,7 +268,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 
     def art(a: Article, cls: str = "") -> str:
         body = "".join(f"<p>{e(p)}</p>" for p in a.paragraphs)
-        return (f'<article class="{cls}"><div class="kicker">{e(a.kicker)}</div>'
+        return (f'<article class="{cls}"><div class="kicker">{e(kicker(a.kicker))}</div>'
                 f"<h3>{e(a.headline)}</h3>{body}{_src(links, a.source_ids, bl)}</article>")
 
     def brief(b: Brief) -> str:
@@ -264,7 +276,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 
     tv = issue.three_views
     views = "".join(
-        f'<div class="view"><div class="kicker">{e(v.label)}</div><h4>{e(v.headline)}</h4>'
+        f'<div class="view"><div class="kicker">{e(kicker(v.label))}</div><h4>{e(v.headline)}</h4>'
         f"<p>{e(v.text)}</p>{_src(links, v.source_ids, bl)}</div>" for v in tv.views
     )
     polls = ""
@@ -276,8 +288,8 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
             + "".join(f'<td class="n">{e(v)}</td>' for v in r.values) + "</tr>"
             for r in p.rows
         )
-        polls = (f'<article><div class="kicker">ОПРОСЫ</div><h3>{e(p.headline)}</h3><p>{e(p.intro)}</p>'
-                 f'<table><tr><th class="l">ОПРОС</th>{head}</tr>{rows}</table>'
+        polls = (f'<article><div class="kicker">Опросы</div><h3>{e(p.headline)}</h3><p>{e(p.intro)}</p>'
+                 f'<table><tr><th class="l">Опрос</th>{head}</tr>{rows}</table>'
                  + "".join(f"<p>{e(x)}</p>" for x in p.after) + _src(links, p.source_ids, bl) + "</article>")
     statements = "".join(
         f"<p><b>{e(s.who_when)}.</b> {e(s.text)} {_src(links, s.source_ids, bl, True)}</p>" for s in issue.statements
@@ -294,16 +306,16 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
   <small>Греция внутри и снаружи</small></div></header>
   <div class="cols2">
     <div class="left">
-      <article class="lead"><div class="kicker">ГЛАВНАЯ ТЕМА</div><h2>{e(issue.main.headline)}</h2>
+      <article class="lead"><div class="kicker">Главная тема</div><h2>{e(issue.main.headline)}</h2>
       {"".join(f"<p>{e(p)}</p>" for p in issue.main.paragraphs)}{_src(links, issue.main.source_ids, bl)}</article>
       <div class="box number"><div class="big">{e(issue.number_value)}</div>
-        <div><div class="kicker">ЦИФРА НЕДЕЛИ</div><p>{e(issue.number_text)}</p></div></div>
-      <div class="box"><div class="kicker">ОТКРЫТЫЙ ВОПРОС</div><p class="q">{e(issue.open_question)}</p>
+        <div><div class="kicker">Цифра недели</div><p>{e(issue.number_text)}</p></div></div>
+      <div class="box"><div class="kicker">Открытый вопрос</div><p class="q">{e(issue.open_question)}</p>
         <p>{e(issue.open_question_text)}</p></div>
-      <div class="box sand"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
+      <div class="box sand"><div class="kicker">Цитата недели</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
         <p>{e(issue.quote_attribution)}</p></div>
     </div>
-    <div class="right"><div class="kicker">ОДНА НОВОСТЬ, ТРИ ВЗГЛЯДА</div><h3>{e(tv.headline)}</h3>
+    <div class="right"><div class="kicker">Одна новость, три взгляда</div><h3>{e(tv.headline)}</h3>
       <p>{e(tv.intro)}</p>{views}</div>
   </div>
 </section>
