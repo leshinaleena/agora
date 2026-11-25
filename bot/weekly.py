@@ -241,7 +241,10 @@ def _src(links: dict, ids: list[str], blocked: list[str], inline: bool = False) 
 
 
 def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.date) -> str:
-    e = html.escape
+    import re
+
+    def e(x: str) -> str:  # убираем служебные номера источников вроде «(w10)», если модель их оставила
+        return html.escape(re.sub(r"\s?\((?:[nw]\d+[,;\s]*)+\)", "", x))
     bl = feeds.no_link_domains()
     num = issue_number(start)
     if start.month == end.month:
