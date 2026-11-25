@@ -9,6 +9,10 @@ on:
         description: "Опубликовать PDF в канал? (yes — да, no — только файл)"
         default: "no"
         required: true
+      from_archive:
+        description: "Отправить уже проверенный выпуск из архива, без новых запросов к Claude? (yes / no)"
+        default: "no"
+        required: false
       week:
         description: "Неделя с понедельника (например 2026-11-16); пусто — прошедшая неделя"
         default: ""
@@ -34,6 +38,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           PUBLISH: ${{ github.event_name == 'schedule' && vars.PUBLISH_WEEKLY || inputs.publish }}
           WEEK_START: ${{ inputs.week }}
+          FROM_ARCHIVE: ${{ inputs.from_archive }}
         run: python -m bot.weekly
       - uses: actions/upload-artifact@v4
         if: always()

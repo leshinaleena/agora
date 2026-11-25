@@ -346,6 +346,12 @@ def main() -> None:
         start = dt.date.fromisoformat(os.environ["WEEK_START"])
         end = start + dt.timedelta(days=6)
         today = end + dt.timedelta(days=1)  # дата выхода — понедельник после недели
+    saved_issue = ARCHIVE / f"weekly-{start}.json"
+    if os.environ.get("FROM_ARCHIVE") == "yes" and saved_issue.exists():
+        # уже проверенный выпуск: только свёрстать и отправить, без новых запросов к Claude
+        d = json.loads(saved_issue.read_text("utf-8"))
+        publish(Issue.model_validate(d["issue"]), d["links"], start, end, today)
+        return
     material, links = collect_week(start, end)
     outside = ""
     if not material:
@@ -377,6 +383,12 @@ def main() -> None:
     )
     if not issue:
         raise SystemExit("Выпуск не написан.")
+    (ARCHIVE / f"weekly-{start}.json").write_text(
+        json.dumps({"issue": issue.model_dump(), "links": links}, ensure_ascii=False, indent=1), "utf-8")
+    publish(issue, links, start, end, today)
+
+
+def publish(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.date) -> None:
     from weasyprint import HTML  # импорт здесь: ежедневной сводке WeasyPrint не нужен
 
     OUT.mkdir(exist_ok=True)
@@ -385,8 +397,6 @@ def main() -> None:
     (OUT / "weekly.html").write_text(page, "utf-8")
     pdf = OUT / f"agora_news_{today:%Y-%m-%d}.pdf"  # дата выхода (понедельник)
     HTML(string=page, base_url=str(ROOT)).write_pdf(pdf)
-    (ARCHIVE / f"weekly-{start}.json").write_text(
-        json.dumps({"issue": issue.model_dump(), "links": links}, ensure_ascii=False, indent=1), "utf-8")
     print(f"[weekly] № {num}: {pdf.name}, расход ${llm.spent['usd']:.3f}")
     if os.environ.get("PUBLISH") == "yes":
         telegram.send_pdf(pdf, f"<b>Агора № {num}</b> · неделя {start.day}–{end.day} {MONTHS[end.month - 1]}\n"
