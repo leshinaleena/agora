@@ -4,7 +4,7 @@
 Переменные окружения:
   ANTHROPIC_API_KEY, TELEGRAM_BOT_TOKEN — секреты (в GitHub: Settings → Secrets).
   PUBLISH=yes    — отправить в канал; иначе только черновик в out/ и archive/.
-  POST_AT=06:30  — не публиковать раньше этого времени по Афинам (7:30 по Москве).
+  POST_AT=07:30  — не публиковать раньше этого времени по Афинам.
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from . import feeds, llm, prompts, telegram
 
 ROOT = Path(__file__).resolve().parent.parent
 ARCHIVE = ROOT / "archive"
-POST_TIME = "06:30"  # выход сводки по Афинам; 7:30 по Москве (Лена, 25.11.2026: между 7 и 8 по Москве)
+POST_TIME = "07:30"  # выход сводки по Афинам, 8:30 по Москве (Лена, 25.11.2026: между 7 и 8 утра по Афинам)
 OUT = ROOT / "out"
 ATHENS = ZoneInfo("Europe/Athens")
 MOSCOW = ZoneInfo("Europe/Moscow")

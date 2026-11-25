@@ -1,9 +1,9 @@
 name: Ежедневная сводка
 on:
   schedule:
-    # 02:45 UTC = 4:45 по Афинам зимой. Программа соберёт сводку (с запасом на задержки GitHub)
-    # и опубликует в 6:30 по Афинам = 7:30 по Москве.
-    - cron: "45 2 * * *"
+    # 03:45 UTC = 5:45 по Афинам зимой. Программа соберёт сводку (с запасом на задержки GitHub)
+    # и опубликует в 7:30 по Афинам = 8:30 по Москве.
+    - cron: "45 3 * * *"
   workflow_dispatch:
     inputs:
       publish:
@@ -39,7 +39,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           # По расписанию публикует всегда (Лена разрешила 25.11.2026). Выключить: Settings → Variables, PUBLISH_DAILY = no
           PUBLISH: ${{ github.event_name == 'schedule' && (vars.PUBLISH_DAILY || 'yes') || inputs.publish }}
-          POST_AT: ${{ github.event_name == 'schedule' && '06:30' || '00:00' }}
+          POST_AT: ${{ github.event_name == 'schedule' && '07:30' || '00:00' }}
           FROM_ARCHIVE: ${{ inputs.from_archive }}
           REPLACE: ${{ inputs.replace }}
         run: python -m bot.daily

@@ -315,14 +315,14 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 </section>
 <section class="page"><h2 class="sec">Внутри страны</h2>
   <div class="cols3">{"".join(art(a) for a in issue.inside)}</div>
+  <div class="cols2 bottom"><div class="brief"><h4>Заявления недели</h4>{statements}</div>
+  <div class="brief"><h4>Следим дальше</h4>{watch}</div></div>
 </section>
 <section class="page"><h2 class="sec">Что думают греки</h2>
   <div class="cols2"><div>{"".join(art(a) for a in issue.mood)}</div><div>{polls}</div></div>
 </section>
 <section class="page"><h2 class="sec">Греция и мир</h2>
   <div class="cols3">{"".join(art(a) for a in issue.world)}</div>
-  <div class="cols2 bottom"><div class="brief"><h4>Заявления недели</h4>{statements}</div>
-  <div class="brief"><h4>Следим дальше</h4>{watch}</div></div>
 </section>
 </body></html>"""
 
