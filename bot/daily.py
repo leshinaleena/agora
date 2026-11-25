@@ -4,7 +4,7 @@
 Переменные окружения:
   ANTHROPIC_API_KEY, TELEGRAM_BOT_TOKEN — секреты (в GitHub: Settings → Secrets).
   PUBLISH=yes    — отправить в канал; иначе только черновик в out/ и archive/.
-  POST_AT=08:30  — не публиковать раньше этого времени по Афинам.
+  POST_AT=06:30  — не публиковать раньше этого времени по Афинам (7:30 по Москве).
 """
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from . import feeds, llm, prompts, telegram
 
 ROOT = Path(__file__).resolve().parent.parent
 ARCHIVE = ROOT / "archive"
+POST_TIME = "06:30"  # выход сводки по Афинам; 7:30 по Москве (Лена, 25.11.2026: между 7 и 8 по Москве)
 OUT = ROOT / "out"
 ATHENS = ZoneInfo("Europe/Athens")
 MOSCOW = ZoneInfo("Europe/Moscow")
@@ -204,10 +205,11 @@ def render(data: dict) -> list[str]:
     blocked = feeds.no_link_domains()
     d = data["digest"]
     day = dt.date.fromisoformat(data["date"])
-    now_a = dt.datetime.combine(day, dt.time(8, 30), ATHENS)
+    hh, mm = map(int, POST_TIME.split(":"))
+    now_a = dt.datetime.combine(day, dt.time(hh, mm), ATHENS)
     head = [
         "<b>АГОРА · УТРЕННЯЯ СВОДКА</b>",
-        f"{ru_date(day)} · Афины 8:30 · Москва {now_a.astimezone(MOSCOW):%-H:%M}",
+        f"{ru_date(day)} · Афины {now_a:%-H:%M} · Москва {now_a.astimezone(MOSCOW):%-H:%M}",
     ]
     if data.get("weather"):
         head.append(data["weather"])
@@ -294,7 +296,7 @@ def main() -> None:
     print(f"\n[daily] сообщений: {len(messages)}, знаков: {total}, запросов к Claude: {data['calls']}, "
           f"расход: ${data['cost_usd']}")
     if os.environ.get("PUBLISH") == "yes":
-        wait_until(os.environ.get("POST_AT", "08:30"))
+        wait_until(os.environ.get("POST_AT", POST_TIME))
         if os.environ.get("REPLACE") == "yes" and data.get("sent_ids"):
             telegram.delete(data["sent_ids"])  # заменить уже опубликованную версию
         sent = []
