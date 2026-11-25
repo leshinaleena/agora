@@ -33,14 +33,23 @@ class Item:
     published: float  # unix time, UTC
     text: str = ""  # полный текст, если есть
     extra: dict = field(default_factory=dict)
+    via: str = ""  # через какую ленту пришло (для Google News)
 
 
 def clean(raw: str) -> str:
     return SPACE_RE.sub(" ", html.unescape(TAG_RE.sub(" ", raw or ""))).strip()
 
 
+def _config() -> dict:
+    return yaml.safe_load((ROOT / "feeds.yaml").read_text("utf-8"))
+
+
 def load_feeds() -> list[dict]:
-    return yaml.safe_load((ROOT / "feeds.yaml").read_text("utf-8"))["feeds"]
+    return _config()["feeds"]
+
+
+def no_link_domains() -> list[str]:
+    return _config().get("no_link_domains", [])
 
 
 def fetch_feed(feed: dict) -> tuple[list[dict], str]:
@@ -82,6 +91,13 @@ def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
             link = e.get("link", "")
             link_key = link.split("?")[0]
             title = clean(e.get("title", ""))
+            source = feed["name"]
+            if feed.get("aggregator"):
+                # В Google News издание указано в <source>, а в конце заголовка « - Издание»
+                src = (e.get("source") or {}).get("title") or ""
+                if src and title.endswith(" - " + src):
+                    title = title[: -len(src) - 3]
+                source = src or source
             key = title.lower()[:80]
             if not link or not title or link_key in seen_links or key in seen_titles:
                 continue
@@ -96,13 +112,14 @@ def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
             items.append(
                 Item(
                     id=f"n{len(items) + 1}",
-                    source=feed["name"],
+                    source=source,
                     lang=feed.get("lang", "el"),
                     title=title,
                     summary=clean(e.get("summary", ""))[:220],
                     link=link,
                     published=pub,
                     text=text,
+                    via=feed["name"] if feed.get("aggregator") else "",
                 )
             )
     return items, report

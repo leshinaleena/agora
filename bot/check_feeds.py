@@ -8,7 +8,8 @@ def main() -> None:
     items, report = feeds.collect(hours=26)
     per = {}
     for i in items:
-        per[i.source] = per.get(i.source, 0) + 1
+        k = i.via or i.source
+        per[k] = per.get(k, 0) + 1
     lines = ["| Издание | Статус | Свежих за сутки |", "|---|---|---|"]
     for name, status in report.items():
         lines.append(f"| {name} | {status} | {per.get(name, 0)} |")
@@ -18,11 +19,12 @@ def main() -> None:
     lines += ["", "| Издание | Текст статьи |", "|---|---|"]
     done = set()
     for i in items:
-        if i.source in done:
+        k = i.via or i.source
+        if k in done:
             continue
-        done.add(i.source)
+        done.add(k)
         n = len(feeds.read_article(i))
-        lines.append(f"| {i.source} | {'открывается' if n > 600 else 'только анонс'} ({n} знаков) |")
+        lines.append(f"| {k} | {'открывается' if n > 600 else 'только анонс'} ({n} знаков) |")
     text = "\n".join(lines)
     print(text)
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
