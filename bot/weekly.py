@@ -388,6 +388,26 @@ def main() -> None:
     publish(issue, links, start, end, today)
 
 
+def _first_sentences(text: str, n: int) -> str:
+    import re
+    parts = re.split(r"(?<=[.!?])\s+", text.strip())
+    return " ".join(parts[:n])
+
+
+def post_text(issue: Issue, start: dt.date, end: dt.date) -> str:
+    """Текстовый пост к PDF: главное за неделю. Собирается из выпуска, без новых запросов к Claude."""
+    e = html.escape
+    num = issue_number(start)
+    lines = [f"<b>АГОРА № {num} · неделя {start.day}–{end.day} {MONTHS[end.month - 1]}</b>", "",
+             f"<b>{e(issue.main.headline)}</b>", e(_first_sentences(issue.main.paragraphs[0], 2)) if issue.main.paragraphs else "", "",
+             f"<b>Цифра недели: {e(issue.number_value)}.</b> {e(issue.number_text)}", "",
+             "<b>Ещё за неделю</b>"]
+    for a in issue.inside + issue.mood + issue.world:
+        lines.append(f"• {e(a.headline)}")
+    lines += ["", f"<b>Открытый вопрос.</b> {e(issue.open_question)}", "", "Весь выпуск — в PDF ниже."]
+    return "\n".join(lines)
+
+
 def publish(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.date) -> None:
     from weasyprint import HTML  # импорт здесь: ежедневной сводке WeasyPrint не нужен
 
@@ -397,8 +417,11 @@ def publish(issue: Issue, links: dict, start: dt.date, end: dt.date, today: dt.d
     (OUT / "weekly.html").write_text(page, "utf-8")
     pdf = OUT / f"agora_news_{today:%Y-%m-%d}.pdf"  # дата выхода (понедельник)
     HTML(string=page, base_url=str(ROOT)).write_pdf(pdf)
-    print(f"[weekly] № {num}: {pdf.name}, расход ${llm.spent['usd']:.3f}")
+    text = post_text(issue, start, end)
+    (OUT / "weekly_post.html").write_text(text, "utf-8")
+    print(f"[weekly] № {num}: {pdf.name}, расход ${llm.spent['usd']:.3f}\n\n{text}")
     if os.environ.get("PUBLISH") == "yes":
+        telegram.send_html(text)  # сначала текст с главным, затем файл
         telegram.send_pdf(pdf, f"<b>Агора № {num}</b> · неделя {start.day}–{end.day} {MONTHS[end.month - 1]}\n"
                                f"<i>{html.escape(issue.main.headline)}</i>")
         print(f"[weekly] опубликовано в {telegram.chat_id()}")
