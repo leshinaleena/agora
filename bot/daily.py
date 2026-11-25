@@ -101,7 +101,9 @@ def build(today: dt.date) -> dict:
     prev_watch = "\n".join(f"- {w}" for w in (prev.get("digest") or {}).get("watch", [])) or "(нет)"
 
     # 1. Haiku отбирает сюжеты по заголовкам
-    listing = "\n".join(f"{i.id} | {i.source} | {i.title} | {i.summary[:150]}" for i in items)
+    listing = "\n".join(
+        f"{i.id} | {'[сигнал] ' if i.extra.get('signal') else ''}{i.source} | {i.title} | {i.summary[:150]}" for i in items
+    )
     sel = llm.ask(
         llm.HAIKU, prompts.SELECT_SYSTEM,
         f"Сюжеты вчерашней сводки:\n{yest_txt}\n\nЗаметки за сутки:\n{listing}",
@@ -117,12 +119,14 @@ def build(today: dt.date) -> dict:
         chosen, seen = [], set()
         for iid in st.item_ids:
             it = by_id.get(iid)
-            if it and it.source not in seen:
+            # Telegram-каналы — только сигнал: факты и ссылки берём из изданий
+            if it and not it.extra.get("signal") and it.source not in seen:
                 chosen.append(it)
                 seen.add(it.source)
             if len(chosen) == 3:
                 break
-        if not chosen:
+        if not chosen:  # сюжет есть только в Telegram-канале — не подтверждён, не берём
+            print(f"[daily] без подтверждения изданием, пропущен: {st.working_title}")
             continue
         texts = "\n\n".join(f"=== {it.id} | {it.source} | {it.title}\n{feeds.read_article(it)}" for it in chosen)
         notes = llm.ask(

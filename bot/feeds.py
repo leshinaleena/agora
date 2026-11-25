@@ -150,7 +150,7 @@ def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
                     published=pub,
                     text=text,
                     via=feed["name"] if feed.get("aggregator") else "",
-                    extra={"home": home} if home else {},
+                    extra={**({"home": home} if home else {}), **({"signal": True} if feed.get("signal") else {})},
                 )
             )
     return items, report

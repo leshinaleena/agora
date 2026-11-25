@@ -59,6 +59,11 @@ feeds:
   - {name: Google News (тур.),  url: "https://news.google.com/rss/search?q=Yunanistan+when:1d&hl=tr&gl=TR&ceid=TR:tr", lang: tr, aggregator: true}
   - {name: Google News (Греция), url: "https://news.google.com/rss?hl=el&gl=GR&ceid=GR:el", lang: el, aggregator: true}
 
+  # Telegram-каналы — только сигнал (Лена, 25.11.2026: достоверность не проверена).
+  # Бот их читает, чтобы заметить сюжет, но в сводку факт попадает только из изданий выше, ссылка — на издание.
+  - {name: "Русские в Афинах (Telegram)", telegram: ruassianathens, lang: ru, signal: true}
+  - {name: "News247 (Telegram)", telegram: news247gr, lang: el, signal: true}
+
 # Издания, на которые не ставим ссылки: в России они признаны «нежелательными»,
 # переход по ссылке может быть риском для читателей в России. Факты из них можно упоминать без ссылки.
 no_link_domains: [meduza.io, novayagazeta.eu, themoscowtimes.com, theins.ru, istories.media, tvrain.tv, rferl.org, svoboda.org]
