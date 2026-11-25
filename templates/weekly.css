@@ -6,9 +6,10 @@
 @font-face { font-family: "Inter"; src: url("FONTS/Inter.ttf"); font-weight: 100 900; }
 
 @page { size: A4; margin: 14mm 13mm 14mm 13mm;
-  @bottom-center { content: "АГОРА · " counter(page); font: 500 7pt "Inter"; color: #888; letter-spacing: .12em; } }
+  @bottom-center { content: "АГОРА · " counter(page); font: 500 7pt "Inter"; color: #6D0B17; letter-spacing: .12em; } }
 
-:root { --red: #8e2f24; --ink: #1b1b1b; --rule: #d8d2c8; }
+/* Палитра из гайда логотипа: чернила, бордо, песок, крем */
+:root { --red: #6D0B17; --ink: #1F1D1C; --rule: #E0D3C8; --sand: #F2EAE4; --cream: #F6EFE6; }
 body { font: 9.2pt/1.42 "Source Serif"; color: var(--ink); margin: 0; }
 a { color: var(--red); text-decoration: underline; text-decoration-thickness: .4pt; }
 p { margin: 0 0 5pt; }
@@ -19,13 +20,16 @@ p { margin: 0 0 5pt; }
   border-bottom: .6pt solid var(--ink); padding-bottom: 3pt; }
 header { display: flex; justify-content: space-between; align-items: flex-end;
   border-bottom: 1.6pt solid var(--ink); padding: 4pt 0 6pt; margin-bottom: 10pt; }
-h1 { font: 600 58pt/0.9 "Cormorant"; letter-spacing: .04em; margin: 0; }
+header .logo { width: 34mm; height: 34mm; margin: 1.5mm 0; } /* круг целиком, без растяжения; поле 1/10 диаметра */
+header .masthead { display: flex; align-items: center; gap: 12pt; }
+header .issue { font: 600 7.5pt/1.5 "Inter"; color: var(--red); letter-spacing: .14em; text-transform: uppercase; }
+header .issue b { display: block; font: 700 26pt/1 "Playfair"; color: var(--ink); letter-spacing: 0; text-transform: none; }
 .motto { text-align: right; font: italic 500 12pt/1.25 "Playfair"; }
 .motto small { display: block; font: 600 7.5pt "Inter"; font-style: normal; margin-top: 3pt; }
 
 .kicker { font: 600 7pt "Inter"; color: var(--red); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 3pt; }
 h2 { font: 700 21pt/1.08 "Playfair"; margin: 0 0 7pt; }
-h2.sec { font: 700 18pt/1.1 "Playfair"; border-bottom: 1.2pt solid var(--ink); padding-bottom: 4pt; margin-bottom: 9pt; }
+h2.sec { font: 700 18pt/1.1 "Playfair"; border-bottom: 1.2pt solid var(--red); padding-bottom: 4pt; margin-bottom: 9pt; }
 h3 { font: 700 12.5pt/1.18 "Playfair"; margin: 0 0 5pt; }
 h4 { font: 700 10.5pt/1.2 "Playfair"; margin: 0 0 4pt; }
 .src { font: 500 7pt/1.35 "Inter"; color: #555; margin-top: 3pt; }
@@ -39,10 +43,11 @@ h4 { font: 700 10.5pt/1.2 "Playfair"; margin: 0 0 4pt; }
 .cols3 > article + article { border-left: .6pt solid var(--rule); padding-left: 11pt; }
 article { margin-bottom: 9pt; }
 .box { border-top: .8pt solid var(--ink); padding-top: 5pt; margin-top: 8pt; }
+.box.sand { background: var(--sand); border-top: 1.4pt solid var(--red); padding: 6pt 8pt; }
 .number { display: flex; gap: 10pt; align-items: flex-start; }
 .number .big { font: 700 34pt/1 "Playfair"; color: var(--red); min-width: 34pt; }
 .q { font: italic 600 11.5pt/1.3 "Playfair"; }
-.view { border-top: .6pt solid var(--rule); padding-top: 5pt; margin-top: 7pt; }
+.view { border-top: .6pt solid var(--red); padding-top: 5pt; margin-top: 7pt; }
 .brief { border-top: 1pt solid var(--ink); padding-top: 5pt; margin-top: 6pt; }
 .brief h4 { font: 700 12pt "Playfair"; }
 .brief .src { display: inline; }

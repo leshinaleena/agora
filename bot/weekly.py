@@ -116,10 +116,28 @@ WEEKLY_TASK = """
 • world — 2–3 статьи «Греция и мир»; если неделя дала сюжет «Греция и Россия», одна из статей о нём.
 • statements — 4–6 «Заявлений недели», одно предложение каждое.
 • watch — 4–6 пунктов «Следим дальше» на следующую неделю.
-• source_ids — номера из списка источников (вида n12), только реально использованные.
+• source_ids — номера из списка источников (вида n12 или w3), только реально использованные.
 Приоритет — острая политика, улица, конфликты, трагедии и внешняя политика; бытовое (ярмарки, скидки, \
 праздники, выплаты) не берём. Не повторяй одну тему в двух местах. Все факты только из материалов. \
 Объём выпуска — 5 страниц A4, это максимум недели.
+"""
+
+WEEK_SEARCH_TASK = """
+Ты — исследователь редакции. Ежедневных сводок за эту неделю нет, поэтому материал для выпуска \
+собираешь сам поиском в интернете. Сделай до 15 поисков: греческие СМИ (Kathimerini/eKathimerini, \
+To Vima, Proto Thema, Efsyn, Naftemporiki, ERT), агентства (Reuters, AP, AFP), Politico Europe, \
+Balkan Insight, Cyprus Mail, турецкие СМИ, а также что Россия официально говорила о Греции.
+Ищи именно события указанной недели: политика и парламент, скандалы, опросы, митинги и забастовки, \
+трагедии и ЧП, Турция и Кипр, ЕС, оборона, миграция, энергетика, Греция и Россия. Бытовое не ищи.
+Верни по-русски сюжеты в таком виде:
+Сюжет: <название> [рубрика]
+- факт с цифрами, датой, цитатой (издание) URL
+- …
+Расхождения: <если издания подают по-разному>
+Даты впереди: <будущие события>
+Для каждого факта — полный URL страницы, где он найден. Только найденное; без догадок. \
+Отдельным блоком в конце: «Взгляд извне» — 4–8 оценок мировых СМИ и аналитиков с URL. \
+Опросы недели — с компанией, каналом, датой и цифрами по партиям.
 """
 
 RESEARCH_TASK = """
@@ -132,6 +150,33 @@ RESEARCH_TASK = """
 утверждает или как оценивает, и полный URL страницы. Только то, что реально нашёл; никаких догадок. \
 Не повторяй факты из сюжетов ниже, если издание не добавляет оценки или нового факта.
 """
+
+
+HOSTS = {
+    "ekathimerini.com": "eKathimerini", "kathimerini.gr": "Kathimerini", "tovima.com": "To Vima",
+    "tovima.gr": "To Vima", "protothema.gr": "Proto Thema", "en.protothema.gr": "Proto Thema",
+    "efsyn.gr": "Efsyn", "naftemporiki.gr": "Naftemporiki", "ertnews.gr": "ERT", "reuters.com": "Reuters",
+    "apnews.com": "AP", "politico.eu": "Politico Europe", "balkaninsight.com": "Balkan Insight",
+    "cyprus-mail.com": "Cyprus Mail", "keeptalkinggreece.com": "Keep Talking Greece", "ft.com": "Financial Times",
+    "bloomberg.com": "Bloomberg", "euractiv.com": "Euractiv", "aa.com.tr": "Anadolu", "dailysabah.com": "Daily Sabah",
+    "hurriyetdailynews.com": "Hürriyet Daily News", "greekreporter.com": "Greek Reporter", "tass.ru": "ТАСС",
+    "ria.ru": "РИА Новости", "mid.ru": "МИД России", "euronews.com": "Euronews", "dw.com": "DW",
+    "greekcitytimes.com": "Greek City Times", "avgi.gr": "Avgi", "documentonews.gr": "Documento",
+    "in.gr": "in.gr", "news247.gr": "News247", "skai.gr": "Skai", "megatv.com": "Mega", "cnn.gr": "CNN Greece",
+}
+
+
+def links_from_urls(text: str, links: dict) -> str:
+    """Заменяет URL в тексте поиска на номера w1, w2… и запоминает ссылки."""
+    import re
+    for url in dict.fromkeys(re.findall(r"https?://[^\s)\]>»\"]+", text)):
+        url = url.rstrip(".,;")
+        host = re.sub(r"^www\.", "", url.split("/")[2])
+        name = HOSTS.get(host) or HOSTS.get(host.split(".", 1)[-1]) or host
+        k = f"w{len([x for x in links if x.startswith('w')]) + 1}"
+        links[k] = {"name": name, "url": url}
+        text = text.replace(url, f"[{k} = {name}]")
+    return text
 
 
 def week_range(today: dt.date) -> tuple[dt.date, dt.date]:
@@ -230,7 +275,8 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 <title>Агора № {num} — {dates}</title><style>{css}</style></head><body>
 <section class="page first">
   <div class="top"><span>№ {num}</span><span>Неделя {dates}</span><span>Афины, {today.day} {MONTHS[today.month - 1]}</span></div>
-  <header><h1>АГОРА</h1><div class="motto"><i>Мир за неделю.<br>Без информационного шума</i>
+  <header><div class="masthead"><img class="logo" src="{(ROOT / 'templates' / 'agora-logo-circle.svg').as_uri()}" alt="Агора">
+  <div class="issue">Еженедельный выпуск<b>№ {num}</b>{dates}</div></div><div class="motto"><i>Мир за неделю.<br>Без информационного шума</i>
   <small>Греция внутри и снаружи</small></div></header>
   <div class="cols2">
     <div class="left">
@@ -240,7 +286,7 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
         <div><div class="kicker">ЦИФРА НЕДЕЛИ</div><p>{e(issue.number_text)}</p></div></div>
       <div class="box"><div class="kicker">ОТКРЫТЫЙ ВОПРОС</div><p class="q">{e(issue.open_question)}</p>
         <p>{e(issue.open_question_text)}</p></div>
-      <div class="box"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
+      <div class="box sand"><div class="kicker">ЦИТАТА НЕДЕЛИ</div><p class="q">«{e(issue.quote.strip('«»'))}»</p>
         <p>{e(issue.quote_attribution)}</p></div>
     </div>
     <div class="right"><div class="kicker">ОДНА НОВОСТЬ, ТРИ ВЗГЛЯДА</div><h3>{e(tv.headline)}</h3>
@@ -269,20 +315,26 @@ def render_html(issue: Issue, links: dict, start: dt.date, end: dt.date, today: 
 def main() -> None:
     today = dt.datetime.now(ATHENS).date()
     start, end = week_range(today)
+    if os.environ.get("WEEK_START"):  # выпуск за прошлую неделю по запросу: WEEK_START=2026-11-16
+        start = dt.date.fromisoformat(os.environ["WEEK_START"])
+        end = start + dt.timedelta(days=6)
+        today = end + dt.timedelta(days=1)  # дата выхода — понедельник после недели
     material, links = collect_week(start, end)
-    if not material:
-        raise SystemExit(f"Нет ежедневных сводок за {start}–{end}: выпуск не из чего собирать.")
-    titles = "\n".join(line for line in material.splitlines() if line.startswith("Сюжет: "))[:6000]
     outside = ""
-    try:
-        outside = llm.research(prompts.EDITORIAL + RESEARCH_TASK, f"Неделя {start} — {end}.\n\n{titles}")
-    except Exception as e:  # поиск не должен ломать выпуск
-        print(f"[weekly] поиск не удался: {e}")
-    import re as _re
-    for k, url in enumerate(dict.fromkeys(_re.findall(r"https?://[^\s)\]>»\"]+", outside)), 1):
-        host = _re.sub(r"^www\.", "", url.split("/")[2])
-        links[f"w{k}"] = {"name": host, "url": url}
-        outside = outside.replace(url, f"[w{k} = {host}]")
+    if not material:
+        # Сводок за неделю нет (например, бот тогда ещё не работал): собираем материал поиском.
+        print(f"[weekly] сводок за {start}–{end} нет, собираю материал поиском в интернете")
+        found = llm.research(prompts.EDITORIAL + WEEK_SEARCH_TASK, f"Неделя {start} — {end}.", max_searches=15)
+        material = links_from_urls(found, links)
+        if not material.strip():
+            raise SystemExit(f"Нет материала за {start}–{end}: выпуск не из чего собирать.")
+    else:
+        titles = "\n".join(line for line in material.splitlines() if line.startswith("Сюжет: "))[:6000]
+        try:
+            outside = llm.research(prompts.EDITORIAL + RESEARCH_TASK, f"Неделя {start} — {end}.\n\n{titles}")
+        except Exception as e:  # поиск не должен ломать выпуск
+            print(f"[weekly] поиск не удался: {e}")
+        outside = links_from_urls(outside, links)
     issue = llm.ask(
         llm.SONNET, prompts.WEEKLY_SYSTEM + WEEKLY_TASK,
         f"Неделя {start} — {end}.\n\n{material}\n\n===== Взгляд извне (поиск в интернете) =====\n{outside or '(нет)'}",

@@ -9,6 +9,10 @@ on:
         description: "Опубликовать PDF в канал? (yes — да, no — только файл)"
         default: "no"
         required: true
+      week:
+        description: "Неделя с понедельника (например 2026-11-16); пусто — прошедшая неделя"
+        default: ""
+        required: false
 permissions:
   contents: write
 concurrency:
@@ -29,6 +33,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           PUBLISH: ${{ github.event_name == 'schedule' && vars.PUBLISH_WEEKLY || inputs.publish }}
+          WEEK_START: ${{ inputs.week }}
         run: python -m bot.weekly
       - uses: actions/upload-artifact@v4
         if: always()
