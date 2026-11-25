@@ -149,10 +149,15 @@ def build(today: dt.date) -> dict:
         + "\nИсточники: " + ", ".join(f"{s['id']} = {s['name']}" for s in b["sources"])
         for b in blocks
     )
-    digest = llm.ask(
+    # Пакетом (вдвое дешевле). Срок — 08:15 по Афинам при публикации по расписанию, иначе 25 минут.
+    deadline = None
+    if os.environ.get("POST_AT", "00:00") != "00:00":
+        hh, mm = map(int, os.environ["POST_AT"].split(":"))
+        deadline = dt.datetime.now(ATHENS).replace(hour=hh, minute=mm, second=0).timestamp() - 15 * 60
+    digest = llm.ask_batch(
         llm.SONNET, prompts.WRITE_SYSTEM,
         f"Дата выпуска: {ru_date(today)}.\n\nВчерашний список «Следим»:\n{prev_watch}\n\n{material}",
-        llm.Digest, effort="medium", max_tokens=32000,
+        llm.Digest, effort="medium", max_tokens=32000, deadline=deadline,
     )
     if not digest:
         raise SystemExit("Сводка не написана.")
@@ -232,10 +237,10 @@ def render(data: dict) -> list[str]:
     if d["watch"]:
         parts.append("👀 <b>СЛЕДИМ</b>\n\n" + "\n".join(f"• {e(w)}" for w in d["watch"]))
 
-    messages = telegram.split(msg1)
-    for block in parts:  # складываем разделы в сообщения, не разрывая раздел
+    messages: list[str] = []
+    for block in [msg1] + parts:  # складываем разделы в сообщения по видимой длине
         for piece in telegram.split(block):
-            if len(messages[-1]) + len(piece) + 2 <= telegram.LIMIT and len(messages) > 1:
+            if messages and telegram.visible_len(messages[-1]) + telegram.visible_len(piece) + 2 <= telegram.LIMIT:
                 messages[-1] += "\n\n" + piece
             else:
                 messages.append(piece)

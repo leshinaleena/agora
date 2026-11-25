@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 
 import requests
@@ -23,11 +24,16 @@ def chat_id() -> str:
     return os.environ.get("TELEGRAM_CHAT", "@agora_greece")
 
 
+def visible_len(text: str) -> int:
+    """Длина так, как её считает Telegram: без HTML-тегов и адресов ссылок."""
+    return len(re.sub(r"<[^>]+>", "", text).replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">"))
+
+
 def split(text: str) -> list[str]:
     """Делит длинный текст по пустым строкам, чтобы не порвать ссылку."""
     parts, cur = [], ""
     for block in text.split("\n\n"):
-        if cur and len(cur) + len(block) + 2 > LIMIT:
+        if cur and visible_len(cur) + visible_len(block) + 2 > LIMIT:
             parts.append(cur)
             cur = block
         else:

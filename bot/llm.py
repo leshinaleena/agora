@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import time
 from typing import Literal, TypeVar
 
 import anthropic
@@ -71,6 +72,66 @@ def ask(
             print(f"[llm] {m}: ответ обрезан по max_tokens")
             return None
         return resp.parsed_output
+    return None
+
+
+def ask_batch(
+    model: str,
+    system: str,
+    user: str,
+    schema: type[T],
+    effort: Literal["low", "medium", "high"] = "medium",
+    max_tokens: int = 16000,
+    deadline: float | None = None,
+) -> T | None:
+    """То же, что ask, но через пакетную обработку: вдвое дешевле, ответ приходит с задержкой.
+    Если к сроку deadline (unix-время) ответа нет — отменяет пакет и спрашивает обычным способом."""
+    deadline = deadline or time.time() + 25 * 60
+    try:
+        batch = client().messages.batches.create(requests=[{
+            "custom_id": "agora",
+            "params": {
+                "model": model,
+                "max_tokens": max_tokens,
+                "system": [{"type": "text", "text": system}],
+                "messages": [{"role": "user", "content": user}],
+                "output_config": {
+                    "effort": effort,
+                    "format": {"type": "json_schema", "schema": anthropic.transform_schema(schema)},
+                },
+            },
+        }])
+    except anthropic.APIError as e:
+        print(f"[llm] пакет не создан ({e}), спрашиваю обычным способом")
+        return ask(model, system, user, schema, effort, max_tokens)
+    print(f"[llm] пакет {batch.id} отправлен", flush=True)
+    while time.time() < deadline:
+        time.sleep(20)
+        batch = client().messages.batches.retrieve(batch.id)
+        if batch.processing_status == "ended":
+            break
+    else:
+        print("[llm] пакет не успел к сроку, отменяю и спрашиваю обычным способом", flush=True)
+        try:
+            client().messages.batches.cancel(batch.id)
+        except anthropic.APIError:
+            pass
+        return ask(model, system, user, schema, effort, max_tokens)
+    for res in client().messages.batches.results(batch.id):
+        if res.result.type != "succeeded":
+            print(f"[llm] пакет: {res.result.type}, спрашиваю обычным способом")
+            return ask(model, system, user, schema, effort, max_tokens)
+        msg = res.result.message
+        pin, pout = PRICES.get(model, (2.0, 10.0))
+        spent["usd"] += (msg.usage.input_tokens * pin + msg.usage.output_tokens * pout) / 2e6  # скидка 50%
+        spent["calls"] += 1
+        print(f"[llm] {model} (пакет): ввод {msg.usage.input_tokens}, вывод {msg.usage.output_tokens}, "
+              f"итого ${spent['usd']:.4f}", flush=True)
+        if msg.stop_reason != "end_turn":
+            print(f"[llm] пакет: stop_reason={msg.stop_reason}, спрашиваю обычным способом")
+            return ask(model, system, user, schema, effort, max_tokens)
+        text = "".join(b.text for b in msg.content if b.type == "text")
+        return schema.model_validate_json(text)
     return None
 
 
