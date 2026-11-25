@@ -52,15 +52,18 @@ def ask(
     """Один запрос со структурированным ответом. None — если модель отказалась."""
     models = [model] + ([SONNET_FALLBACK] if model == SONNET else [])
     for m in models:
-        resp = client().messages.parse(
+        with client().messages.stream(
             model=m,
             max_tokens=max_tokens,
             system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": user}],
             output_config={"effort": effort},
             output_format=schema,
-        )
+        ) as stream:
+            resp = stream.get_final_message()
         _account(m, resp.usage)
+        print(f"[llm] {m}: ввод {resp.usage.input_tokens}, вывод {resp.usage.output_tokens}, "
+              f"итого ${spent['usd']:.4f}", flush=True)
         if resp.stop_reason == "refusal":
             print(f"[llm] {m} отказался отвечать, пробую запасную модель")
             continue
