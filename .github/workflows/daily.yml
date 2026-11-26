@@ -5,11 +5,14 @@ on:
     # и опубликует в 7:30 по Афинам = 8:30 по Москве.
     # GitHub иногда пропускает запуски по расписанию (26.11 так и вышло), поэтому есть запасные:
     # если сводка уже вышла, запасной запуск сразу завершается и ничего не тратит.
+    # Если основной запуск уже ждёт 7:30, запасные стоят в очереди за ним и потом сразу завершаются.
+    # Сводка должна выйти до 8:00 по Афинам. Сборка идёт 5–10 минут, GitHub иногда опаздывает,
+    # поэтому последний запасной запуск — в 7:20, с запасом.
     - cron: "45 3 * * *"
-    - cron: "17 4 * * *"
-    - cron: "43 4 * * *"
-    - cron: "11 5 * * *"
-    - cron: "37 5 * * *"
+    - cron: "11 4 * * *"
+    - cron: "37 4 * * *"
+    - cron: "3 5 * * *"
+    - cron: "21 5 * * *"
   workflow_dispatch:
     inputs:
       publish:
@@ -54,7 +57,7 @@ jobs:
           POST_AT: ${{ github.event_name == 'schedule' && '07:30' || '00:00' }}
           FROM_ARCHIVE: ${{ inputs.from_archive }}
           REPLACE: ${{ inputs.replace }}
-          SKIP_IF_SENT: ${{ github.event_name == 'schedule' && 'yes' || 'no' }}
+          SKIP_IF_SENT: ${{ inputs.replace == 'yes' && 'no' || 'yes' }}
         run: set -o pipefail; python -m bot.daily 2>&1 | tee run.log
       - name: Черновик на страницу запуска
         if: always()

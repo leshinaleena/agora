@@ -57,8 +57,17 @@ def fail(what: str, log_path: str) -> None:
     print("[alert] сообщение о сбое отправлено")
 
 
+def say(text: str) -> None:
+    chat = os.environ.get("ALERT_CHAT_ID")
+    if chat:
+        telegram._call("sendMessage", json={"chat_id": chat, "text": text,
+                                            "link_preview_options": {"is_disabled": True}})
+
+
 if __name__ == "__main__":
     if sys.argv[1] == "whoami":
         whoami()
+    elif sys.argv[1] == "say":
+        say(sys.argv[2])
     else:
         fail(sys.argv[2], sys.argv[3])

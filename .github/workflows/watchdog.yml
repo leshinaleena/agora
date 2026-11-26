@@ -1,0 +1,40 @@
+name: Контроль выхода сводки
+on:
+  schedule:
+    # 7:45 и 7:55 по Афинам: вышла ли сегодняшняя сводка. Claude не вызывается.
+    # Два запуска на случай, если GitHub пропустит один из них.
+    - cron: "45 5 * * *"
+    - cron: "55 5 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Проверить и, если надо, сообщить Лене
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ALERT_CHAT_ID: ${{ secrets.ALERT_CHAT_ID }}
+        run: |
+          today=$(TZ=Europe/Athens date +%F)
+          f="archive/$today.json"
+          if [ -f "$f" ] && python -c "import json,sys; sys.exit(0 if json.load(open('$f')).get('sent_ids') else 1)"; then
+            echo "Сводка за $today вышла"; exit 0
+          fi
+          running=$(gh api "repos/${{ github.repository }}/actions/workflows/daily.yml/runs?status=in_progress" --jq '.total_count')
+          queued=$(gh api "repos/${{ github.repository }}/actions/workflows/daily.yml/runs?status=queued" --jq '.total_count')
+          if [ "$running" != "0" ] || [ "$queued" != "0" ]; then
+            python -m bot.alert say "⏳ «Агора»: сводка за $today ещё собирается, выйдет в ближайшие минуты. Если к 8:15 её нет, напишите Claude."
+          else
+            gh workflow run daily.yml -R "${{ github.repository }}" -f publish=yes
+            python -m bot.alert say "⚠️ «Агора»: сводка за $today не вышла к $(TZ=Europe/Athens date +%H:%M) (GitHub не запустил бота). Я запустил её сам, она выйдет минут через 10. Напишите Claude, чтобы разобраться."
+          fi
