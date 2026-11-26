@@ -220,6 +220,10 @@ def collect_week(start: dt.date, end: dt.date) -> tuple[str, dict]:
                     + f"\nИсточники: {', '.join(ids)}"
                 )
         d += dt.timedelta(days=1)
+    notes = ARCHIVE / f"weekly-notes-{start}.md"
+    if notes.exists():  # сюжеты, которые сводки пропустили, а Лена попросила добавить в выпуск
+        parts.append("===== Добавлено редакцией (проверено по изданиям) =====\n"
+                     + links_from_urls(notes.read_text("utf-8"), links))
     return "\n\n".join(parts), links
 
 
