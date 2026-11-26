@@ -58,6 +58,7 @@ feeds:
   - {name: Google News (рус.),  url: "https://news.google.com/rss/search?q=%D0%93%D1%80%D0%B5%D1%86%D0%B8%D1%8F+when:1d&hl=ru&gl=RU&ceid=RU:ru", lang: ru, aggregator: true}
   - {name: Google News (тур.),  url: "https://news.google.com/rss/search?q=Yunanistan+when:1d&hl=tr&gl=TR&ceid=TR:tr", lang: tr, aggregator: true}
   - {name: Google News (Греция), url: "https://news.google.com/rss?hl=el&gl=GR&ceid=GR:el", lang: el, aggregator: true}
+  - {name: Google News (Греция и Россия), url: "https://news.google.com/rss/search?q=%CE%A1%CF%89%CF%83%CE%AF%CE%B1%20OR%20%CE%9C%CF%8C%CF%83%CF%87%CE%B1%20OR%20%CE%9A%CF%81%CE%B5%CE%BC%CE%BB%CE%AF%CE%BD%CE%BF%20OR%20%CE%A0%CE%BF%CF%8D%CF%84%CE%B9%CE%BD%20when%3A1d&hl=el&gl=GR&ceid=GR:el", lang: el, aggregator: true}
 
   # Telegram-каналы — только сигнал (Лена, 25.11.2026: достоверность не проверена).
   # Бот их читает, чтобы заметить сюжет, но в сводку факт попадает только из изданий выше, ссылка — на издание.
