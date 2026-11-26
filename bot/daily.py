@@ -288,6 +288,12 @@ def main() -> None:
         today = dt.date.fromisoformat(os.environ["FROM_ARCHIVE"])
         data = json.loads((ARCHIVE / f"{today}.json").read_text("utf-8"))
     else:
+        saved = ARCHIVE / f"{today}.json"
+        if os.environ.get("SKIP_IF_SENT") == "yes" and saved.exists() \
+                and json.loads(saved.read_text("utf-8")).get("sent_ids"):
+            # запасной запуск по расписанию: сводка уже вышла, второй раз не собираем и не платим
+            print(f"[daily] сводка за {today} уже опубликована, запасной запуск ничего не делает")
+            return
         data = build(today)
     messages = [m.replace("ЕЛАС", "ЭЛАС") for m in render(data)]
     ARCHIVE.mkdir(exist_ok=True)
