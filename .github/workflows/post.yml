@@ -1,0 +1,23 @@
+name: Отдельный пост в канал
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "Файл с текстом поста (HTML для Telegram), например posts/2026-11-26-dopolnenie.html"
+        required: true
+permissions:
+  contents: read
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Отправить
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          FILE: ${{ inputs.file }}
+        run: python -c "import os, pathlib; from bot import telegram; print(telegram.send_html(pathlib.Path(os.environ['FILE']).read_text('utf-8')))"
