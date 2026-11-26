@@ -102,57 +102,90 @@ def _published(entry) -> float | None:
     return None
 
 
-def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
-    """Свежие записи из всех лент за последние `hours` часов."""
-    since = time.time() - hours * 3600
-    items: list[Item] = []
-    report: dict[str, str] = {}
-    seen_links: set[str] = set()
-    seen_titles: set[str] = set()
+CACHE = ROOT / "cache" / "items.jsonl"  # заметки, собранные днём (snapshot.py), чтобы утром видеть все сутки
+
+
+def _records(feed: dict, entries: list) -> list[dict]:
+    """Записи ленты в простом виде: их же сохраняет дневной сбор."""
+    out = []
+    for e in entries[:100]:
+        pub = _published(e)
+        link = e.get("link", "")
+        title = clean(e.get("title", ""))
+        if pub is None or not link or not title:
+            continue
+        source, home = feed["name"], ""
+        if feed.get("aggregator"):
+            # В Google News издание указано в <source>, а в конце заголовка « - Издание»
+            src = (e.get("source") or {}).get("title") or ""
+            if src and title.endswith(" - " + src):
+                title = title[: -len(src) - 3]
+            source = src or source
+            home = (e.get("source") or {}).get("href") or ""
+        text = ""
+        if feed.get("full"):
+            content = e.get("content") or []
+            text = clean(content[0].get("value", "")) if content else ""
+            if len(text) < 600:
+                summ = clean(e.get("summary", ""))
+                text = summ if len(summ) > 600 else ""
+        out.append({
+            "feed": feed["name"], "source": source, "lang": feed.get("lang", "el"), "title": title,
+            "summary": clean(e.get("summary", ""))[:220], "link": link, "published": pub, "text": text[:5000],
+            "via": feed["name"] if feed.get("aggregator") else "", "home": home, "signal": bool(feed.get("signal")),
+        })
+    return out
+
+
+def load_cache() -> list[dict]:
+    if not CACHE.exists():
+        return []
+    import json
+    recs = []
+    for line in CACHE.read_text("utf-8").splitlines():
+        try:
+            recs.append(json.loads(line))
+        except ValueError:
+            pass
+    return recs
+
+
+def fetch_all() -> tuple[list[dict], dict[str, str]]:
+    recs, report = [], {}
     for feed in load_feeds():
         entries, status = fetch_feed(feed)
         report[feed["name"]] = status
-        for e in entries[:80]:
-            pub = _published(e)
-            if pub is None or pub < since:
-                continue
-            link = e.get("link", "")
-            link_key = link.split("?")[0]
-            title = clean(e.get("title", ""))
-            source = feed["name"]
-            home = ""
-            if feed.get("aggregator"):
-                # В Google News издание указано в <source>, а в конце заголовка « - Издание»
-                src = (e.get("source") or {}).get("title") or ""
-                if src and title.endswith(" - " + src):
-                    title = title[: -len(src) - 3]
-                source = src or source
-                home = (e.get("source") or {}).get("href") or ""
-            key = title.lower()[:80]
-            if not link or not title or link_key in seen_links or key in seen_titles:
-                continue
-            seen_links.add(link_key)
-            seen_titles.add(key)
-            text = ""
-            if feed.get("full"):
-                content = e.get("content") or []
-                text = clean(content[0].get("value", "")) if content else ""
-                if len(text) < 600:
-                    text = clean(e.get("summary", "")) if len(clean(e.get("summary", ""))) > 600 else ""
-            items.append(
-                Item(
-                    id=f"n{len(items) + 1}",
-                    source=source,
-                    lang=feed.get("lang", "el"),
-                    title=title,
-                    summary=clean(e.get("summary", ""))[:220],
-                    link=link,
-                    published=pub,
-                    text=text,
-                    via=feed["name"] if feed.get("aggregator") else "",
-                    extra={**({"home": home} if home else {}), **({"signal": True} if feed.get("signal") else {})},
-                )
+        recs += _records(feed, entries)
+    return recs, report
+
+
+def collect(hours: float = 26) -> tuple[list[Item], dict[str, str]]:
+    """Свежие записи из всех лент за последние `hours` часов: то, что в лентах сейчас,
+    плюс собранное днём (иначе к утру вечерние заметки из лент уже выпадают)."""
+    since = time.time() - hours * 3600
+    live, report = fetch_all()
+    cached = load_cache()
+    if cached:
+        report["(собрано днём)"] = f"{len(cached)} заметок в запасе"
+    items: list[Item] = []
+    seen_links: set[str] = set()
+    seen_titles: set[str] = set()
+    for r in live + cached:
+        if r["published"] < since:
+            continue
+        link_key = r["link"].split("?")[0]
+        key = r["title"].lower()[:80]
+        if link_key in seen_links or key in seen_titles:
+            continue
+        seen_links.add(link_key)
+        seen_titles.add(key)
+        items.append(
+            Item(
+                id=f"n{len(items) + 1}", source=r["source"], lang=r["lang"], title=r["title"],
+                summary=r["summary"], link=r["link"], published=r["published"], text=r["text"], via=r["via"],
+                extra={**({"home": r["home"]} if r["home"] else {}), **({"signal": True} if r["signal"] else {})},
             )
+        )
     return items, report
 
 
