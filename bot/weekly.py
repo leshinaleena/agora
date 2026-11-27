@@ -168,7 +168,7 @@ HOSTS = {
     "greekcitytimes.com": "Greek City Times", "avgi.gr": "Avgi", "documentonews.gr": "Documento",
     "in.gr": "in.gr", "en.parapolitika.gr": "Parapolitika", "parapolitika.gr": "Parapolitika",
     "newsminimalist.com": "Newsit", "yusufkanli.substack.com": "Юсуф Канлы", "cyprusnews.substack.com": "RIK",
-    "hellasjournal.com": "Hellas Journal", "en.rua.gr": "Athens News", "greekherald.com.au": "Greek Herald",
+    "hellasjournal.com": "Hellas Journal", "en.rua.gr": "Athens News", "gr.rua.gr": "Athens News", "pronews.gr": "Pronews", "maleviziotis.gr": "Maleviziotis", "skaikritis.gr": "SKAI Kritis", "greekherald.com.au": "Greek Herald",
     "thenationalherald.com": "National Herald", "politis.com.cy": "Politis", "en.politis.com.cy": "Politis",
     "iefimerida.gr": "iefimerida", "neoskosmos.com": "Neos Kosmos", "kiprinform.com": "Kiprinform", "news247.gr": "News247", "skai.gr": "Skai", "megatv.com": "Mega", "cnn.gr": "CNN Greece",
 }
