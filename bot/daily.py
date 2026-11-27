@@ -161,7 +161,7 @@ def build(today: dt.date) -> dict:
         deadline = dt.datetime.now(ATHENS).replace(hour=hh, minute=mm, second=0).timestamp() - 15 * 60
     digest = llm.ask_batch(
         llm.SONNET, prompts.WRITE_SYSTEM,
-        f"Дата выпуска: {ru_date(today)}.\n\nВчерашний список «Следим»:\n{prev_watch}\n\n{material}",
+        f"Дата выпуска: {ru_date(today)}.\n\nСюжеты вчерашней сводки (не повторяй без нового развития):\n{yest_txt}\n\nВчерашний список «Следим»:\n{prev_watch}\n\n{material}",
         llm.Digest, effort="medium", max_tokens=32000, deadline=deadline,
     )
     if not digest:
