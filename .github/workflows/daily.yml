@@ -23,6 +23,10 @@ on:
         description: "Удалить прежние посты этой сводки перед отправкой? (yes / no)"
         default: "no"
         required: false
+      post_at:
+        description: "Во сколько по Афинам опубликовать (например 07:30). Пусто — сразу после сборки"
+        default: ""
+        required: false
       from_archive:
         description: "Взять готовую сводку из архива за дату (например 2026-11-25), без запросов к Claude"
         default: ""
@@ -54,7 +58,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           # По расписанию публикует всегда (Лена разрешила 25.11.2026). Выключить: Settings → Variables, PUBLISH_DAILY = no
           PUBLISH: ${{ github.event_name == 'schedule' && (vars.PUBLISH_DAILY || 'yes') || inputs.publish }}
-          POST_AT: ${{ github.event_name == 'schedule' && '07:30' || '00:00' }}
+          POST_AT: ${{ github.event_name == 'schedule' && '07:30' || inputs.post_at || '00:00' }}
           FROM_ARCHIVE: ${{ inputs.from_archive }}
           REPLACE: ${{ inputs.replace }}
           SKIP_IF_SENT: ${{ inputs.replace == 'yes' && 'no' || 'yes' }}
