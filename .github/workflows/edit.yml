@@ -1,0 +1,24 @@
+name: Исправить опубликованную сводку
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Дата сводки, например 2026-11-28 (текст берётся из archive/ДАТА.json)"
+        required: true
+permissions:
+  contents: read
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Заменить текст в канале
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          FROM_ARCHIVE: ${{ inputs.date }}
+          EDIT_SENT: "yes"
+        run: python -m bot.daily

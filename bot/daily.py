@@ -166,17 +166,63 @@ def build(today: dt.date) -> dict:
     )
     if not digest:
         raise SystemExit("Сводка не написана.")
+    digest = proofread(digest.model_dump())
 
     return {
         "date": str(today),
         "weather": weather(),
-        "digest": digest.model_dump(),
+        "digest": digest,
         "stories": blocks,
         "links": {s["id"]: s for b in blocks for s in b["sources"]},
         "feeds": report,
         "cost_usd": round(llm.spent["usd"], 4),
         "calls": llm.spent["calls"],
     }
+
+
+def _strings(obj, path=()):
+    """Все строки сводки с их адресом внутри словаря."""
+    if isinstance(obj, str):
+        yield path, obj
+    elif isinstance(obj, dict):
+        for k, v in obj.items():
+            if k != "source_ids":
+                yield from _strings(v, path + (k,))
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            yield from _strings(v, path + (i,))
+
+
+def apply_fixes(digest: dict, fixes) -> list[str]:
+    """Заменяет ошибочные куски на исправленные. Берёт только осторожные правки."""
+    done = []
+    for f in fixes:
+        wrong, right = f.wrong.strip(), f.right.strip()
+        if not wrong or not right or wrong == right or abs(len(wrong) - len(right)) > 15 or len(wrong) > 80:
+            continue
+        for path, text in list(_strings(digest)):
+            if wrong in text:
+                node = digest
+                for key in path[:-1]:
+                    node = node[key]
+                node[path[-1]] = text.replace(wrong, right)
+                done.append(f"{wrong} -> {right}")
+    return done
+
+
+def proofread(digest: dict) -> dict:
+    """Дешёвая вычитка на грамотность (Haiku, около $0,001 за выпуск)."""
+    texts = [t for _, t in _strings(digest) if len(t) > 3]
+    listing = "\n".join(f"[{n}] {t}" for n, t in enumerate(texts, 1))
+    try:
+        res = llm.ask(llm.HAIKU, prompts.PROOF_SYSTEM, listing, llm.Proof, effort="low", max_tokens=4000)
+    except Exception as e:  # вычитка не должна ломать выпуск
+        print(f"[daily] вычитка не удалась: {e}")
+        return digest
+    if res:
+        for line in apply_fixes(digest, res.fixes):
+            print(f"[daily] корректор: {line}")
+    return digest
 
 
 # ---------- Оформление для Telegram ----------
@@ -306,7 +352,14 @@ def main() -> None:
     total = sum(len(m) for m in messages)
     print(f"\n[daily] сообщений: {len(messages)}, знаков: {total}, запросов к Claude: {data['calls']}, "
           f"расход: ${data['cost_usd']}")
-    if os.environ.get("PUBLISH") == "yes":
+    if os.environ.get("EDIT_SENT") == "yes":  # исправить уже опубликованную сводку на месте
+        ids = list(data.get("sent_ids") or [])
+        for m in messages:
+            n = len(telegram.split(m))
+            telegram.edit_html(ids[:n], m)
+            ids = ids[n:]
+        print(f"[daily] опубликованная сводка за {today} исправлена")
+    elif os.environ.get("PUBLISH") == "yes":
         wait_until(os.environ.get("POST_AT", POST_TIME))
         if os.environ.get("REPLACE") == "yes" and data.get("sent_ids"):
             telegram.delete(data["sent_ids"])  # заменить уже опубликованную версию

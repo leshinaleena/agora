@@ -68,6 +68,18 @@ def send_html(text: str) -> list[int]:
     return ids
 
 
+def edit_html(message_ids: list[int], text: str) -> None:
+    """Заменить текст уже опубликованных сообщений (те же части, в том же порядке)."""
+    parts = split(text)
+    if len(parts) != len(message_ids):
+        raise RuntimeError(f"частей {len(parts)}, а сообщений {len(message_ids)}: правка невозможна")
+    for mid, part in zip(message_ids, parts):
+        _call("editMessageText", json={
+            "chat_id": chat_id(), "message_id": mid, "text": part,
+            "parse_mode": "HTML", "link_preview_options": {"is_disabled": True},
+        })
+
+
 def send_pdf(path: Path, caption_html: str) -> None:
     with path.open("rb") as f:
         _call(

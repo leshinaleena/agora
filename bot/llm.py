@@ -225,3 +225,12 @@ class Digest(BaseModel):
     brief: list[BriefSection]
     athens: list[Bullet]  # практическое для живущих в Афинах: транспорт, забастовки, город
     watch: list[str]  # «19 ноября: …» — за чем следим в ближайшие дни
+
+
+class Fix(BaseModel):
+    wrong: str  # точный кусок с ошибкой
+    right: str  # он же исправленный
+
+
+class Proof(BaseModel):
+    fixes: list[Fix]
