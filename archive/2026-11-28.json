@@ -1,0 +1,1074 @@
+{
+ "date": "2026-11-28",
+ "weather": "Афины сегодня: гроза, сейчас +14, днём до +18, возможен дождь (58%). Завтра до +16.",
+ "digest": {
+  "main": [
+   {
+    "headline": "Депутаты ND требуют отставки Лиакоса, правительство урезало его полномочия",
+    "lead": "Замминистра внутренних дел Вангелис Лиакос остался на посту, но по ФЕК (официальному вестнику) четверга полномочия по местному самоуправлению у него отняли. Поводом стали муниципальные контракты на 1,7 млн евро, которые получили фирмы двух его сестёр.",
+    "details": "Депутат Филиппос Фортомас потребовал отставки Лиакоса в эфире канала Attica. Ангелос Сиригос заявил, что на месте замминистра уже подал бы в отставку: такие случаи создают впечатление, что «всё коррумпировано». Вице-премьер Костис Хатзидакис сказал, что полномочий в сфере местного самоуправления Лиакос не получит. Efsyn пишет, что отставку сочли политически слишком дорогой. По данным eKathimerini, в окружении премьера надеются, что напряжение спадёт.",
+    "source_ids": [
+     "n131",
+     "n563"
+    ]
+   },
+   {
+    "headline": "Рим обвинил Зеленского в ударе по российской корвете у Бенгази",
+    "lead": "22 ноября Украина семью морскими беспилотниками атаковала у Бенгази в Ливии российскую корвету «Меркурий» и грузовое судно Angara. Италия заявляет, что партнёров заранее не предупредили.",
+    "details": "Мелони в разговоре с Зеленским выразила «ощутимую обеспокоенность», по официальному сообщению Рима. Правительство Италии утверждает, что Зеленский признал отсутствие предварительной координации. Министр обороны Крозетто сказал, что Зеленский «лгал». Сам Зеленский называет корвету законной военной целью и говорит о самообороне. Ta Nea пишет, что корвета затоплена, To Vima сообщает лишь о поражении обоих судов. Сальвини 1 декабря созывает комитет по морской безопасности.",
+    "source_ids": [
+     "n14",
+     "n141",
+     "n245"
+    ]
+   },
+   {
+    "headline": "Президент Тасулас встретится с Эрдоганом в Стамбуле",
+    "lead": "Президент Греции Константинос Тасулас в субботу, 28 ноября, проведёт встречу с Реджепом Тайипом Эрдоганом. Встречу подтверждают Kathimerini, eKathimerini и To Vima.",
+    "details": "Тасулас приезжает в Стамбул по приглашению Вселенского патриарха Варфоломея на тронный праздник патриархата в честь апостола Андрея Первозванного. Программа визита называет встречи с Эрдоганом и с греческой общиной Стамбула. Темы разговора с Эрдоганом в заметках не названы.",
+    "source_ids": [
+     "n54",
+     "n119",
+     "n145"
+    ]
+   }
+  ],
+  "mood": [],
+  "agenda": [
+   {
+    "label": "Стамбул",
+    "text": "Тасулас открывает в Сисманоглио выставку «Сияние Фанара. Сокровища византийского и поствизантийского искусства» и встречается с греческой общиной города.",
+    "source_ids": [
+     "n54",
+     "n145"
+    ]
+   }
+  ],
+  "brief": [
+   {
+    "title": "Политика",
+    "bullets": [
+     {
+      "label": "Дело Куртакиса",
+      "text": "Европейская прокуратура 26 ноября заморозила на девять месяцев все активы издателя Иоанниса Куртакиса, владельцев TEXAN братьев Мургос и главы «Антаподотикис Анакиклосис» Павлоса Раваниса. По данным Kathimerini, с января 2021 года по июль 2026 года на связанные с Куртакисом компании перевели 19 011 680 евро.",
+      "source_ids": [
+       "n97",
+       "n129"
+      ]
+     },
+     {
+      "label": "Красные кредиты",
+      "text": "Парламент одобрил предложение СИРИЗА о следственной комиссии по частным долгам и фондам: 29 депутатов, срок три месяца, «Новая демократия» проголосовала «воздержался». Первое заседание ожидается до Рождества. ПАСОК, по Efsyn, список ещё не передал.",
+      "source_ids": [
+       "n62",
+       "n159",
+       "n548"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Безопасность и море",
+    "bullets": [
+     {
+      "label": "Конвой в Средиземном море",
+      "text": "Reuters со ссылкой на три источника пишет, что российский конвой с военной техникой, шедший в Ливию, повернул назад у Сицилийского пролива в день удара по Бенгази. Его сопровождал фрегат «Головко». Минобороны России не комментирует.",
+      "source_ids": [
+       "n24",
+       "n275",
+       "n335"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Экономика",
+    "bullets": [
+     {
+      "label": "Взносы самозанятых",
+      "text": "Kathimerini пишет, что с 2027 года взносы около 1,4 млн самозанятых и фермеров могут вырасти примерно на 4%. В первой категории это с 250,77 до 260,80 евро в месяц. Пороги взноса солидарности пенсионеров с 1 января индексируют на 2,9%.",
+      "source_ids": [
+       "n31"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Общество",
+    "bullets": [
+     {
+      "label": "Убийство Зампуниса",
+      "text": "Афинская полиция арестовала 43-летнего разыскиваемого по делу об убийстве Вангелиса Зампуниса после сотрудничества с турецкими властями. Ta Nea называет его Алексеем Сокпой по прозвищу «Китаец» и пишет, что его задержали на севере Кипра и выдали Турции. To Vima сообщает, что он родился в России.",
+      "source_ids": [
+       "n16",
+       "n142",
+       "n226"
+      ]
+     },
+     {
+      "label": "Красный код",
+      "text": "Красный код действует в Ионических островах, Эпире и Западной Греции. Министерство труда запретило наружные работы там в субботу, штраф 2000 евро за каждого работника. С воскресенья ожидаются ливни и ветры до 9 баллов, в Эгейском море местами до 10.",
+      "source_ids": [
+       "n30",
+       "n143"
+      ]
+     }
+    ]
+   },
+   {
+    "title": "Россия и Греция, русские в Греции",
+    "bullets": [
+     {
+      "label": "Касидиарис",
+      "text": "Официальный представитель МИД России Мария Захарова заявила, что ничего не знает о контактах Илиаса Касидиариса в Москве, пишет Sigmalive.",
+      "source_ids": [
+       "n1249"
+      ]
+     }
+    ]
+   }
+  ],
+  "athens": [],
+  "watch": [
+   "28 ноября: визит Тасуласа в Стамбул, встреча с Эрдоганом",
+   "30 ноября: визит министра обороны Турции Гюлера в Пентагон",
+   "1 декабря: заседание комитета Италии по морской безопасности",
+   "3 декабря: акция учителей",
+   "До Рождества: первое заседание следственной комиссии по красным кредитам",
+   "17–18 декабря: саммит ЕС, продолжение переговоров о бюджете"
+  ]
+ },
+ "stories": [
+  {
+   "n": 1,
+   "title": "Скандал вокруг Лиакоса: спор внутри ND и требование отставки",
+   "rubric": "politics",
+   "importance": 5,
+   "facts": [
+    "Заместитель министра внутренних дел Вангелис Лиакос находится под огнём из-за муниципальных контрактов на 1,7 млн евро, полученных фирмами его двух сестёр через прямые назначения от государства (Efsyn; eKathimerini)",
+    "Депутат ND Филиппос Фортомас (Киклады) публично потребовал отставки Лиакоса в эфире канала Attica (Efsyn)",
+    "Депутат Ангелос Сиригос заявил, что на месте Лиакоса уже подал бы в отставку, и добавил, что такие случаи создают впечатление, что «всё коррумпировано», и выгодны антиистеблишментным партиям (eKathimerini)",
+    "Министр здравоохранения Адонис Георгиадис сказал, что Лиакоса не обвиняют в правонарушениях, но указал на заявления других министров, которые дистанцировались от замминистра (eKathimerini)",
+    "Министр гражданской защиты Михалис Хрисохоидис отказался участвовать в дискуссии (eKathimerini)",
+    "Вице-премьер Костис Хатзидакис заявил, что Лиакос не получит полномочий в сфере местного самоуправления (eKathimerini)",
+    "Согласно ФЕК, опубликованному в четверг, полномочия Лиакоса по местному самоуправлению были у него отняты (Efsyn)",
+    "Efsyn пишет, что отставка Лиакоса не произошла, так как её сочли политически слишком дорогой (Efsyn)",
+    "Администрация премьера, по данным eKathimerini, надеется, что напряжение спадёт, и считает более серьёзным дело, связанное с генсеком ЭЛАС Милтосом Хатзияннакисом (eKathimerini)"
+   ],
+   "disagreement": "Efsyn трактует урезание полномочий Лиакоса как признание проблемы правительством и пишет, что отставку предотвратили из-за высокой политической цены. eKathimerini подаёт ситуацию как раскол внутри правительства без такой оценки и сообщает, что Максимос (канцелярия премьера) надеется на спад напряжения.",
+   "dates_ahead": [],
+   "sources": [
+    {
+     "id": "n1",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/eortologio/564567670/eortologio-poioi-giortazoyn-simera-28-noemvrioy/",
+     "title": "Εορτολόγιο: Ποιοι γιορτάζουν σήμερα 28 Νοεμβρίου",
+     "home": ""
+    },
+    {
+     "id": "n131",
+     "name": "eKathimerini",
+     "url": "https://www.ekathimerini.com/politics/1322629/liakos-affair-deepens-government-divisions/",
+     "title": "Liakos affair deepens government divisions",
+     "home": ""
+    },
+    {
+     "id": "n563",
+     "name": "Efsyn",
+     "url": "https://www.efsyn.gr/politiki/1518957/nea-galazio-adeiasma-gia-tin-ypothesi-liakoy-o-fortomas-zita-tin-paraitisi-toy/",
+     "title": "Νέα «γαλάζιο» άδειασμα για την υπόθεση Λιάκου – Ο Φόρτωμας ζητά την παραίτησή του",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Дело о «домиках для переработки»: арест издателя Куртакиса, обвинения в организованной преступной группе",
+   "rubric": "politics",
+   "importance": 5,
+   "facts": [
+    "Европейская прокуратура (EPPO) 26 ноября 2026 года выпустила распоряжение о заморозке всех активов издателя Иоанниса Куртакиса, владельцев TEXAN Апостолоса и Панайотиса Мургоса и председателя «Антаподотикис Анакиклосис» Павлоса Раванис (Kathimerini, eKathimerini)",
+    "Заморозка действует девять месяцев и касается банковских счетов, инвестиций, финансовых продуктов, сейфов, движимого и недвижимого имущества; она нужна, чтобы возместить ущерб ЕС и греческому государству, если вина будет доказана (Kathimerini, eKathimerini)",
+    "С 10 февраля 2022 года по 13 июня 2025 года с счетов TEXAN и «Антаподотикис Анакиклосис» перевели 16 298 095 евро на счета компаний, связанных с Куртакисом (Kathimerini)",
+    "С 1 января 2021 года по 26 июля 2026 года переводы в эти компании составили 19 011 680 евро (Kathimerini); eKathimerini округляет эту сумму до 19 миллионов евро",
+    "Расследование касается закупки и установки 248 «домиков для переработки» в Аттике, Пелопоннесе и Крите на деньги ЕСПА и Европейского фонда регионального развития и Кохезионного фонда (Kathimerini, eKathimerini)",
+    "Прокуратура считает, что технические спецификации тендеров копировали оборудование TEXAN, а цены за единицу были значительно выше рыночных; TEXAN получила 87 756 542,29 евро с февраля 2022 по июнь 2025 года (Kathimerini, eKathimerini)",
+    "Следователи подозревают организованную группу в мошенничестве с субсидиями, злоупотреблении доверием в ущерб финансовым интересам ЕС и Греции и отмывании доходов от преступной деятельности (Kathimerini, eKathimerini)",
+    "Четверо обвиняемых получили отсрочку и должны дать показания в понедельник 30 октября, по данным Efsyn; по данным Efsyn, арест и заморозка счетов касаются четверых задержанных и связанных с ними компаний (Efsyn)"
+   ],
+   "disagreement": "Efsyn относит заморозку только к четверым задержанным, тогда как Kathimerini и eKathimerini называют более широкий круг: компании и «другие лица», которые проходят по делу. Efsyn также упоминает газету «Парапомитика» как издание Куртакиса, а в других текстах этого нет. Дата в тексте Efsyn указывает на 30 октября, то есть на более раннюю стадию дела, поэтому его хронология не совпадает с распоряжением от 26 ноября.",
+   "dates_ahead": [
+    "Заморозка активов действует девять месяцев с 26 ноября 2026 года",
+    "Следствие Европейской прокуратуры продолжается, сроков окончания не названо"
+   ],
+   "sources": [
+    {
+     "id": "n97",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/society/564617557/eyropaiki-eisaggelia-desmeysi-perioysiakon-stoicheion-ton-4-syllifthenton-gia-ta-spitakia-anakyklosis/",
+     "title": "Ευρωπαϊκή Εισαγγελία: Δέσμευση περιουσιακών στοιχείων των 4 συλληφθέντων για τα σπιτάκια ανακύκλωσης",
+     "home": ""
+    },
+    {
+     "id": "n129",
+     "name": "eKathimerini",
+     "url": "https://www.ekathimerini.com/economy/1322697/european-prosecutors-freeze-assets-in-greek-recycling-funds-investigation/",
+     "title": "European prosecutors freeze assets in Greek recycling funds investigation",
+     "home": ""
+    },
+    {
+     "id": "n503",
+     "name": "Efsyn",
+     "url": "https://www.efsyn.gr/ellada/1519293/spitakia-anakyklosis-prothesmia-piran-oi-tesseris-katigoroymenoi-ti-deytera-oi-apologies-toys/",
+     "title": "Σπιτάκια Ανακύκλωσης: Προθεσμία πήραν οι τέσσερις κατηγορούμενοι – Τη Δευτέρα οι απολογίες τους",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Удар Украины по русской корвете в Бенгази: Италия против Зеленского, Греция и Средиземное море",
+   "rubric": "security",
+   "importance": 5,
+   "facts": [
+    "22 ноября Украина атаковала два российских судна у Бенгази (Ливия) семью беспилотными морскими аппаратами (To Vima).",
+    "Киев назвал целями корвету «Меркурий» и грузовое судно MV Angara, которое, по версии Украины, перевозило военные грузы (To Vima).",
+    "По версии Ta Nea, корвету «Меркурий» в ливийских территориальных водах нанесли удар и затопили, а To Vima пишет лишь о поражении обоих судов (Ta Nea, To Vima).",
+    "Зеленский подтвердил операцию, назвал корвету законной военной целью и заявил о самообороне (To Vima).",
+    "Мелони в телефонном разговоре с Зеленским выразила, по официальной ремарке правительства Рима, «ощутимую обеспокоенность» из-за операции, которая, по словам Мелони, нарушила суверенитет Ливии и может расширить конфликт на Средиземное море (Kathimerini).",
+    "Правительство Италии сообщило, что Зеленский подтвердил: операция прошла без предварительной координации с партнёрами, и пообещал постоянную связь и обмен разведданными (Kathimerini).",
+    "Таяни заявил, что Италия не знала о намерениях Киева и не поддерживала операцию (Ta Nea, To Vima). Крозетто сказал, что Зеленский «лгал», после звонков представителям ЕС, НАТО, Франции, Германии и Великобритании, которые ничего не знали заранее (To Vima).",
+    "По сообщению La Repubblica, Зеленский в разговоре с Мелони принёс извинения (Ta Nea).",
+    "В Ливии Италия держит около 200 военных в миссии поддержки ливийских сил безопасности (To Vima).",
+    "Кончте потребовал, чтобы Мелони немедленно проинформировала парламент, а Сальвини требует от Киева назвать партнёров, с которыми согласовывалась операция (Ta Nea)."
+   ],
+   "disagreement": "Киев говорит, что операция законна и проводилась в рамках самообороны, а Зеленский в интервью BBC утверждал, что Украина не действует без координации с партнёрами. Рим утверждает обратное: по его версии, Зеленский признал отсутствие координации, а Крозетто называет его слова ложью. Ta Nea пишет, что корвету нанесли удар и затопили, To Vima ограничивается словами «поражены». Ta Nea сообщает о извинениях Зеленского по данным La Repubblica, в то время как правительственное сообщение и To Vima об извинениях не упоминают.",
+   "dates_ahead": [
+    "1 декабря: Сальвини созывает внеочередное заседание Межминистерского комитета по морской безопасности, в повестке риски расширения войны на Средиземное море и свобода судоходства (Ta Nea)."
+   ],
+   "sources": [
+    {
+     "id": "n14",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/world/564618613/epikoinonia-meloni-zelenski-me-fonto-tin-oykraniki-epithesi-sti-veggazi/",
+     "title": "Επικοινωνία Μελόνι – Ζελένσκι με φόντο την ουκρανική επίθεση στη Βεγγάζη",
+     "home": ""
+    },
+    {
+     "id": "n141",
+     "name": "To Vima",
+     "url": "https://www.tovima.gr/2026/11/27/world/kaneis-den-eixe-enimerothei-i-italia-adeiazei-ton-zelenski-gia-tin-epithesi-sta-rosika-ploia/",
+     "title": "«Κανείς δεν είχε ενημερωθεί»: Η Ιταλία αδειάζει τον Ζελένσκι για την επίθεση στα ρωσικά πλοία",
+     "home": ""
+    },
+    {
+     "id": "n245",
+     "name": "Ta Nea",
+     "url": "https://www.tanea.gr/2026/11/27/world/rigma-stis-sxeseis-romis-kievou-gia-ti-metafora-tou-polemou-sti-mesogeio/",
+     "title": "Ρήγμα στις σχέσεις Ρώμης – Κιέβου για τη μεταφορά του πολέμου στη Μεσόγειο",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Касидиарис в Москве: контакты бывшего депутата «Золотой зари» с российскими властями",
+   "rubric": "russia",
+   "importance": 5,
+   "facts": [
+    "Ильяс Касидиарис, бывший депутат «Золотой зари», находится в Москве (по сообщению вчерашней сводки, источник не указан в самой сводке)",
+    "Захарова заявляет, что ничего не знает о контактах Касидиариса в Москве (Sigmalive)",
+    "Заголовки ΤΑ ΝΕΑ и antapocrisis посвящены визиту Касидиариса в Москву, но их текст в материалах отсутствует, поэтому подробностей из них не извлечь"
+   ],
+   "disagreement": "",
+   "dates_ahead": [],
+   "sources": [
+    {
+     "id": "n1249",
+     "name": "Sigmalive",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPYWthdmktS19EZ1RRM3duVXFTUmFFR1hOdGY0N2loQjNSV2FUbEJoT0ROeG9QTnhIbWZvMmYta29JSmVJWHBJdFdCR29KQXZhOUJhUnU1UHpudjJaQWhWeDktb2t5cUl6N2dSU0lEM0JiZXV2MkN6VWlwSmJWNEJiTmVLbnZ6b2lNVzZwZFBsN1RFay1LR05GTVo4RDVMUFdpcndqY2dYSWJ3RjlDNGNaVExvbjBGV3luN2c?oc=5",
+     "title": "Επαφές Κασιδιάρη στη Μόσχα: Η Ζαχάροβα δηλώνει ότι δεν γνωρίζει τίποτα",
+     "home": "https://www.sigmalive.com"
+    },
+    {
+     "id": "n1250",
+     "name": "ΤΑ ΝΕΑ",
+     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBKdmxVMmtocC1TSXNMQVA2Und2RE9WdmFLeFgzUHFVYlRLRlRBRG82ck1HT2s2QlQ0MGlUTnNRMjBZc29ULURHMzFCSGVhS2xuX3hYT3RhLUkxcEc2dGxIRnVUam1iby1ZN2tZM1M3dC1pNTFoVUd6N3lR?oc=5",
+     "title": "Ο Κασιδιάρης στη Μόσχα",
+     "home": "https://www.tanea.gr"
+    },
+    {
+     "id": "n1290",
+     "name": "antapocrisis",
+     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9TNURPbDdwbmQzOW5rUFVCclJCVDBRTnlwNnAta1hoYVFjTnNzU0R1a2s5eXU3eDdya24zSl9GU1JMbXpJRW5Jc3lCQXdiLWxTUGJDcWtxc3JSV1I0UTNMcnVxTjBHa0FyZkJRanNpbTJTNkpGdnc?oc=5",
+     "title": "Για την επίσκεψη Κασιδιάρη στη Μόσχα",
+     "home": "https://www.antapocrisis.gr"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Греция и Турция: встреча Тасуласа и Эрдогана в Стамбуле",
+   "rubric": "neighbors",
+   "importance": 5,
+   "facts": [
+    "Президент Греции Константинос Тасулас 28 ноября отправится в Стамбул с паломнической поездкой по приглашению Вселенского патриарха Варфоломея (Kathimerini)",
+    "Поездка приурочена к празднованию тронного праздника Вселенского патриархата в честь апостола Андрея Первозванного, покровителя и основателя патриархата (eKathimerini)",
+    "В Стамбуле Тасулас откроет в Сисманоглио выставку «Сияние Фанара. Сокровища византийского и постви зантийского искусства» (To Vima)",
+    "Во время пребывания президент встретится с представителями греческой общины Стамбула (Kathimerini)",
+    "В субботу, 28 ноября, Тасулас проведёт встречу с президентом Турции Реджепом Тайипом Эрдоганом (eKathimerini)",
+    "Встреча с Эрдоганом подтверждена в трёх изданиях: Kathimerini, eKathimerini и To Vima (Kathimerini, eKathimerini, To Vima)"
+   ],
+   "disagreement": "",
+   "dates_ahead": [
+    "28 ноября: паломническая поездка Тасуласа в Стамбул, празднование тронного праздника Вселенского патриархата",
+    "28 ноября: встреча Тасуласа с Эрдоганом",
+    "28 ноября: открытие выставки «Сияние Фанара» в Сисманоглио и встреча с греческой общиной"
+   ],
+   "sources": [
+    {
+     "id": "n54",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/politics/564618034/stin-konstantinoypoli-ayrio-o-konstantinos-tasoylas-synantisi-me-erntogan/",
+     "title": "Στην Κωνσταντινούπολη αύριο ο Κωνσταντίνος Τασούλας – Συνάντηση με Ερντογάν",
+     "home": ""
+    },
+    {
+     "id": "n119",
+     "name": "eKathimerini",
+     "url": "https://www.ekathimerini.com/politics/foreign-policy/1322739/tasoulas-to-meet-erdogan-during-istanbul-visit/",
+     "title": "Tassoulas to meet Erdogan during Istanbul visit",
+     "home": ""
+    },
+    {
+     "id": "n145",
+     "name": "To Vima",
+     "url": "https://www.tovima.gr/2026/11/27/politics/stin-konstantinoupoli-o-tasoulas-tha-synantithei-me-ton-erntogan/",
+     "title": "Στην Κωνσταντινούπολη ο Τασούλας – Θα συναντηθεί με τον Ερντογάν",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Саммит ЕС по бюджету 2028–2034 закончился без решения",
+   "rubric": "eu_world",
+   "importance": 4,
+   "facts": [
+    "Саммит ЕС в Брюсселе, завершившийся поздно вечером 26 ноября, не принял решения по Многолетнему бюджету ЕС на 2028–2034 годы; вопросы бюджета, нового займа Украине и руководства ЕЦБ отложены на Совет 17–18 декабря (ERT News; Hellas Journal)",
+    "Костa признал: «Не удалось договориться о общем объёме бюджета»; часть стран просила новые сокращения, большинство против, некоторые предлагали пересмотреть уже принятые сокращения, особенно в политике сплочённости (The Press Project; Hellas Journal)",
+    "Переговорный вариант Костa предусматривает бюджет около 1,78 трлн евро против почти 2 трлн в первоначальном предложении Еврокомиссии, то есть сокращение более 200 млрд евро (ERT News); Hellas Journal называет цифру 204 млрд евро (Hellas Journal)",
+    "Макрон назвал сокращение 204 млрд евро «стратегической ошибкой» и выступил против уменьшения средств на сплочённость и ОСП (The Press Project; Hellas Journal)",
+    "Мерц заявил о «новой подвижности» в переговорах о дальнейшем уменьшении бюджета и связал позицию Берлина с участием всех 27 стран в финансировании Украины (Hellas Journal; ERT News)",
+    "Митсотакис предупредил, что Греция не примет новых сокращений в сплочённости и сельском хозяйстве, и назвал их «красной линией» (ERT News); в посте в X он написал, что сокращения могут сделать ненужным доклад Драги (The Press Project)",
+    "Семь чистых доноров (Германия, Австрия, Бельгия, Дания, Финляндия, Нидерланды, Швеция) давят за меньший бюджет, группа 17 «Друзей сплочённости», включая Грецию, против новых сокращений (ERT News)",
+    "Фон дер Ляйен отметила прогресс по собственным ресурсам и «хорошие перспективы» для налога на цифровые услуги (ERT News)",
+    "Кредит Украине на 45 млрд евро поддержали 24 страны; Венгрия, Словакия и Чехия остались в стороне, Болгария участвует только в невоенной части (ERT News)",
+    "Макрон повторил, что без соглашения до 31 декабря 2026 года переговоры придётся перенести на второе полугодие 2027 года, после выборов во Франции (Hellas Journal)"
+   ],
+   "disagreement": "Hellas Journal называет сокращение 204 млрд евро относительно предложения Комиссии, ERT News пишет «свыше 200 млрд» и округляет бюджет до 1,78 трлн против почти 2 трлн. Макрон называет сокращения стратегической ошибкой, Мерц говорит о необходимости дальнейших сокращений; греческая сторона в ERT News и The Press Project подаёт итоги как красную линию Греции, а в Hellas Journal греческие правительственные источники говорят о «долгом пути впереди». Hellas Journal пишет, что Макрон и Мерц дали противоположные оценки, ERT News отмечает, что Мерц связал позицию с финансированием Украины.",
+   "dates_ahead": [
+    "17–18 декабря: очередной Европейский совет, где планируется новая попытка договориться о бюджете 2028–2034, кредите Украине и руководстве ЕЦБ",
+    "31 декабря 2026: крайний срок, который Макрон назвал для соглашения по бюджету, иначе переговоры перенесут на второе полугодие 2027 года",
+    "1 января 2028: дата, с которой ЕС должен работать по новому бюджету"
+   ],
+   "sources": [
+    {
+     "id": "n862",
+     "name": "The Press Project",
+     "url": "https://thepressproject.gr/vryxelles-choris-symfonia-i-ektakti-synodos-koryfis-gia-ton-proypologismo-2028-2034/",
+     "title": "Βρυξέλλες: Χωρίς συμφωνία η έκτακτη Σύνοδος Κορυφής για τον προϋπολογισμό 2028–2034",
+     "home": ""
+    },
+    {
+     "id": "n1570",
+     "name": "ERT News",
+     "url": "https://www.ertnews.gr/eidiseis/diethni/ee-xoris-symfonia-gia-ton-neo-polyeti-proypologismo-i-ektakti-synodos-koryfis-parapempontai-ola-ston-dekemvrio/",
+     "title": "ΕΕ: Χωρίς συμφωνία για τον νέο πολυετή προϋπολογισμό η έκτακτη Σύνοδος Κορυφής – Παραπέμπονται όλα στον Δεκέμβριο",
+     "home": ""
+    },
+    {
+     "id": "n1611",
+     "name": "Hellas Journal",
+     "url": "https://hellasjournal.com/2026/11/adiexodo-sti-synodo-koryfis-gia-ton-evropaiko-proypologismo-sygkrousi-makron-kai-merts-gia-tis-perikopes-neo-rantevou-stis-17-18-dekemvriou-echoume-akomi-dromo-brosta-mas-diaminyoun-e/",
+     "title": "Αδιέξοδο στη Σύνοδο Κορυφής για τον ευρωπαϊκό προϋπολογισμό: Σύγκρουση Μακρόν και Μερτς για τις περικοπές, νέο ραντεβού στις 17-18 Δεκεμβρίου… «Έχουμε ακόμη δρόμο μπροστά μας» διαμηνύουν ελληνικές κυβερνητικές πηγές",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "title": "Турецко-ливийский меморандум: Европарламент признал его недействительным",
+   "rubric": "neighbors",
+   "importance": 4,
+   "facts": [
+    "Европарламент, по сообщению A Haber, проголосовал за резолюцию, признающую турецко-ливийский меморандум недействительным (A Haber, текст короткий, без деталей голосования)",
+    "Liberal.gr пишет, что турецкие СМИ связывают соглашение с Ливией и визит Хафтара в Анкару с доктриной «Голубой Родины» (Liberal.gr)",
+    "Daily Sabah подаёт турецко-ливийское соглашение как переопределение геополитики Восточного Средиземноморья (Daily Sabah)"
+   ],
+   "disagreement": "Греческие и турецкие издания расходятся в подаче: A Haber представляет голосование в Европарламенте как жалобу Греции в ЕС, Daily Sabah подаёт соглашение как законное геополитическое достижение Анкары, а Liberal.gr рассматривает его как часть доктрины «Голубой Родины». Сведений о числе голосов и точной формулировке резолюции в текстах нет.",
+   "dates_ahead": [],
+   "sources": [
+    {
+     "id": "n1151",
+     "name": "A Haber",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQc1cwbnQ3VVJGUUxIbGQ1d3BqbUt3ZHpwbU5jTXNBb0xvMkVjTVh2VW55b2dfMEEwenpITG1nWEhxeXlEUWlRMHNWNGllRGJyUktXWi1wc2RrWmRFcWNqTjdFRVJZcktzQWJrMXFhY2NVYmttQ0x5cU9NbG44WFQ2dVpRbHctdzlSZzdsVnYtT25tNDBWYV9LUzRJcXpsVmpERURwMjJwQW9BQm02RTJ4aS1IUVBKOVdSUnFUcWFuQWVQdw?oc=5",
+     "title": "Yunanistan yeniden AB'ye şikâyet peşinde! Avrupa Parlamentosunda baskın oylama",
+     "home": "https://www.ahaber.com.tr"
+    },
+    {
+     "id": "n1337",
+     "name": "Liberal.gr",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPQmFnVDIydzhXcFlvZnBnNWxfdVJWNGlsalRIYWRZY09MdTFFMHZJTUJyRE5zLW1odGJOck44ZWY3YzlQNkctSDBtTWtyMnZsNUdkaHF2NGx4U2U3SndxUFFuZV9ET2hZTW1nM1lWNV9uNHRNM3dZT3BrcllBdG9Tb0h2Wl8xcVhOVGdScnlRUmlxb1lzM05Yc2gxX3VDNjhEeTZsbDctR2w1TUV4THlwNHVkak9SeW02dTZORk80Y9IBxAFBVV95cUxNejNOb2pRVE1icll0cnM3OEktdWFSejJ5cVdxcF9MWF9wV3hNZENfcUZJRVVxVVdYVmhQVlU1aXNqX0h1V0NKeDF2dVo1ckh1SEhLV0FjR0dNekJjSjBwalNXNTIyNHczZndFUEh1a1FwUXdZVGhXcm9oZUNsemZ4NDBKaVhIalJPRzJnTkhnaWpBUjN3eVI4eGtITGUyc1FOaWozdndmLWxNTWN5dU5rem05MnVCSFZ0U3R1WUM2SmxsTGE1?oc=5",
+     "title": "Τουρκικά ΜΜΕ: Μέρος του δόγματος της «Γαλάζιας Πατρίδας» η συμφωνία με τη Λιβύη και η επίσκεψη Χαφτάρ",
+     "home": "https://www.liberal.gr"
+    },
+    {
+     "id": "n1519",
+     "name": "Daily Sabah",
+     "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNd0txaTltem42bjdxa2Vld2ZKdXRTYUdsV0lxSmRLSS1YM2kxU1JYQkZrZVJ4MDhZSm5hQVA1VnJEUkxRcUh2NmxfMzYyM0JpeFljWjhlZTd4RVdkR1Q1bUlyUm9fdmN5MVdubS14Z2ZicDhjaTZpYTJvc1lfbW5LUHdhSkNmc2owbTU1aHV6anlYU1RfTjBrQUJYWjJXR3JmY3l4ZkdHNNIBpwFBVV95cUxNd0txaTltem42bjdxa2Vld2ZKdXRTYUdsV0lxSmRLSS1YM2kxU1JYQkZrZVJ4MDhZSm5hQVA1VnJEUkxRcUh2NmxfMzYyM0JpeFljWjhlZTd4RVdkR1Q1bUlyUm9fdmN5MVdubS14Z2ZicDhjaTZpYTJvc1lfbW5LUHdhSkNmc2owbTU1aHV6anlYU1RfTjBrQUJYWjJXR3JmY3l4ZkdHNA?oc=5",
+     "title": "Geopolitics of East Med redefined: Türkiye-Libya agreement | Daily Sabah",
+     "home": "https://www.dailysabah.com"
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "title": "Российский флот меняет курс в Средиземном море после удара в Ливии",
+   "rubric": "russia",
+   "importance": 4,
+   "facts": [
+    "Ukrainian sea drones sank a Russian corvette, «Merkury», in the port of Benghazi on 22 November (n24/Kathimerini/Reuters; in.gr; Naftemporiki).",
+    "Reuters, citing three people from military and security services, reports that a convoy of Russian ships carrying military vehicles bound for Libya turned back in the Mediterranean; the change was not known until now (n24/Kathimerini/Reuters; Naftemporiki).",
+    "The convoy was escorted by the Russian frigate «Golovko» and changed course near the Strait of Sicily on the same day as the Benghazi attack, according to a European military official tracking it (n24/Kathimerini/Reuters; in.gr; Naftemporiki).",
+    "Ukrainian military intelligence and a Middle East security official confirmed to Reuters that the ships were halted off the coast of Algeria (n24/Kathimerini/Reuters; Naftemporiki).",
+    "The three ships «Maia 1», «Lady R» and «Lady D» last transmitted positions near the Bay of Biscay on 12 November, per MarineTraffic data; the convoy left Kaliningrad on 5 November and was last spotted near Algeria on 25 November (in.gr/Reuters).",
+    "The ships' operators, JSC Sovfracht and MG-Flot, are under EU and US sanctions (in.gr/Reuters).",
+    "European and Middle East sources say the vehicles were probably meant for the Russian «Africa Corps» in West Africa, though a European source did not rule out that some were for the LNA of Khalifa Haftar (in.gr/Reuters).",
+    "Some of the ships had earlier served in the so-called «Syria Express» supplying Assad's regime (in.gr, citing a Western maritime security source).",
+    "The Russian Defence Ministry has not commented (n24/Kathimerini/Reuters; Naftemporiki said it did not reply immediately)."
+   ],
+   "disagreement": "Ukrainian and Middle East sources confirm the course change, while the Russian Defence Ministry has not commented. The destination of the vehicles is unclear: sources point to Africa Corps in West Africa, but a European source leaves open that some were for Haftar's LNA. Naftemporiki gives no ship names, and in.gr adds the frigate's name as «Golovko» in transliteration; Naftemporiki also describes the convoy as escorted by the frigate. The Kathimerini text says the convoy was headed for Libya and was changing course, while in.gr says the convoy stopped, and the reports disagree on whether it is in Algeria or has ended its journey.",
+   "dates_ahead": [],
+   "sources": [
+    {
+     "id": "n24",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/world/564618403/reuters-rosika-ploia-allazoyn-poreia-sti-mesogeio-meta-tin-oykraniki-epithesi-sti-livyi/",
+     "title": "Reuters: Ρωσικά πλοία αλλάζουν πορεία στη Μεσόγειο μετά την ουκρανική επίθεση στη Λιβύη",
+     "home": ""
+    },
+    {
+     "id": "n275",
+     "name": "in.gr",
+     "url": "https://www.in.gr/2026/11/28/world/livyi-rosiki-niopompi-ekane-anastrofi-meta-ti-vythisi-polemikou-ploiou-stis-22-noemvriou/",
+     "title": "Λιβύη: Ρωσική νηοπομπή έκανε αναστροφή μετά τη βύθιση πολεμικού πλοίου στις 22 Νοεμβρίου",
+     "home": ""
+    },
+    {
+     "id": "n335",
+     "name": "Naftemporiki",
+     "url": "https://www.naftemporiki.gr/kosmos/2195374/rosikos-stoliskos-me-proorismo-ti-livyi-allaxe-poreia-meta-ti-vythisi-toy-polemikoy-ploioy-stis-22-noemvrioy/?utm_source=rss&utm_medium=rss&utm_campaign=rosikos-stoliskos-me-proorismo-ti-livyi-allaxe-poreia-meta-ti-vythisi-toy-polemikoy-ploioy-stis-22-noemvrioy",
+     "title": "Ρωσικός στολίσκος με προορισμό τη Λιβύη άλλαξε πορεία στη Μεσόγειο μετά τη βύθιση της κορβέτας στις 22 Νοεμβρίου",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "title": "Убийство Заmбуниса: арест «Китайца» Алексея Сокпы в Афинах, выдача из Турции",
+   "rubric": "athens",
+   "importance": 4,
+   "facts": [
+    "В пятницу, 27 ноября, полиция в Афинах арестовала 43-летнего мужчину, которого разыскивали по делу об убийстве Вангелиса Зампуниса (Kathimerini; To Vima)",
+    "Задержание произошло после сотрудничества греческой полиции с турецкими властями (Kathimerini; To Vima)",
+    "Ta Nea называет задержанного Алексеем Сокпой, в криминальной среде его знают как «Китайца», и пишет, что он один из двух исполнителей убийства (Ta Nea)",
+    "To Vima сообщает, что задержанный родился в России и что полиция опубликовала его данные и фотографию 1 августа 2026 года, объявив его в розыск через Interpol (To Vima)",
+    "Зампуниса застрелили 14 января 2024 года возле его заправки в Новом Косме: по данным Ta Nea, двое нападавших выпустили около 100 пуль из калашникова примерно за 28 секунд (Ta Nea)",
+    "По данным Ta Nea, после убийства мужчина скрывался в оккупированной северной части Кипра, где его задержали в районе Кирении местные власти и начали дела о незаконном пребывании и нарушении режима военной зоны (Ta Nea)",
+    "По последним данным, которые приводит Ta Nea, турецкие власти выдали его греческой полиции (Ta Nea)",
+    "Задержанного должны доставить к прокурору, чтобы исполнить ордер на арест (Kathimerini; To Vima)"
+   ],
+   "disagreement": "Ta Nea пишет о задержании в Кирении и последующей выдаче Турцией, тогда как Kathimerini и To Vima упоминают только сотрудничество с турецкими властями и не называют ни Кирению, ни Кипр. Kathimerini называет задержанного только инициалами А.С., имя Сокпа есть только в Ta Nea. Ta Nea сообщает о его роли исполнителя со ссылкой на материалы дела, To Vima этой роли не упоминает.",
+   "dates_ahead": [
+    "Ближайшие дни: задержанного доставят к прокурору для исполнения ордера на арест (Kathimerini; To Vima)"
+   ],
+   "sources": [
+    {
+     "id": "n16",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/society/astynomiko/564618502/neos-kosmos-synelifthi-43chronos-gia-tin-ektelesi-44chronoy-ston-neo-kosmo/",
+     "title": "Συνελήφθη 43χρονος για τη δολοφονία Ζαμπούνη",
+     "home": ""
+    },
+    {
+     "id": "n142",
+     "name": "To Vima",
+     "url": "https://www.tovima.gr/2026/11/27/society/synelifthi-stin-athina-43xronos-gia-ti-dolofonia-zampouni-i-synergasia-me-tis-tourkikes-arxes/",
+     "title": "Συνελήφθη στην Αθήνα 43χρονος για τη δολοφονία Ζαμπούνη – Η συνεργασία με τις τουρκικές Αρχές",
+     "home": ""
+    },
+    {
+     "id": "n226",
+     "name": "Ta Nea",
+     "url": "https://www.tanea.gr/2026/11/27/greece/poios-einai-o-kinezos-tis-greek-mafia-o-aleksei-sokpa-to-krisfygeto-kai-i-dolofonia-zampouni-me-100-sfaires-ston-neo-kosmo/",
+     "title": "Ποιος είναι ο «Κινέζος» της Greek Mafia: Ο Αλεξέι Σόκπα, το κρησφύγετο και η δολοφονία Ζαμπούνη με 100 σφαίρες στον Νέο Κόσμο",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "title": "Погода: шторм и красный код в шести регионах, наводнения в Фесприотии и Керкире",
+   "rubric": "society",
+   "importance": 4,
+   "facts": [
+    "Пожарные на северо-западе Греции: в ночь на 27 ноября ливни затопили Сывоты и Платарию в муниципалитете Игуменица (Фесприотида), поступило около 150 вызовов в пожарную службу (eKathimerini)",
+    "В Сывотах эвакуировали трёх пожилых жителей, в работе восемь расчётов и 22 пожарных, подкрепление из Иоаннины (eKathimerini)",
+    "Министерство климатического кризиса и гражданской защиты ввело Red Code (повышенная готовность) в Ионических островах, Эпире и Западной Греции на 27–28 ноября, с воскресенья 29 ноября в Фессалии, Центральной Греции и Пелопоннесе (Kathimerini, To Vima)",
+    "Красная погодная предупреждение на 27 ноября: ливни и грозы в Ионическом регионе, Эпире и западной Центральной Греции; 28 ноября красное предупреждение сохраняется, оранжевое для западного Пелопоннеса (Kathimerini)",
+    "С вечера субботы 28 ноября оранжевое предупреждение для Пиерии, Халкидики и восточной Фессалии; в воскресенье ливни начнутся в Фессалии, Фтиотиде и Эвбее (Kathimerini)",
+    "Министерство труда обязало прекратить наружные работы в субботу 28 ноября в Западной Греции, на Ионических островах и в Эпире; штраф 2000 евро за каждого работника (To Vima)",
+    "В воскресенье 29 ноября ветры до 9 баллов по Бофорту, в Эгейском море местами до 10 (Kathimerini, To Vima)",
+    "Национальный оперативный центр гражданской защиты поддерживает связь с муниципалитетами, пожарная служба в готовности (Kathimerini, To Vima)"
+   ],
+   "disagreement": "",
+   "dates_ahead": [
+    "27 ноября: Red Code и красное предупреждение в Ионических островах, Эпире и западной Центральной Греции",
+    "28 ноября: красное предупреждение в тех же регионах, оранжевое в западном Пелопоннесе; обязательная остановка наружных работ в Западной Греции, на Ионических островах и в Эпире",
+    "28 ноября вечером: оранжевое предупреждение в Пиерии, Халкидики и восточной Фессалии",
+    "29 ноября: ливни и ветры до 9 баллов в Фессалии, Фтиотиде, Эвбее и на Пелопоннесе, местами 10 баллов в Эгейском море"
+   ],
+   "sources": [
+    {
+     "id": "n30",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/society/564618349/kakokairia-se-red-code-exi-perifereies-en-anamoni-entonon-fainomenon/",
+     "title": "Κακοκαιρία: Σε Red Code έξι περιφέρειες εν αναμονή έντονων φαινομένων",
+     "home": ""
+    },
+    {
+     "id": "n139",
+     "name": "eKathimerini",
+     "url": "https://www.ekathimerini.com/news/1322680/heavy-rain-causes-flooding-in-northwestern-greece-prompts-150-calls-to-fire-service/",
+     "title": "Heavy rain causes flooding in northwestern Greece, prompts 150 calls to fire service",
+     "home": ""
+    },
+    {
+     "id": "n143",
+     "name": "To Vima",
+     "url": "https://www.tovima.gr/2026/11/27/society/kakokairia-eksi-perifereies-se-red-code-pote-kai-pou-tha-xtypisoun-oi-kataigides/",
+     "title": "Κακοκαιρία: Πότε και πού θα χτυπήσουν οι καταιγίδες – Red Code για τον κρατικό μηχανισμό",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "title": "Ассоциация «Сотрудники полиции»: фальшивые чеки и аресты полицейских и военных",
+   "rubric": "society",
+   "importance": 4,
+   "facts": [
+    "Греческая полиция разгромила два независимых кольца, продававших поддельные чеки за проживание сотрудникам в форме, ущерб государству превысил 12 млн евро (Kathimerini, Greek City Times; Ta Nea, Efsyn: «более 12 млн евро», за последние семь лет по Efsyn)",
+    "Во вторник арестовали 17 человек в одновременных рейдах в Афинах, Иоаннине и Митилене, среди задержанных полицейские, сотрудники береговой охраны и военная (Greek City Times)",
+    "По версии следствия, около 1291 сотрудника в форме использовал поддельные чеки и получал суточные за командировки, которых не было (Greek City Times)",
+    "При обысках изъято около 400 000 евро наличными, поддельные чеки, записи с именами и суммами, терминалы для карт, компьютеры, телефоны и автомобили (Greek City Times)",
+    "Ta Nea и Efsyn: бухгалтер «Маркелла» считается одним из центральных фигурантов; имущество 33 человек и 25 компаний заблокировано (Ta Nea, Efsyn)",
+    "Следователи проверяют ещё минимум 60 сотрудников береговой охраны и 23 полицейских в других делах, а также гражданского служащего и 17 госслужащих, включая военных, персонал скорой помощи и работника суда (Greek City Times)",
+    "Вторая организация работала из квартиры в районе Гизи с 2020 года и обслуживала только сотрудников полиции и береговой охраны, по данным Efsyn",
+    "Задержанных в основном передали следователю по тяжким преступлениям; дело военнослужащих выделено и передано военной юстиции (Ta Nea)"
+   ],
+   "disagreement": "Greek City Times называет цифру 1291 сотрудника и 17 арестованных; Ta Nea и Efsyn называют 33 заблокированных имущества лиц и 25 компаний, но не приводят число задержанных. Efsyn ссылается на ERT при описании роли «Маркеллы», Ta Nea приводит перехваченные разговоры, в которых речь идёт о ставках и выплатах, Efsyn добавляет суммы взносов. Расхождения в деталях описания ролей нет, но Greek City Times отдельно упоминает прошлогодний случай на Миконосе, который в других источниках не фигурирует.",
+   "dates_ahead": [
+    "15 декабря: по разговорам, один из клиентов собирался приехать в Афины (Ta Nea, по перехваченному разговору)",
+    "В декабре: по данным следствия, «Маркелла» обдумывала закрытие компаний, связанных с деятельностью кольца (Efsyn)",
+    "До конца декабря: по перехваченным разговорам, фигуранты рассчитывали на завершение своих проектов (Ta Nea)"
+   ],
+   "sources": [
+    {
+     "id": "n1988",
+     "name": "Greek City Times",
+     "url": "https://greekcitytimes.com/2026/11/27/fake-accommodation-receipts/",
+     "title": "Police Probe 1,291 Uniformed Officers Over Fake Accommodation Receipts",
+     "home": ""
+    },
+    {
+     "id": "n1674",
+     "name": "Ta Nea",
+     "url": "https://www.tanea.gr/2026/11/27/greece/prosektika-omorfa-kai-oraia-gia-na-min-exoume-ekplikseis-neoi-apokalyptikoi-dialogoi-apo-to-kykloma-ton-enstolon-me-tis-eikonikes-apodeikseis/",
+     "title": "«Προσεκτικά, όμορφα και ωραία για να μην έχουμε εκπλήξεις» – Νέοι αποκαλυπτικοί διάλογοι από το κύκλωμα των ενστόλων με τις εικονικές αποδείξεις",
+     "home": ""
+    },
+    {
+     "id": "n502",
+     "name": "Efsyn",
+     "url": "https://www.efsyn.gr/ellada/1519300/kykloma-enstolon-oi-dialogoi-poy-kaine-edoses-pali-hrima-edosa-apo-ayta-poy-den-xerei-kaneis/",
+     "title": "Κύκλωμα ενστόλων – Οι διάλογοι που «καίνε»: «Έδωσες πάλι χρήμα;» – «Έδωσα από αυτά που δεν ξέρει κανείς»",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "title": "Оппозиция и следственная комиссия по частным долгам и фондам",
+   "rubric": "politics",
+   "importance": 4,
+   "facts": [
+    "Парламент одобрил предложение СИРИЗА о создании следственной комиссии по красным кредитам, за проголосовали 137 депутатов, «Новая демократия» проголосовала «παρών» (To Vima)",
+    "Комиссия будет состоять из 29 депутатов, первоначальный срок её работы три месяца (To Vima)",
+    "Комиссия будет изучать решения государства с 2015 года по управлению частным долгом: секьюритизацию безнадёжных кредитов, продажу их фондам, практику servicers, госгарантии по программе «Ираклис», процедуры аукционов и защиту первого жилья (To Vima)",
+    "«Новая демократия» назвала 16 депутатов, в их числе Митаракис, Николакопулос, Скондра и Φάνης Παππάς (Kathimerini, Efsyn)",
+    "От СИРИЗА войдут Νίκος Παππάς и Зоя Анастасопулу, от КПГ Караθανασόπουλος, Метаксас и Комнинака, которые уже работали в комиссии по Теммпи (Kathimerini, To Vima)",
+    "От «Элинис Лисис» войдёт вице-спикер Василис Вилиардос с заменой Стелиос Фотопулос, от «НИКИ» Андреас Ворилас (Kathimerini, To Vima)",
+    "Зоя Конституопулу, председатель «Плефсис Элевтерияс», заявила на радио, что лично войдёт в комиссию (Kathimerini, To Vima)",
+    "От ПАСОКа, по данным To Vima и Efsyn, будет докладчицей Милена Апостолаки, список ПАСОКа ещё не передан в секретариат председателя парламента (Efsyn)",
+    "Первое заседание комиссии с выбором президиума ожидается до Рождества (Kathimerini, To Vima)"
+   ],
+   "disagreement": "Kathimerini пишет, что ПАСОК сообщит состав в ближайшие часы, Efsyn пишет, что список ещё не отправлен, но присутствие Апостолаки считается «σίγουρη», то есть почти решённым. To Vima называет Апостолаки будущей докладчицей, но тут же пишет, что докладчика выберут позже, когда комиссия сформируется, а Efsyn говорит о ней как о докладчице в прошлых комиссиях (по ОПЕКЕПЕ и Теммпи).",
+   "dates_ahead": [
+    "До Рождества: первое заседание следственной комиссии по красным кредитам и выбор её президиума (Kathimerini, To Vima)",
+    "После жеребьёвки независимых депутатов: решение пленума парламента о составе комиссии (To Vima)",
+    "Срок работы комиссии: три месяца с начала её работы (To Vima)"
+   ],
+   "sources": [
+    {
+     "id": "n62",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/politics/564617902/exetastiki-gia-funds-kai-servicers-sti-voyli-ta-prota-onomata-voyleyton-poy-tha-symmetaschoyn-stin-epitropi/",
+     "title": "Εξεταστική για funds και servicers στη Βουλή – Τα πρώτα ονόματα βουλευτών που θα συμμετάσχουν στην επιτροπή",
+     "home": ""
+    },
+    {
+     "id": "n159",
+     "name": "To Vima",
+     "url": "https://www.tovima.gr/2026/11/27/politics/kokkina-daneia-ayta-einai-ta-meli-tis-eksetastikis-ta-epomena-vimata/",
+     "title": "Κόκκινα δάνεια: Αυτά είναι τα μέλη της Εξεταστικής – Τα επόμενα βήματα",
+     "home": ""
+    },
+    {
+     "id": "n548",
+     "name": "Efsyn",
+     "url": "https://www.efsyn.gr/politiki/1519075/exetastiki-gia-kokkina-daneia-kai-funds-oi-protoi-voyleytes-poy-anakoinothikan-apo-ta-kommata/",
+     "title": "Εξεταστική για κόκκινα δάνεια και funds: Οι πρώτοι βουλευτές που ανακοινώθηκαν από τα κόμματα",
+     "home": ""
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "title": "Федеральная прокуратура ЕС и Экспорт Греции: скандал вокруг «Скандальных» ЛКК (объединено с делом)",
+   "rubric": "politics",
+   "importance": 3,
+   "facts": [
+    "Howl.Link называет скандал с «домиками для переработки» Лернейской гидрой и пишет, что в него замешаны министры и депутаты «Новой демократии», а также местные руководители партии (Howl.Link)",
+    "GOVNews пишет, что на Максимос давят сразу несколько направлений: судебные события, «домики для переработки», дело Темпи, ОПЕКЕПЕ и прослушка (GOVNews.gr)"
+   ],
+   "disagreement": "Howl.Link делает акцент на участии действующих министров и депутатов «Новой демократии» в схеме, GOVNews подаёт то же дело как часть общего давления на правительство через несколько судебных линий сразу.",
+   "dates_ahead": [],
+   "sources": [
+    {
+     "id": "n1410",
+     "name": "Howl.Link",
+     "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE85ekIyLWdwcWNJaHkxRHduV2tWeFEySURSN3gwb291VE81UU85bHNwZzd5Y2trMGlXVkFV?oc=5",
+     "title": "Λερναία Ύδρα το σκάνδαλο με τα Σπιτάκια Ανακύκλωσης – Μπλεγμένοι υπουργοί και βουλευτές της Νέας Δημοκρατίας καθώς και γαλάζιοι αυτοδιοικητικοί",
+     "home": "https://t.co"
+    },
+    {
+     "id": "n1415",
+     "name": "GOVNews.gr",
+     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNYnZyZGo0cGE2TXMzbmVMNnRyQndlQ2w0anU5YWJpTUV0RHVvQ2Z2SmJXRkRuMGhSOFZGMlpnQjJWVTVyR0xNWHRjNHBTVmI3c2EyOTlTRms4azFVSUc3czJYRDVXMFMxLXNnX2lseG5TQkZoWlN2dldMT0FSaEpiamVmWTVqUEdHcDU1WGRRQTJXQmtmQzhhU25rZ3BpVGpRMWtFY2syQVpOVlJJRElFSmtXcTMxNmV5SjgwMXdrNDI0cnB1?oc=5",
+     "title": "Πίεση στο Μαξίμου από δικαστικές εξελίξεις, «σπιτάκια ανακύκλωσης», Τέμπη, ΟΠΕΚΕΠΕ και υποκλοπές",
+     "home": "https://govnews.gr"
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "title": "Пенсионеры и ФИ: пересмотр налоговых льгот и налоговой политики",
+   "rubric": "economy",
+   "importance": 3,
+   "facts": [
+    "Ελεγκτικό Συνέδριο (Счётная палата Греции, высший административный суд) рассматривает конституционность способа расчёта взноса солидарности пенсионеров (ЕАС): применять ли ставку ко всей пенсии или только к части сверх порога каждой ступени, как в подоходном налоге. Решение ожидается, точной даты в тексте нет (Kathimerini).",
+    "С 1 января 2027 года пороги ступеней ЕАС индексируются на 2,9%, вслед за ростом основных пенсий. Это не меняет сам взнос, но не даёт пенсионерам платить больше только из-за повышения пенсии (Kathimerini).",
+    "Ступени ЕАС после индексации: от 1509 до 1832 евро ставка 3%, от 1832 до 2156 евро 6%, от 2156 до 2479 евро 7%, от 2479 до 2803 евро 9%, до примерно 3126 евро 10%, до примерно 3449 евро 12%, до примерно 3773 евро 13%, выше 14% (Kathimerini).",
+    "Около 1,4 млн самозанятых, фрилансеров, индивидуальных предпринимателей и фермеров ожидают новых повышений взносов с 2027 года. Наиболее вероятный сценарий предполагает рост примерно на 4%, исходя из инфляции (Kathimerini).",
+    "Для первой страховой категории, в которую входят более 80% неналоговых плательщиков, ежемесячный взнос может вырасти с 250,77 до 260,80 евро, то есть примерно на 10 евро в месяц или 120 евро в год. В шестой категории рост превысит 27 евро в месяц, взнос приблизится к 703 евро (Kathimerini).",
+    "За 2023–2026 годы взносы неналоговых плательщиков выросли на 18,36%. С повышением на 4% общий рост с 2023 по 2027 год приблизится к 22,36% (Kathimerini).",
+    "Запуск Индекса развития зарплат, который должен определять взносы с учётом не только инфляции, но и производительности труда, перенесён на 2028 год (Kathimerini).",
+    "Правительственные расчёты бюджета на 2027 год: доля относительной бедности составит 16,7% против 16,4% в сценарии 2026 года с дополнительными мерами. Средний годовой эквивалентный доход вырастет на 701 евро, или 4,64%, по сравнению с базой 2026 года (To Vima).",
+    "По тем же расчётам, у беднейших 10% доход вырастет на 274 евро в год (5,78%), у богатейших 10% на 1409 евро (3,93%). Порог бедности для одиночки поднимется с 8075,92 до 8452,73 евро в год, а коэффициент Джини вырастет с 0,2913 до 0,2924 (To Vima).",
+    "Ожидаемое снижение бедности по группам: одинокие родители с 25,5% до 25%, люди до 65 лет, живущие одни, с 19,7% до 18,9%, пары с тремя и более детьми с 25,2% до 19,7%, люди от 80 лет с 19,1% до 14,7% (To Vima)."
+   ],
+   "disagreement": "",
+   "dates_ahead": [
+    "Решение Ελεγκτικό Συνέδριο о способе расчёта взноса солидарности пенсионеров: дата не названа, ожидается",
+    "1 января 2027 года: индексация порогов ступеней ЕАС на 2,9%",
+    "2027 год: возможное повышение взносов неналоговых плательщиков примерно на 4%",
+    "2028 год: запуск Индекса развития зарплат для расчёта взносов"
+   ],
+   "sources": [
+    {
+     "id": "n31",
+     "name": "Kathimerini",
+     "url": "https://www.kathimerini.gr/visual/infographics/564616645/apo-ta-1-509-eyro-syntaxis-i-eisfora-allileggyis/",
+     "title": "Από τα 1.509 ευρώ σύνταξης η εισφορά αλληλεγγύης",
+     "home": ""
+    },
+    {
+     "id": "n158",
+     "name": "To Vima",
+     "url": "https://www.tovima.gr/2026/11/27/finance/proypologismos-ayksanetai-i-ftoxeia-para-tis-ayksiseis-se-misthous-kai-syntakseis/",
+     "title": "Προϋπολογισμός: Αυξάνεται η φτώχεια παρά τις αυξήσεις σε μισθούς και συντάξεις",
+     "home": ""
+    },
+    {
+     "id": "n1808",
+     "name": "Protothema",
+     "url": "https://www.protothema.gr/culture/article/1918061/stefania-goulioti-anametratai-me-ton-amlet-ton-emvlimatiko-iroa-tou-saixpir/?utm_source=rss",
+     "title": "Στεφανία Γουλιώτη: Αναμετράται με τον «Άμλετ», τον εμβληματικό ήρωα του Σαίξπηρ, στο Θέατρο Βεάκη",
+     "home": ""
+    }
+   ]
+  }
+ ],
+ "links": {
+  "n1": {
+   "id": "n1",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/eortologio/564567670/eortologio-poioi-giortazoyn-simera-28-noemvrioy/",
+   "title": "Εορτολόγιο: Ποιοι γιορτάζουν σήμερα 28 Νοεμβρίου",
+   "home": ""
+  },
+  "n131": {
+   "id": "n131",
+   "name": "eKathimerini",
+   "url": "https://www.ekathimerini.com/politics/1322629/liakos-affair-deepens-government-divisions/",
+   "title": "Liakos affair deepens government divisions",
+   "home": ""
+  },
+  "n563": {
+   "id": "n563",
+   "name": "Efsyn",
+   "url": "https://www.efsyn.gr/politiki/1518957/nea-galazio-adeiasma-gia-tin-ypothesi-liakoy-o-fortomas-zita-tin-paraitisi-toy/",
+   "title": "Νέα «γαλάζιο» άδειασμα για την υπόθεση Λιάκου – Ο Φόρτωμας ζητά την παραίτησή του",
+   "home": ""
+  },
+  "n97": {
+   "id": "n97",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/society/564617557/eyropaiki-eisaggelia-desmeysi-perioysiakon-stoicheion-ton-4-syllifthenton-gia-ta-spitakia-anakyklosis/",
+   "title": "Ευρωπαϊκή Εισαγγελία: Δέσμευση περιουσιακών στοιχείων των 4 συλληφθέντων για τα σπιτάκια ανακύκλωσης",
+   "home": ""
+  },
+  "n129": {
+   "id": "n129",
+   "name": "eKathimerini",
+   "url": "https://www.ekathimerini.com/economy/1322697/european-prosecutors-freeze-assets-in-greek-recycling-funds-investigation/",
+   "title": "European prosecutors freeze assets in Greek recycling funds investigation",
+   "home": ""
+  },
+  "n503": {
+   "id": "n503",
+   "name": "Efsyn",
+   "url": "https://www.efsyn.gr/ellada/1519293/spitakia-anakyklosis-prothesmia-piran-oi-tesseris-katigoroymenoi-ti-deytera-oi-apologies-toys/",
+   "title": "Σπιτάκια Ανακύκλωσης: Προθεσμία πήραν οι τέσσερις κατηγορούμενοι – Τη Δευτέρα οι απολογίες τους",
+   "home": ""
+  },
+  "n14": {
+   "id": "n14",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/world/564618613/epikoinonia-meloni-zelenski-me-fonto-tin-oykraniki-epithesi-sti-veggazi/",
+   "title": "Επικοινωνία Μελόνι – Ζελένσκι με φόντο την ουκρανική επίθεση στη Βεγγάζη",
+   "home": ""
+  },
+  "n141": {
+   "id": "n141",
+   "name": "To Vima",
+   "url": "https://www.tovima.gr/2026/11/27/world/kaneis-den-eixe-enimerothei-i-italia-adeiazei-ton-zelenski-gia-tin-epithesi-sta-rosika-ploia/",
+   "title": "«Κανείς δεν είχε ενημερωθεί»: Η Ιταλία αδειάζει τον Ζελένσκι για την επίθεση στα ρωσικά πλοία",
+   "home": ""
+  },
+  "n245": {
+   "id": "n245",
+   "name": "Ta Nea",
+   "url": "https://www.tanea.gr/2026/11/27/world/rigma-stis-sxeseis-romis-kievou-gia-ti-metafora-tou-polemou-sti-mesogeio/",
+   "title": "Ρήγμα στις σχέσεις Ρώμης – Κιέβου για τη μεταφορά του πολέμου στη Μεσόγειο",
+   "home": ""
+  },
+  "n1249": {
+   "id": "n1249",
+   "name": "Sigmalive",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPYWthdmktS19EZ1RRM3duVXFTUmFFR1hOdGY0N2loQjNSV2FUbEJoT0ROeG9QTnhIbWZvMmYta29JSmVJWHBJdFdCR29KQXZhOUJhUnU1UHpudjJaQWhWeDktb2t5cUl6N2dSU0lEM0JiZXV2MkN6VWlwSmJWNEJiTmVLbnZ6b2lNVzZwZFBsN1RFay1LR05GTVo4RDVMUFdpcndqY2dYSWJ3RjlDNGNaVExvbjBGV3luN2c?oc=5",
+   "title": "Επαφές Κασιδιάρη στη Μόσχα: Η Ζαχάροβα δηλώνει ότι δεν γνωρίζει τίποτα",
+   "home": "https://www.sigmalive.com"
+  },
+  "n1250": {
+   "id": "n1250",
+   "name": "ΤΑ ΝΕΑ",
+   "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBKdmxVMmtocC1TSXNMQVA2Und2RE9WdmFLeFgzUHFVYlRLRlRBRG82ck1HT2s2QlQ0MGlUTnNRMjBZc29ULURHMzFCSGVhS2xuX3hYT3RhLUkxcEc2dGxIRnVUam1iby1ZN2tZM1M3dC1pNTFoVUd6N3lR?oc=5",
+   "title": "Ο Κασιδιάρης στη Μόσχα",
+   "home": "https://www.tanea.gr"
+  },
+  "n1290": {
+   "id": "n1290",
+   "name": "antapocrisis",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9TNURPbDdwbmQzOW5rUFVCclJCVDBRTnlwNnAta1hoYVFjTnNzU0R1a2s5eXU3eDdya24zSl9GU1JMbXpJRW5Jc3lCQXdiLWxTUGJDcWtxc3JSV1I0UTNMcnVxTjBHa0FyZkJRanNpbTJTNkpGdnc?oc=5",
+   "title": "Για την επίσκεψη Κασιδιάρη στη Μόσχα",
+   "home": "https://www.antapocrisis.gr"
+  },
+  "n54": {
+   "id": "n54",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/politics/564618034/stin-konstantinoypoli-ayrio-o-konstantinos-tasoylas-synantisi-me-erntogan/",
+   "title": "Στην Κωνσταντινούπολη αύριο ο Κωνσταντίνος Τασούλας – Συνάντηση με Ερντογάν",
+   "home": ""
+  },
+  "n119": {
+   "id": "n119",
+   "name": "eKathimerini",
+   "url": "https://www.ekathimerini.com/politics/foreign-policy/1322739/tasoulas-to-meet-erdogan-during-istanbul-visit/",
+   "title": "Tassoulas to meet Erdogan during Istanbul visit",
+   "home": ""
+  },
+  "n145": {
+   "id": "n145",
+   "name": "To Vima",
+   "url": "https://www.tovima.gr/2026/11/27/politics/stin-konstantinoupoli-o-tasoulas-tha-synantithei-me-ton-erntogan/",
+   "title": "Στην Κωνσταντινούπολη ο Τασούλας – Θα συναντηθεί με τον Ερντογάν",
+   "home": ""
+  },
+  "n862": {
+   "id": "n862",
+   "name": "The Press Project",
+   "url": "https://thepressproject.gr/vryxelles-choris-symfonia-i-ektakti-synodos-koryfis-gia-ton-proypologismo-2028-2034/",
+   "title": "Βρυξέλλες: Χωρίς συμφωνία η έκτακτη Σύνοδος Κορυφής για τον προϋπολογισμό 2028–2034",
+   "home": ""
+  },
+  "n1570": {
+   "id": "n1570",
+   "name": "ERT News",
+   "url": "https://www.ertnews.gr/eidiseis/diethni/ee-xoris-symfonia-gia-ton-neo-polyeti-proypologismo-i-ektakti-synodos-koryfis-parapempontai-ola-ston-dekemvrio/",
+   "title": "ΕΕ: Χωρίς συμφωνία για τον νέο πολυετή προϋπολογισμό η έκτακτη Σύνοδος Κορυφής – Παραπέμπονται όλα στον Δεκέμβριο",
+   "home": ""
+  },
+  "n1611": {
+   "id": "n1611",
+   "name": "Hellas Journal",
+   "url": "https://hellasjournal.com/2026/11/adiexodo-sti-synodo-koryfis-gia-ton-evropaiko-proypologismo-sygkrousi-makron-kai-merts-gia-tis-perikopes-neo-rantevou-stis-17-18-dekemvriou-echoume-akomi-dromo-brosta-mas-diaminyoun-e/",
+   "title": "Αδιέξοδο στη Σύνοδο Κορυφής για τον ευρωπαϊκό προϋπολογισμό: Σύγκρουση Μακρόν και Μερτς για τις περικοπές, νέο ραντεβού στις 17-18 Δεκεμβρίου… «Έχουμε ακόμη δρόμο μπροστά μας» διαμηνύουν ελληνικές κυβερνητικές πηγές",
+   "home": ""
+  },
+  "n1151": {
+   "id": "n1151",
+   "name": "A Haber",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQc1cwbnQ3VVJGUUxIbGQ1d3BqbUt3ZHpwbU5jTXNBb0xvMkVjTVh2VW55b2dfMEEwenpITG1nWEhxeXlEUWlRMHNWNGllRGJyUktXWi1wc2RrWmRFcWNqTjdFRVJZcktzQWJrMXFhY2NVYmttQ0x5cU9NbG44WFQ2dVpRbHctdzlSZzdsVnYtT25tNDBWYV9LUzRJcXpsVmpERURwMjJwQW9BQm02RTJ4aS1IUVBKOVdSUnFUcWFuQWVQdw?oc=5",
+   "title": "Yunanistan yeniden AB'ye şikâyet peşinde! Avrupa Parlamentosunda baskın oylama",
+   "home": "https://www.ahaber.com.tr"
+  },
+  "n1337": {
+   "id": "n1337",
+   "name": "Liberal.gr",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPQmFnVDIydzhXcFlvZnBnNWxfdVJWNGlsalRIYWRZY09MdTFFMHZJTUJyRE5zLW1odGJOck44ZWY3YzlQNkctSDBtTWtyMnZsNUdkaHF2NGx4U2U3SndxUFFuZV9ET2hZTW1nM1lWNV9uNHRNM3dZT3BrcllBdG9Tb0h2Wl8xcVhOVGdScnlRUmlxb1lzM05Yc2gxX3VDNjhEeTZsbDctR2w1TUV4THlwNHVkak9SeW02dTZORk80Y9IBxAFBVV95cUxNejNOb2pRVE1icll0cnM3OEktdWFSejJ5cVdxcF9MWF9wV3hNZENfcUZJRVVxVVdYVmhQVlU1aXNqX0h1V0NKeDF2dVo1ckh1SEhLV0FjR0dNekJjSjBwalNXNTIyNHczZndFUEh1a1FwUXdZVGhXcm9oZUNsemZ4NDBKaVhIalJPRzJnTkhnaWpBUjN3eVI4eGtITGUyc1FOaWozdndmLWxNTWN5dU5rem05MnVCSFZ0U3R1WUM2SmxsTGE1?oc=5",
+   "title": "Τουρκικά ΜΜΕ: Μέρος του δόγματος της «Γαλάζιας Πατρίδας» η συμφωνία με τη Λιβύη και η επίσκεψη Χαφτάρ",
+   "home": "https://www.liberal.gr"
+  },
+  "n1519": {
+   "id": "n1519",
+   "name": "Daily Sabah",
+   "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNd0txaTltem42bjdxa2Vld2ZKdXRTYUdsV0lxSmRLSS1YM2kxU1JYQkZrZVJ4MDhZSm5hQVA1VnJEUkxRcUh2NmxfMzYyM0JpeFljWjhlZTd4RVdkR1Q1bUlyUm9fdmN5MVdubS14Z2ZicDhjaTZpYTJvc1lfbW5LUHdhSkNmc2owbTU1aHV6anlYU1RfTjBrQUJYWjJXR3JmY3l4ZkdHNNIBpwFBVV95cUxNd0txaTltem42bjdxa2Vld2ZKdXRTYUdsV0lxSmRLSS1YM2kxU1JYQkZrZVJ4MDhZSm5hQVA1VnJEUkxRcUh2NmxfMzYyM0JpeFljWjhlZTd4RVdkR1Q1bUlyUm9fdmN5MVdubS14Z2ZicDhjaTZpYTJvc1lfbW5LUHdhSkNmc2owbTU1aHV6anlYU1RfTjBrQUJYWjJXR3JmY3l4ZkdHNA?oc=5",
+   "title": "Geopolitics of East Med redefined: Türkiye-Libya agreement | Daily Sabah",
+   "home": "https://www.dailysabah.com"
+  },
+  "n24": {
+   "id": "n24",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/world/564618403/reuters-rosika-ploia-allazoyn-poreia-sti-mesogeio-meta-tin-oykraniki-epithesi-sti-livyi/",
+   "title": "Reuters: Ρωσικά πλοία αλλάζουν πορεία στη Μεσόγειο μετά την ουκρανική επίθεση στη Λιβύη",
+   "home": ""
+  },
+  "n275": {
+   "id": "n275",
+   "name": "in.gr",
+   "url": "https://www.in.gr/2026/11/28/world/livyi-rosiki-niopompi-ekane-anastrofi-meta-ti-vythisi-polemikou-ploiou-stis-22-noemvriou/",
+   "title": "Λιβύη: Ρωσική νηοπομπή έκανε αναστροφή μετά τη βύθιση πολεμικού πλοίου στις 22 Νοεμβρίου",
+   "home": ""
+  },
+  "n335": {
+   "id": "n335",
+   "name": "Naftemporiki",
+   "url": "https://www.naftemporiki.gr/kosmos/2195374/rosikos-stoliskos-me-proorismo-ti-livyi-allaxe-poreia-meta-ti-vythisi-toy-polemikoy-ploioy-stis-22-noemvrioy/?utm_source=rss&utm_medium=rss&utm_campaign=rosikos-stoliskos-me-proorismo-ti-livyi-allaxe-poreia-meta-ti-vythisi-toy-polemikoy-ploioy-stis-22-noemvrioy",
+   "title": "Ρωσικός στολίσκος με προορισμό τη Λιβύη άλλαξε πορεία στη Μεσόγειο μετά τη βύθιση της κορβέτας στις 22 Νοεμβρίου",
+   "home": ""
+  },
+  "n16": {
+   "id": "n16",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/society/astynomiko/564618502/neos-kosmos-synelifthi-43chronos-gia-tin-ektelesi-44chronoy-ston-neo-kosmo/",
+   "title": "Συνελήφθη 43χρονος για τη δολοφονία Ζαμπούνη",
+   "home": ""
+  },
+  "n142": {
+   "id": "n142",
+   "name": "To Vima",
+   "url": "https://www.tovima.gr/2026/11/27/society/synelifthi-stin-athina-43xronos-gia-ti-dolofonia-zampouni-i-synergasia-me-tis-tourkikes-arxes/",
+   "title": "Συνελήφθη στην Αθήνα 43χρονος για τη δολοφονία Ζαμπούνη – Η συνεργασία με τις τουρκικές Αρχές",
+   "home": ""
+  },
+  "n226": {
+   "id": "n226",
+   "name": "Ta Nea",
+   "url": "https://www.tanea.gr/2026/11/27/greece/poios-einai-o-kinezos-tis-greek-mafia-o-aleksei-sokpa-to-krisfygeto-kai-i-dolofonia-zampouni-me-100-sfaires-ston-neo-kosmo/",
+   "title": "Ποιος είναι ο «Κινέζος» της Greek Mafia: Ο Αλεξέι Σόκπα, το κρησφύγετο και η δολοφονία Ζαμπούνη με 100 σφαίρες στον Νέο Κόσμο",
+   "home": ""
+  },
+  "n30": {
+   "id": "n30",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/society/564618349/kakokairia-se-red-code-exi-perifereies-en-anamoni-entonon-fainomenon/",
+   "title": "Κακοκαιρία: Σε Red Code έξι περιφέρειες εν αναμονή έντονων φαινομένων",
+   "home": ""
+  },
+  "n139": {
+   "id": "n139",
+   "name": "eKathimerini",
+   "url": "https://www.ekathimerini.com/news/1322680/heavy-rain-causes-flooding-in-northwestern-greece-prompts-150-calls-to-fire-service/",
+   "title": "Heavy rain causes flooding in northwestern Greece, prompts 150 calls to fire service",
+   "home": ""
+  },
+  "n143": {
+   "id": "n143",
+   "name": "To Vima",
+   "url": "https://www.tovima.gr/2026/11/27/society/kakokairia-eksi-perifereies-se-red-code-pote-kai-pou-tha-xtypisoun-oi-kataigides/",
+   "title": "Κακοκαιρία: Πότε και πού θα χτυπήσουν οι καταιγίδες – Red Code για τον κρατικό μηχανισμό",
+   "home": ""
+  },
+  "n1988": {
+   "id": "n1988",
+   "name": "Greek City Times",
+   "url": "https://greekcitytimes.com/2026/11/27/fake-accommodation-receipts/",
+   "title": "Police Probe 1,291 Uniformed Officers Over Fake Accommodation Receipts",
+   "home": ""
+  },
+  "n1674": {
+   "id": "n1674",
+   "name": "Ta Nea",
+   "url": "https://www.tanea.gr/2026/11/27/greece/prosektika-omorfa-kai-oraia-gia-na-min-exoume-ekplikseis-neoi-apokalyptikoi-dialogoi-apo-to-kykloma-ton-enstolon-me-tis-eikonikes-apodeikseis/",
+   "title": "«Προσεκτικά, όμορφα και ωραία για να μην έχουμε εκπλήξεις» – Νέοι αποκαλυπτικοί διάλογοι από το κύκλωμα των ενστόλων με τις εικονικές αποδείξεις",
+   "home": ""
+  },
+  "n502": {
+   "id": "n502",
+   "name": "Efsyn",
+   "url": "https://www.efsyn.gr/ellada/1519300/kykloma-enstolon-oi-dialogoi-poy-kaine-edoses-pali-hrima-edosa-apo-ayta-poy-den-xerei-kaneis/",
+   "title": "Κύκλωμα ενστόλων – Οι διάλογοι που «καίνε»: «Έδωσες πάλι χρήμα;» – «Έδωσα από αυτά που δεν ξέρει κανείς»",
+   "home": ""
+  },
+  "n62": {
+   "id": "n62",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/politics/564617902/exetastiki-gia-funds-kai-servicers-sti-voyli-ta-prota-onomata-voyleyton-poy-tha-symmetaschoyn-stin-epitropi/",
+   "title": "Εξεταστική για funds και servicers στη Βουλή – Τα πρώτα ονόματα βουλευτών που θα συμμετάσχουν στην επιτροπή",
+   "home": ""
+  },
+  "n159": {
+   "id": "n159",
+   "name": "To Vima",
+   "url": "https://www.tovima.gr/2026/11/27/politics/kokkina-daneia-ayta-einai-ta-meli-tis-eksetastikis-ta-epomena-vimata/",
+   "title": "Κόκκινα δάνεια: Αυτά είναι τα μέλη της Εξεταστικής – Τα επόμενα βήματα",
+   "home": ""
+  },
+  "n548": {
+   "id": "n548",
+   "name": "Efsyn",
+   "url": "https://www.efsyn.gr/politiki/1519075/exetastiki-gia-kokkina-daneia-kai-funds-oi-protoi-voyleytes-poy-anakoinothikan-apo-ta-kommata/",
+   "title": "Εξεταστική για κόκκινα δάνεια και funds: Οι πρώτοι βουλευτές που ανακοινώθηκαν από τα κόμματα",
+   "home": ""
+  },
+  "n1410": {
+   "id": "n1410",
+   "name": "Howl.Link",
+   "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE85ekIyLWdwcWNJaHkxRHduV2tWeFEySURSN3gwb291VE81UU85bHNwZzd5Y2trMGlXVkFV?oc=5",
+   "title": "Λερναία Ύδρα το σκάνδαλο με τα Σπιτάκια Ανακύκλωσης – Μπλεγμένοι υπουργοί και βουλευτές της Νέας Δημοκρατίας καθώς και γαλάζιοι αυτοδιοικητικοί",
+   "home": "https://t.co"
+  },
+  "n1415": {
+   "id": "n1415",
+   "name": "GOVNews.gr",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNYnZyZGo0cGE2TXMzbmVMNnRyQndlQ2w0anU5YWJpTUV0RHVvQ2Z2SmJXRkRuMGhSOFZGMlpnQjJWVTVyR0xNWHRjNHBTVmI3c2EyOTlTRms4azFVSUc3czJYRDVXMFMxLXNnX2lseG5TQkZoWlN2dldMT0FSaEpiamVmWTVqUEdHcDU1WGRRQTJXQmtmQzhhU25rZ3BpVGpRMWtFY2syQVpOVlJJRElFSmtXcTMxNmV5SjgwMXdrNDI0cnB1?oc=5",
+   "title": "Πίεση στο Μαξίμου από δικαστικές εξελίξεις, «σπιτάκια ανακύκλωσης», Τέμπη, ΟΠΕΚΕΠΕ και υποκλοπές",
+   "home": "https://govnews.gr"
+  },
+  "n31": {
+   "id": "n31",
+   "name": "Kathimerini",
+   "url": "https://www.kathimerini.gr/visual/infographics/564616645/apo-ta-1-509-eyro-syntaxis-i-eisfora-allileggyis/",
+   "title": "Από τα 1.509 ευρώ σύνταξης η εισφορά αλληλεγγύης",
+   "home": ""
+  },
+  "n158": {
+   "id": "n158",
+   "name": "To Vima",
+   "url": "https://www.tovima.gr/2026/11/27/finance/proypologismos-ayksanetai-i-ftoxeia-para-tis-ayksiseis-se-misthous-kai-syntakseis/",
+   "title": "Προϋπολογισμός: Αυξάνεται η φτώχεια παρά τις αυξήσεις σε μισθούς και συντάξεις",
+   "home": ""
+  },
+  "n1808": {
+   "id": "n1808",
+   "name": "Protothema",
+   "url": "https://www.protothema.gr/culture/article/1918061/stefania-goulioti-anametratai-me-ton-amlet-ton-emvlimatiko-iroa-tou-saixpir/?utm_source=rss",
+   "title": "Στεφανία Γουλιώτη: Αναμετράται με τον «Άμλετ», τον εμβληματικό ήρωα του Σαίξπηρ, στο Θέατρο Βεάκη",
+   "home": ""
+  }
+ },
+ "feeds": {
+  "Kathimerini": "ok, 100 записей",
+  "eKathimerini": "ok, 40 записей",
+  "To Vima": "ok, 50 записей",
+  "To Vima English": "ok, 20 записей",
+  "Ta Nea": "ok, 50 записей",
+  "in.gr": "ok, 50 записей",
+  "Naftemporiki": "ok, 30 записей",
+  "ERT News": "ok, 35 записей",
+  "Protothema": "ok, 100 записей",
+  "Protothema English": "ok, 10 записей",
+  "Efsyn": "ok, 90 записей",
+  "Avgi": "ok, 10 записей",
+  "Iefimerida": "ok, 75 записей",
+  "Skai": "ok, 27 записей",
+  "Documento": "ok, 20 записей",
+  "Greek Reporter": "ok, 20 записей",
+  "Keep Talking Greece": "ok, 5 записей",
+  "Parapolitika English": "ok, 10 записей",
+  "Real.gr": "ok, 20 записей",
+  "Newsit": "ok, 50 записей",
+  "enikos": "ok, 50 записей",
+  "The Press Project": "ok, 10 записей",
+  "Reporters United": "ok, 10 записей",
+  "Solomon": "ok, 10 записей",
+  "Greek City Times": "ok, 15 записей",
+  "Hellas Journal": "ok, 30 записей",
+  "Cyprus Mail": "ok, 20 записей",
+  "Kiprinform": "ok, 10 записей",
+  "Balkan Insight": "ok, 90 записей",
+  "DW (греч.)": "ok, 22 записей",
+  "Anadolu": "ok, 30 записей",
+  "Google News (англ.)": "ok, 100 записей",
+  "Google News (рус.)": "ok, 55 записей",
+  "Google News (тур.)": "ok, 100 записей",
+  "Google News (Греция)": "ok, 30 записей",
+  "Google News (Греция и Россия)": "ok, 100 записей",
+  "Google News (Parapolitika, CNN Greece и др.)": "ok, 100 записей",
+  "Google News (парламент и суды)": "ok, 18 записей",
+  "Google News (Кипр)": "ok, 100 записей",
+  "Google News (Турция о Греции)": "ok, 12 записей",
+  "Русские в Афинах (Telegram)": "ok, 20 сообщений",
+  "News247 (Telegram)": "ok, 20 сообщений",
+  "(собрано днём)": "4089 заметок в запасе"
+ },
+ "cost_usd": 0.093,
+ "calls": 17,
+ "sent_ids": [
+  18,
+  19
+ ]
+}
