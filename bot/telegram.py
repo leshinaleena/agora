@@ -74,10 +74,16 @@ def edit_html(message_ids: list[int], text: str) -> None:
     if len(parts) != len(message_ids):
         raise RuntimeError(f"частей {len(parts)}, а сообщений {len(message_ids)}: правка невозможна")
     for mid, part in zip(message_ids, parts):
-        _call("editMessageText", json={
-            "chat_id": chat_id(), "message_id": mid, "text": part,
-            "parse_mode": "HTML", "link_preview_options": {"is_disabled": True},
-        })
+        try:
+            _call("editMessageText", json={
+                "chat_id": chat_id(), "message_id": mid, "text": part,
+                "parse_mode": "HTML", "link_preview_options": {"is_disabled": True},
+            })
+            print(f"[telegram] сообщение {mid} исправлено")
+        except RuntimeError as e:
+            if "not modified" not in str(e):
+                raise
+            print(f"[telegram] сообщение {mid} без изменений")
 
 
 def send_pdf(path: Path, caption_html: str) -> None:
